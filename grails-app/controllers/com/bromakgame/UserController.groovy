@@ -19,10 +19,12 @@ class UserController {
         respond user
     }
 
+	@Secured(value = ['IS_AUTHENTICATED_ANONYMOUSLY'], httpMethod = 'GET')
     def create() {
         respond new User(params)
     }
 
+	@Secured(value = ['IS_AUTHENTICATED_ANONYMOUSLY'], httpMethod = 'POST')
     @Transactional
     def save(User user) {
         if (user == null) {

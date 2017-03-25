@@ -27,7 +27,19 @@
             </g:hasErrors>
             <g:form action="save">
                 <fieldset class="form">
-                    <f:all bean="user"/>
+                    <!--<f:all bean="user"/>-->
+					<f:with bean="user">
+						<f:field property="username"/>
+						<f:field property="email"/>
+						<f:field property="password"/>
+						
+						<sec:ifAnyGranted roles="ROLE_ADMIN">
+							<f:field property="enabled"/>
+							<f:field property="accountExpired"/>
+							<f:field property="accountLocked"/>
+							<f:field property="passwordExpired"/>
+						</sec:ifAnyGranted>
+					</f:with>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
