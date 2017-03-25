@@ -9,13 +9,19 @@ import grails.plugin.springsecurity.annotation.Secured
 class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	
+	def springSecurityService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond User.list(params), model:[userCount: User.count()]
     }
 
+	@Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def show(User user) {
+		if (user != springSecurityService.currentUser)
+			notFound()
+		
         respond user
     }
 
@@ -40,6 +46,9 @@ class UserController {
         }
 
         user.save flush:true
+		
+		def roleUser = Role.findByAuthority('ROLE_USER')
+		UserRole.create user, roleUser
 
         request.withFormat {
             form multipartForm {
