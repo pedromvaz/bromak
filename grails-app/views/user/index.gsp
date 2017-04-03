@@ -1,28 +1,75 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-        <title><g:message code="default.list.label" args="[entityName]" /></title>
-    </head>
-    <body>
-        <a href="#list-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="list-user" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-                <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:table collection="${userList}" />
+	<head>
+		<meta name="layout" content="main" />
+		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
+		<title><g:message code="default.list.label" args="[entityName]" /></title>
+	</head>
+	<body>
+		
+		<!-- Temporary tabs, will create an admin-specific layout -->
+		<div class="navbar">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a href="#">Users</a></li>
+				<li role="presentation"><a href="#">Roles</a></li>
+				<li role="presentation"><a href="#">Races</a></li>
+			</ul>
+		</div>
+		
+		<g:if test="${flash.message}">
+			<div class="message" role="status">${flash.message}</div>
+		</g:if>
+		
+		<!--<div class="col-sm-6">-->
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title"><g:message code="default.list.label" args="[entityName]" /></h3>
+				</div>
+				<div class="panel-body">
+					<!--<f:table collection="${userList}" class="table" />-->
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Username</th>
+								<th>Email</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<g:each in="${userList}" var="user">
+								<tr>
+									<td>${user.username}</td>
+									<td>${user.email}</td>
+									<td>
+										<g:if test="${user.enabled}">
+											<span class="label label-success"><g:message code="users.enabled.label" /></span>
+										</g:if>
+										<g:else>
+											<span class="label label-danger"><g:message code="users.disabled.label" /></span>
+										</g:else>
+										
+										<g:if test="${user.accountExpired}">
+											<span class="label label-danger"><g:message code="users.accountExpired.label" /></span>
+										</g:if>
+										
+										<g:if test="${user.accountLocked}">
+											<span class="label label-danger"><g:message code="users.accountLocked.label" /></span>
+										</g:if>
+										
+										<g:if test="${user.passwordExpired}">
+											<span class="label label-danger"><g:message code="users.passwordExpired.label" /></span>
+										</g:if>
+									</td>
+								</tr>
+							</g:each>
+						</tbody>
+					</table>
 
-            <div class="pagination">
-                <g:paginate total="${userCount ?: 0}" />
-            </div>
-        </div>
-    </body>
+					<div class="pagination">
+						<g:paginate total="${userCount ?: 0}" />
+					</div>
+				</div>
+			</div>
+		<!--</div>-->
+	</body>
 </html>
