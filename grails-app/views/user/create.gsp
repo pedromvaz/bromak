@@ -6,16 +6,19 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
+		
 		<g:if test='${flash.message}'>
 			<div class="alert alert-info" role="alert">${flash.message}</div>
 		</g:if>
 
 		<g:hasErrors bean="${this.user}">
-			<ul class="errors" role="alert">
-				<g:eachError bean="${this.user}" var="error">
-					<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-				</g:eachError>
-			</ul>
+			<div class="alert alert-danger" role="alert">
+				<ul>
+					<g:eachError bean="${this.user}" var="error">
+						<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+					</g:eachError>
+				</ul>
+			</div>
 		</g:hasErrors>
 
 		<div class="row">
@@ -32,10 +35,10 @@
 							<input type="text" name="username" id="username" class="form-control" placeholder="<g:message code='users.username.label'/>" required autofocus>
 							
 							<label for="email" class="sr-only"><g:message code='users.email.label'/></label>
-							<input type="email" name="email" id="email" class="form-control" placeholder="<g:message code='users.email.label'/>" required autofocus>
+							<input type="email" name="email" id="email" class="form-control" placeholder="<g:message code='users.email.label'/>" required>
 							
 							<label for="password" class="sr-only"><g:message code='users.password.label'/></label>
-							<input type="password" name="password" id="password" class="form-control" placeholder="<g:message code='users.password.label'/>" required autofocus>
+							<input type="password" name="password" id="password" class="form-control" placeholder="<g:message code='users.password.label'/>" required>
 							
 							<sec:ifAnyGranted roles="ROLE_ADMIN">
 								<div class="checkbox">
@@ -67,7 +70,9 @@
 								</div>
 							</sec:ifAnyGranted>
 							
-							<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit"><g:message code='default.button.create.label'/></button>
+							<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit">
+								<g:message code='default.button.create.label'/>
+							</button>
 						</form>
 					</div>
 				</div>

@@ -17,7 +17,8 @@ class UserController {
         respond User.list(params), model:[userCount: User.count()]
     }
 
-	@Secured(['ROLE_ADMIN', 'ROLE_USER'])
+	//@Secured(['ROLE_ADMIN', 'ROLE_USER'])
+	@Secured('ROLE_UNKNOWN')
     def show(User user) {
 		if (user != springSecurityService.currentUser)
 			notFound()
@@ -59,10 +60,14 @@ class UserController {
         }
     }
 
+	//@Secured(['ROLE_ADMIN', 'ROLE_USER'])
+	@Secured('ROLE_UNKNOWN')
     def edit(User user) {
         respond user
     }
 
+	//@Secured(['ROLE_ADMIN', 'ROLE_USER'])
+	@Secured('ROLE_UNKNOWN')
     @Transactional
     def update(User user) {
         if (user == null) {
@@ -88,6 +93,8 @@ class UserController {
         }
     }
 
+	//@Secured(['ROLE_ADMIN', 'ROLE_USER'])
+	@Secured('ROLE_UNKNOWN')
     @Transactional
     def delete(User user) {
 

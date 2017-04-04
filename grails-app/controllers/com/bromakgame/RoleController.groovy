@@ -15,6 +15,7 @@ class RoleController {
         respond Role.list(params), model:[roleCount: Role.count()]
     }
 
+	@Secured('ROLE_UNKNOWN')
     def show(Role role) {
         respond role
     }
@@ -48,10 +49,12 @@ class RoleController {
         }
     }
 
+	@Secured('ROLE_UNKNOWN')
     def edit(Role role) {
         respond role
     }
 
+	@Secured('ROLE_UNKNOWN')
     @Transactional
     def update(Role role) {
         if (role == null) {
@@ -77,6 +80,7 @@ class RoleController {
         }
     }
 
+	@Secured('ROLE_UNKNOWN')
     @Transactional
     def delete(Role role) {
 

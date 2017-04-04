@@ -8,6 +8,7 @@
 	<body>
 		
 		<!-- Temporary tabs, will create an admin-specific layout -->
+		<!--
 		<div class="navbar">
 			<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active"><a href="#">Users</a></li>
@@ -15,6 +16,7 @@
 				<li role="presentation"><a href="#">Races</a></li>
 			</ul>
 		</div>
+		-->
 		
 		<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
@@ -68,6 +70,12 @@
 					<div class="pagination">
 						<g:paginate total="${userCount ?: 0}" />
 					</div>
+					
+					<g:link action="create">
+						<button type="button" class="btn btn-primary">
+							<g:message code="default.new.label" args="[entityName]" />
+						</button>
+					</g:link>
 				</div>
 			</div>
 		<!--</div>-->
