@@ -54,13 +54,13 @@
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
 								<ul class="dropdown-menu">
+									<li class="dropdown-header">User Accounts</li>
 									<li><g:link controller="user" action="index">Users</g:link></li>
 									<li><g:link controller="role" action="index">Roles</g:link></li>
-									<li><a href="#">Races</a></li>
 									<li role="separator" class="divider"></li>
-									<li class="dropdown-header">Nav header</li>
-									<li><a href="#">Separated link</a></li>
-									<li><a href="#">One more separated link</a></li>
+									<li class="dropdown-header">Champions</li>
+									<li><g:link controller="creature" action="index">Creatures</g:link></li>
+									<li><g:link controller="race" action="index">Races</g:link></li>
 								</ul>
 							</li>
 						</sec:ifAnyGranted>

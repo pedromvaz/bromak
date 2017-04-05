@@ -32,9 +32,9 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th>Username</th>
-								<th>Email</th>
-								<th>Status</th>
+								<th><g:message code="users.username.label" /></th>
+								<th><g:message code="users.email.label" /></th>
+								<th><g:message code="users.status.label" /></th>
 							</tr>
 						</thead>
 						<tbody>
