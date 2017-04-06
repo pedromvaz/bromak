@@ -13,7 +13,7 @@ class BootStrap {
 		// -----------------------
 		
         def adminRole = new Role(authority: 'ROLE_ADMIN', description: 'An administrator of the bromak website').save()
-        def userRole = new Role(authority: 'ROLE_USER', description: 'A player on the bromak website').save()
+        def userRole = new Role(authority: 'ROLE_PLAYER', description: 'A player on the bromak website').save()
 
         def testUser = new User(username: 'admin', email: 'admin@bromakgame.com', password: 'admin', enabled: true).save()
 

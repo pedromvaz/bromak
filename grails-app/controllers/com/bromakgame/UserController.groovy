@@ -17,7 +17,7 @@ class UserController {
         respond User.list(params), model:[userCount: User.count()]
     }
 
-	//@Secured(['ROLE_ADMIN', 'ROLE_USER'])
+	//@Secured(['ROLE_ADMIN', 'ROLE_PLAYER'])
 	@Secured('ROLE_UNKNOWN')
     def show(User user) {
 		if (user != springSecurityService.currentUser)
@@ -48,7 +48,7 @@ class UserController {
 
         user.save flush:true
 		
-		def roleUser = Role.findByAuthority('ROLE_USER')
+		def roleUser = Role.findByAuthority('ROLE_PLAYER')
 		UserRole.create user, roleUser
 
         request.withFormat {
@@ -60,13 +60,13 @@ class UserController {
         }
     }
 
-	//@Secured(['ROLE_ADMIN', 'ROLE_USER'])
+	//@Secured(['ROLE_ADMIN', 'ROLE_PLAYER'])
 	@Secured('ROLE_UNKNOWN')
     def edit(User user) {
         respond user
     }
 
-	//@Secured(['ROLE_ADMIN', 'ROLE_USER'])
+	//@Secured(['ROLE_ADMIN', 'ROLE_PLAYER'])
 	@Secured('ROLE_UNKNOWN')
     @Transactional
     def update(User user) {
@@ -93,7 +93,7 @@ class UserController {
         }
     }
 
-	//@Secured(['ROLE_ADMIN', 'ROLE_USER'])
+	//@Secured(['ROLE_ADMIN', 'ROLE_PLAYER'])
 	@Secured('ROLE_UNKNOWN')
     @Transactional
     def delete(User user) {
