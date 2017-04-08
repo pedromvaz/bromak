@@ -52,7 +52,10 @@
 						<li><a href="#contact">Contact</a></li>
 						<sec:ifAnyGranted roles="ROLE_ADMIN">
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									Admin
+									<span class="caret"></span>
+								</a>
 								<ul class="dropdown-menu">
 									<li class="dropdown-header">User Accounts</li>
 									<li><g:link controller="user" action="index">Users</g:link></li>
@@ -66,9 +69,22 @@
 						</sec:ifAnyGranted>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><g:link controller="login" action="auth">Login</g:link></li>
-						<li><g:link controller="user" action="create">Register</g:link></li>
-						<li><g:link controller="logout">Logout</g:link></li>
+						<sec:ifLoggedIn>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<sec:loggedInUserInfo field='username'/>
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li class="dropdown-header">User Account</li>
+									<li><g:link controller="logout">Logout</g:link></li>
+								</ul>
+							</li>
+						</sec:ifLoggedIn>
+						<sec:ifNotLoggedIn>
+							<li><g:link controller="login" action="auth">Login</g:link></li>
+							<li><g:link controller="user" action="create">Register</g:link></li>
+						</sec:ifNotLoggedIn>
 					</ul>
 				</div>
 			</div>
