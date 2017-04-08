@@ -20,8 +20,8 @@ class UserController {
 	//@Secured(['ROLE_ADMIN', 'ROLE_PLAYER'])
 	@Secured('ROLE_UNKNOWN')
     def show(User user) {
-		if (user != springSecurityService.currentUser)
-			notFound()
+		//if (user != null && user != springSecurityService.currentUser)
+		//	notFound()
 		
         respond user
     }

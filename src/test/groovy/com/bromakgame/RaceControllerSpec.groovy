@@ -10,9 +10,8 @@ class RaceControllerSpec extends Specification {
     def populateValidParams(params) {
         assert params != null
 
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-        assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
+        params["name"] = 'Human'
+		params["description"] = 'An arrogante race'
     }
 
     void "Test the index action returns the correct model"() {
