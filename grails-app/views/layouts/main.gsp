@@ -50,6 +50,7 @@
 					<ul class="nav navbar-nav">
 						<li><a href="#about">About</a></li>
 						<li><a href="#contact">Contact</a></li>
+						
 						<sec:ifAnyGranted roles="ROLE_ADMIN">
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -64,6 +65,20 @@
 									<li class="dropdown-header">Champions</li>
 									<li><g:link controller="creature" action="index">Creatures</g:link></li>
 									<li><g:link controller="race" action="index">Races</g:link></li>
+								</ul>
+							</li>
+						</sec:ifAnyGranted>
+						
+						<sec:ifAnyGranted roles="ROLE_PLAYER">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									Player
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li class="dropdown-header">Champions</li>
+									<li><g:link controller="champion" action="index">List</g:link></li>
+									<li><g:link controller="champion" action="create">Create new Champion</g:link></li>
 								</ul>
 							</li>
 						</sec:ifAnyGranted>

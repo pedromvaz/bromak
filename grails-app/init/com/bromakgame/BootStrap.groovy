@@ -39,6 +39,7 @@ class BootStrap {
 		def goblinRace = new Race(name: 'Goblin', description: 'A coward race.', enabled: true).save()
 		def trollRace = new Race(name: 'Troll', description: 'A brutish race.', enabled: true).save()
 		
+		assert Race.count() == 6
     }
     
     def destroy = {

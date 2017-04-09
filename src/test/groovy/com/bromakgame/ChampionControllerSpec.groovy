@@ -3,20 +3,17 @@ package com.bromakgame
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(UserController)
-@Mock([User, UserRole])
-class UserControllerSpec extends Specification {
+@TestFor(ChampionController)
+@Mock([Champion, Race])
+class ChampionControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
 
-        params["username"] = 'pedro'
-		params["email"] = 'pedro@bromakgame.com'
-		params["password"] = "pedro"
-		params["enabled"] = true
-		params["accountExpired"] = false
-		params["accountLocked"] = false
-		params["passwordExpired"] = false
+        params["firstName"] = 'Charming'
+		params["title"] = 'Prince'
+        //params["race"] = race
+		params["race"] = new Race(name: 'Human', description: 'Human')
     }
 
     void "Test the index action returns the correct model"() {
@@ -25,8 +22,8 @@ class UserControllerSpec extends Specification {
             controller.index()
 
         then:"The model is correct"
-            !model.userList
-            model.userCount == 0
+            !model.championList
+            model.championCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -34,7 +31,7 @@ class UserControllerSpec extends Specification {
             controller.create()
 
         then:"The model is correctly created"
-            model.user!= null
+            model.champion!= null
     }
 
     void "Test the save action correctly persists an instance"() {
@@ -42,25 +39,25 @@ class UserControllerSpec extends Specification {
         when:"The save action is executed with an invalid instance"
             request.contentType = FORM_CONTENT_TYPE
             request.method = 'POST'
-            def user = new User()
-            user.validate()
-            controller.save(user)
+            def champion = new Champion()
+            champion.validate()
+            controller.save(champion)
 
         then:"The create view is rendered again with the correct model"
-            model.user!= null
+            model.champion!= null
             view == 'create'
 
         when:"The save action is executed with a valid instance"
             response.reset()
             populateValidParams(params)
-            user = new User(params)
+            champion = new Champion(params)
 
-            controller.save(user)
+            controller.save(champion)
 
-        then:"A redirect is issued to create a new champion"
-            response.redirectedUrl == '/champion/create'
+        then:"A redirect is issued to the champion list"
+            response.redirectedUrl == '/champion/index'
             controller.flash.message != null
-            User.count() == 1
+            Champion.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -72,11 +69,11 @@ class UserControllerSpec extends Specification {
 
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
-            def user = new User(params)
-            controller.show(user)
+            def champion = new Champion(params)
+            controller.show(champion)
 
         then:"A model is populated containing the domain instance"
-            model.user == user
+            model.champion == champion
     }
 
     void "Test that the edit action returns the correct model"() {
@@ -88,11 +85,11 @@ class UserControllerSpec extends Specification {
 
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
-            def user = new User(params)
-            controller.edit(user)
+            def champion = new Champion(params)
+            controller.edit(champion)
 
         then:"A model is populated containing the domain instance"
-            model.user == user
+            model.champion == champion
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
@@ -102,28 +99,28 @@ class UserControllerSpec extends Specification {
             controller.update(null)
 
         then:"A 404 error is returned"
-            response.redirectedUrl == '/user/index'
+            response.redirectedUrl == '/champion/index'
             flash.message != null
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def user = new User()
-            user.validate()
-            controller.update(user)
+            def champion = new Champion()
+            champion.validate()
+            controller.update(champion)
 
         then:"The edit view is rendered again with the invalid instance"
             view == 'edit'
-            model.user == user
+            model.champion == champion
 
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            user = new User(params).save(flush: true)
-            controller.update(user)
+            champion = new Champion(params).save(flush: true)
+            controller.update(champion)
 
         then:"A redirect is issued to the show action"
-            user != null
-            response.redirectedUrl == "/user/show/$user.id"
+            champion != null
+            response.redirectedUrl == "/champion/show/$champion.id"
             flash.message != null
     }
 
@@ -134,23 +131,23 @@ class UserControllerSpec extends Specification {
             controller.delete(null)
 
         then:"A 404 is returned"
-            response.redirectedUrl == '/user/index'
+            response.redirectedUrl == '/champion/index'
             flash.message != null
 
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def user = new User(params).save(flush: true)
+            def champion = new Champion(params).save(flush: true)
 
         then:"It exists"
-            User.count() == 1
+            Champion.count() == 1
 
         when:"The domain instance is passed to the delete action"
-            controller.delete(user)
+            controller.delete(champion)
 
         then:"The instance is deleted"
-            User.count() == 0
-            response.redirectedUrl == '/user/index'
+            Champion.count() == 0
+            response.redirectedUrl == '/champion/index'
             flash.message != null
     }
 }
