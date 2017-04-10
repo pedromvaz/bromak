@@ -44,14 +44,7 @@
 							
 							<div class="form-group">
 								<label for="raceId" class="sr-only"><g:message code='creatures.race.label'/></label>
-								<select class="form-control" name="race.id" id="raceId" >
-									<option value="1">Human</option>
-									<option value="2">Dwarf</option>
-									<option value="3">Elf</option>
-									<option value="4">Orc</option>
-									<option value="5">Goblin</option>
-									<option value="6">Troll</option>
-								</select>
+								<g:select class="form-control" name="race.id" from="${com.bromakgame.Race.findAllByIntelligentAndEnabled(true, true)}" optionKey="id" optionValue="name" />
 							</div>
 							
 							<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit">

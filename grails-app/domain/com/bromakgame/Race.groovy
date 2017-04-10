@@ -9,6 +9,7 @@ class Race {
 	
 	String name
 	String description
+	boolean intelligent
 	boolean enabled
 
     static constraints = {

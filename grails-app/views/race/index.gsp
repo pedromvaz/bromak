@@ -22,6 +22,7 @@
 							<tr>
 								<th><g:message code="races.name.label" /></th>
 								<th><g:message code="races.description.label" /></th>
+								<th><g:message code="races.cognition.label" /></th>
 								<th><g:message code="races.status.label" /></th>
 							</tr>
 						</thead>
@@ -30,6 +31,14 @@
 								<tr>
 									<td>${race.name}</td>
 									<td>${race.description}</td>
+									<td>
+										<g:if test="${race.intelligent}">
+											<span class="label label-success"><g:message code="races.intelligent.label" /></span>
+										</g:if>
+										<g:else>
+											<span class="label label-danger"><g:message code="races.primitive.label" /></span>
+										</g:else>
+									</td>
 									<td>
 										<g:if test="${race.enabled}">
 											<span class="label label-success"><g:message code="races.enabled.label" /></span>
