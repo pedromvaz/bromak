@@ -43,7 +43,8 @@ class RaceController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'race.label', default: 'Race'), race.id])
-                redirect race
+                //redirect race
+				redirect action:"index", method:"GET"
             }
             '*' { respond race, [status: CREATED] }
         }

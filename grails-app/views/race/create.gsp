@@ -41,6 +41,13 @@
 							
 							<div class="checkbox">
 								<label>
+									<input type="checkbox" name="intelligent" id="intelligent">
+									<g:message code='races.intelligent.label'/>
+								</label>
+							</div>
+							
+							<div class="checkbox">
+								<label>
 									<input type="checkbox" name="enabled" id="enabled" checked="checked">
 									<g:message code='races.enabled.label'/>
 								</label>
