@@ -14,17 +14,17 @@
 			
 			<!-- Carousel -->
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
-			  <!-- Indicators -->
+				<!-- Indicators -->
 				<ol class="carousel-indicators">
 					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 					<li data-target="#myCarousel" data-slide-to="1"></li>
 				</ol>
 				<div class="carousel-inner" role="listbox">
 					<div class="item active">
-						<img class="first-slide" src="http://img11.deviantart.net/db50/i/2013/265/4/1/standard_rpg_races__male_by_chief_orc-d6nffjp.jpg" alt="Male Champions">
+						<img class="shrink-img" src="http://img11.deviantart.net/db50/i/2013/265/4/1/standard_rpg_races__male_by_chief_orc-d6nffjp.jpg" alt="Male Champions">
 					</div>
 					<div class="item">
-						<img class="second-slide" src="http://img10.deviantart.net/88e5/i/2013/269/1/7/standard_rpg_races__female_by_chief_orc-d6nxjsi.jpg" alt="Female Champions">
+						<img class="shrink-img" src="http://img10.deviantart.net/88e5/i/2013/269/1/7/standard_rpg_races__female_by_chief_orc-d6nxjsi.jpg" alt="Female Champions">
 					</div>
 				</div>
 				<!--

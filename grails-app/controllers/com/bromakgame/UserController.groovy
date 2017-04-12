@@ -55,7 +55,7 @@ class UserController {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
                 //redirect user
-				redirect controller:"champion", action:"create", method:"GET"
+				redirect controller:"champion", action:"index", method:"GET"
             }
             '*' { respond user, [status: CREATED] }
         }
