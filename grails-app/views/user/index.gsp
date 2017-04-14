@@ -67,9 +67,11 @@
 						</tbody>
 					</table>
 
-					<div class="pagination">
-						<g:paginate total="${userCount ?: 0}" />
-					</div>
+					<g:if test="${userCount > 10}">
+							<div class="pagination">
+								<g:paginate total="${userCount ?: 0}" />
+							</div>
+						</g:if>
 					
 					<g:link action="create">
 						<button type="button" class="btn btn-primary">

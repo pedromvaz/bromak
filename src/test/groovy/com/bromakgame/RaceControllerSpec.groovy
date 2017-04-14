@@ -53,7 +53,7 @@ class RaceControllerSpec extends Specification {
             controller.save(race)
 
         then:"A redirect is issued to the show action"
-            response.redirectedUrl == '/race/show/1'
+            response.redirectedUrl == '/race/index'
             controller.flash.message != null
             Race.count() == 1
     }

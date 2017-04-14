@@ -79,9 +79,11 @@
 							</tbody>
 						</table>
 
-						<div class="pagination">
-							<g:paginate total="${championCount ?: 0}" />
-						</div>
+						<g:if test="${championCount > 10}">
+							<div class="pagination">
+								<g:paginate total="${championCount ?: 0}" />
+							</div>
+						</g:if>
 
 						<g:link action="create">
 							<button type="button" class="btn btn-primary">

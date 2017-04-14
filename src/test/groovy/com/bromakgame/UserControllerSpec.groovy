@@ -58,7 +58,7 @@ class UserControllerSpec extends Specification {
             controller.save(user)
 
         then:"A redirect is issued to create a new champion"
-            response.redirectedUrl == '/champion/create'
+            response.redirectedUrl == '/champion/index'
             controller.flash.message != null
             User.count() == 1
     }
