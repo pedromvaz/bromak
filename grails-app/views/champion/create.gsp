@@ -43,6 +43,17 @@
 							<input type="text" name="title" id="title" class="form-control" placeholder="<g:message code='creatures.title.label'/>">
 							
 							<div class="form-group">
+								<label class="radio-inline">
+									<input type="radio" name="gender" value="m">
+									<g:message code="creatures.gender.male.label" />
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="gender" value="f">
+									<g:message code="creatures.gender.female.label" />
+								</label>
+							</div>
+							
+							<div class="form-group">
 								<label for="raceId" class="sr-only"><g:message code='creatures.race.label'/></label>
 								<g:select class="form-control" name="race.id" from="${com.bromakgame.Race.findAllByIntelligentAndEnabled(true, true)}" optionKey="id" optionValue="name" />
 							</div>

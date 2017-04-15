@@ -13,11 +13,11 @@ class BootStrap {
 		// -----------------------
 		
         def adminRole = new Role(authority: 'ROLE_ADMIN', description: 'An administrator of the bromak website').save()
-        def userRole = new Role(authority: 'ROLE_PLAYER', description: 'A player on the bromak website').save()
+        def playerRole = new Role(authority: 'ROLE_PLAYER', description: 'A player on the bromak website').save()
 
-        def testUser = new User(username: 'admin', email: 'admin@bromakgame.com', password: 'admin', enabled: true).save()
+        def testAdmin = new User(username: 'admin', email: 'admin@bromakgame.com', password: 'admin', enabled: true).save()
 
-        UserRole.create testUser, adminRole
+        UserRole.create testAdmin, adminRole
 
         UserRole.withSession {
             it.flush()
@@ -55,6 +55,40 @@ class BootStrap {
 			intelligent: false, enabled: true).save()
 		
 		assert Race.count() == 9
+		
+		// ------
+		// Player
+		// ------
+		
+		def testPlayer = new User(username: 'player', email: 'player@bromakgame.com', password: 'player', enabled: true).save()
+
+        UserRole.create testPlayer, playerRole
+
+        UserRole.withSession {
+            it.flush()
+            it.clear()
+        }
+
+        assert User.count() == 2
+        assert Role.count() == 2
+        assert UserRole.count() == 2
+		
+		// -------------------------
+		// Champions and Family Tree
+		// -------------------------
+		
+		def champFather = new Champion(firstName: 'Father', gender: 'm', race: humanRace, user: testPlayer).save()
+		def champMother = new Champion(firstName: 'Mother', gender: 'f', race: humanRace, user: testPlayer).save()
+		def champSon = new Champion(firstName: 'Son', gender: 'm', race: humanRace, user: testPlayer).save()
+		def champDaughter = new Champion(firstName: 'Daughter', gender: 'f', race: humanRace, user: testPlayer).save()
+		
+		assert Champion.count() == 4
+		
+		champSon.father = champFather
+		champSon.mother = champMother
+		
+		champDaughter.father = champFather
+		champDaughter.mother = champMother
     }
     
     def destroy = {

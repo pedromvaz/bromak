@@ -14,7 +14,7 @@ class CreatureControllerSpec extends Specification {
 		
         params["firstName"] = 'Charming'
 		params["title"] = 'Prince'
-        //params["race"] = race
+        params["gender"] = 'm'
 		params["race"] = new Race(name: 'Human', description: 'Human')
     }
 

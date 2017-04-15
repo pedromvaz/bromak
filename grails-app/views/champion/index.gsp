@@ -62,17 +62,26 @@
 							<thead>
 								<tr>
 									<th><g:message code="creatures.firstName.label" /></th>
-									<th><g:message code="creatures.lastName.label" /></th>
-									<th><g:message code="creatures.title.label" /></th>
+									<th><g:message code="creatures.father.label" /></th>
+									<th><g:message code="creatures.mother.label" /></th>
+									<th><g:message code="creatures.gender.label" /></th>
 									<th><g:message code="creatures.race.label" /></th>
 								</tr>
 							</thead>
 							<tbody>
 								<g:each in="${championList}" var="champion">
 									<tr>
-										<td>${champion.firstName}</td>
-										<td>${champion.lastName}</td>
-										<td>${champion.title}</td>
+										<td>${champion.getFullName()}</td>
+										<td>${champion.father?.getFullName()}</td>
+										<td>${champion.mother?.getFullName()}</td>
+										<td>
+											<g:if test="${champion.gender == 'm'}">
+												<g:message code="creatures.gender.male.label" />
+											</g:if>
+											<g:else>
+												<g:message code="creatures.gender.female.label" />
+											</g:else>
+										</td>
 										<td>${champion.race.name}</td>
 									</tr>
 								</g:each>

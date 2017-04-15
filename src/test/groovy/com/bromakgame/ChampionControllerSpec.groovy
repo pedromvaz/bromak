@@ -12,7 +12,7 @@ class ChampionControllerSpec extends Specification {
 
         params["firstName"] = 'Charming'
 		params["title"] = 'Prince'
-        //params["race"] = race
+		params["gender"] = 'm'
 		params["race"] = new Race(name: 'Human', description: 'Human')
 		params["user"] = new User(username: 'User', email: 'user@email.com', password: 'pass')
     }
