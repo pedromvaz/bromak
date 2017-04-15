@@ -4,7 +4,7 @@ import grails.test.mixin.*
 import spock.lang.*
 
 @TestFor(ChampionController)
-@Mock([Champion, Race])
+@Mock([Champion, Race, User])
 class ChampionControllerSpec extends Specification {
 
     def populateValidParams(params) {
@@ -14,6 +14,7 @@ class ChampionControllerSpec extends Specification {
 		params["title"] = 'Prince'
         //params["race"] = race
 		params["race"] = new Race(name: 'Human', description: 'Human')
+		params["user"] = new User(username: 'User', email: 'user@email.com', password: 'pass')
     }
 
     void "Test the index action returns the correct model"() {

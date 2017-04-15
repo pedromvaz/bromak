@@ -14,7 +14,11 @@ class ChampionController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Champion.list(params), model:[championCount: Champion.count()]
+		
+		User player = springSecurityService?.getCurrentUser()
+		
+        //respond Champion.list(params), model:[championCount: Champion.count()]
+		respond Champion.findAllWhere(user: player, params), model:[championCount: Champion.findAllWhere(user: player).size()]
     }
 
 	@Secured('ROLE_UNKNOWN')
@@ -34,6 +38,17 @@ class ChampionController {
             return
         }
 
+		// in order to associate User with Champion
+		// it must be done before hasErrors()
+		// and a new validate() must be run to validate User is now set
+		// hasErrors() will use result from last validate()
+		User user = springSecurityService?.getCurrentUser()
+		
+		if (user != null) {
+			champion.user = user
+			champion.validate()
+		}
+
         if (champion.hasErrors()) {
             transactionStatus.setRollbackOnly()
             respond champion.errors, view:'create'
@@ -42,12 +57,10 @@ class ChampionController {
 
         champion.save flush:true
 		
-		User user = springSecurityService?.getCurrentUser()
-		
 		if (user != null) {
 			user.addToChampions(champion).save()
 		}
-
+		
         request.withFormat {
             form multipartForm {
                 flash.message = message(
