@@ -18,7 +18,7 @@ class Creature {
 	Race race
 	
 	String getFullName() {
-		String fullName = firstName;
+		String fullName = firstName
 		
 		if (title?.trim()) {
 			fullName = title + " " + fullName
@@ -29,6 +29,10 @@ class Creature {
 		}
 		
 		return fullName
+	}
+	
+	String getGenderDesc() {
+		return (gender == "m") ? "Male" : "Female"
 	}
 	
     static constraints = {

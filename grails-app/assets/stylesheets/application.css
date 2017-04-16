@@ -18,6 +18,7 @@
 *= require dist/css/signin
 *= require dist/css/carousel
 *= require dist/css/pagination
+*= require dist/css/thumbnail
 *
 * require dist/css/sticky-footer-navbar
 */

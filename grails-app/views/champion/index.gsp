@@ -27,16 +27,6 @@
 						<img class="shrink-img" src="http://img10.deviantart.net/88e5/i/2013/269/1/7/standard_rpg_races__female_by_chief_orc-d6nxjsi.jpg" alt="Female Champions">
 					</div>
 				</div>
-				<!--
-				<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
-				-->
 			</div>
 			<!-- /.carousel -->
 			
@@ -52,56 +42,42 @@
 		</g:if>
 		<g:else>
 		
-			<!--<div class="col-sm-6">-->
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title"><g:message code="default.list.label" args="[entityName]" /></h3>
-					</div>
-					<div class="panel-body">
-						<table class="table">
-							<thead>
-								<tr>
-									<th><g:message code="creatures.firstName.label" /></th>
-									<th><g:message code="creatures.father.label" /></th>
-									<th><g:message code="creatures.mother.label" /></th>
-									<th><g:message code="creatures.gender.label" /></th>
-									<th><g:message code="creatures.race.label" /></th>
-								</tr>
-							</thead>
+			<div class="list-group">
+				<g:each in="${championList}" var="champion">
+					<a href="#" class="list-group-item">
+						<table>
 							<tbody>
-								<g:each in="${championList}" var="champion">
-									<tr>
-										<td>${champion.getFullName()}</td>
-										<td>${champion.father?.getFullName()}</td>
-										<td>${champion.mother?.getFullName()}</td>
-										<td>
-											<g:if test="${champion.gender == 'm'}">
-												<g:message code="creatures.gender.male.label" />
-											</g:if>
-											<g:else>
-												<g:message code="creatures.gender.female.label" />
-											</g:else>
-										</td>
-										<td>${champion.race.name}</td>
-									</tr>
-								</g:each>
+								<tr>
+									<td>
+										<g:if test="${champion.gender == 'm'}">
+											<img class="img-thumbnail-50pc" src="http://www.iconninja.com/files/40/368/11/man-user-male-avatar-young-person-icon.svg">
+										</g:if>
+										<g:else>
+											<img class="img-thumbnail-50pc" src="http://www.iconninja.com/files/311/30/378/female-young-woman-user-avatar-person-icon.svg">
+										</g:else>
+									</td>
+									<td>
+										<h4 class="list-group-item-heading">${champion.getFullName()}</h4>
+										<p class="list-group-item-text">${champion.getGenderDesc() + " " + champion.race.name}</p>
+									</td>
+								</tr>
 							</tbody>
 						</table>
-
-						<g:if test="${championCount > 10}">
-							<div class="pagination">
-								<g:paginate total="${championCount ?: 0}" />
-							</div>
-						</g:if>
-
-						<g:link action="create">
-							<button type="button" class="btn btn-primary">
-								<g:message code="default.new.label" args="[entityName]" />
-							</button>
-						</g:link>
-					</div>
+					</a>
+				</g:each>
+			</div>
+			
+			<g:if test="${championCount > 10}">
+				<div class="pagination">
+					<g:paginate total="${championCount ?: 0}" />
 				</div>
-			<!--</div>-->
+			</g:if>
+
+			<g:link action="create">
+				<button type="button" class="btn btn-primary">
+					<g:message code="default.new.label" args="[entityName]" />
+				</button>
+			</g:link>
 			
 		</g:else>
 	</body>

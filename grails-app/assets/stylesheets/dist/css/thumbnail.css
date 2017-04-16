@@ -1,0 +1,17 @@
+.img-thumbnail {
+    display: inline-block;
+    max-width: 100%;
+    padding: 4px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+	/*margin-right:10px*/
+}
+
+.img-thumbnail-50pc {
+	width:50%;
+	height:50%;
+}
