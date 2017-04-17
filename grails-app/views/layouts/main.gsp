@@ -62,8 +62,7 @@
 									<li><g:link controller="user" action="index">Users</g:link></li>
 									<li><g:link controller="role" action="index">Roles</g:link></li>
 									<li role="separator" class="divider"></li>
-									<li class="dropdown-header">Champions</li>
-									<li><g:link controller="creature" action="index">Creatures</g:link></li>
+									<li class="dropdown-header">Creatures</li>
 									<li><g:link controller="race" action="index">Races</g:link></li>
 								</ul>
 							</li>
@@ -78,7 +77,6 @@
 								<ul class="dropdown-menu">
 									<li class="dropdown-header">Champions</li>
 									<li><g:link controller="champion" action="index">List</g:link></li>
-									<li><g:link controller="champion" action="create">Create new Champion</g:link></li>
 								</ul>
 							</li>
 						</sec:ifAnyGranted>

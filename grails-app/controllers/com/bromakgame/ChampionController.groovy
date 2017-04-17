@@ -16,9 +16,9 @@ class ChampionController {
         params.max = Math.min(max ?: 10, 100)
 		
 		User player = springSecurityService?.getCurrentUser()
+		int champCount = Champion.findAllWhere(user: player).size()
 		
-        //respond Champion.list(params), model:[championCount: Champion.count()]
-		respond Champion.findAllWhere(user: player, params), model:[championCount: Champion.findAllWhere(user: player).size()]
+		respond Champion.findAllWhere(user: player, params), model:[championCount: champCount, hasChampionsAlive: playerHasChampionsAlive()]
     }
 
 	@Secured('ROLE_UNKNOWN')
@@ -27,7 +27,12 @@ class ChampionController {
     }
 
     def create() {
-        respond new Champion(params)
+		if (playerHasChampionsAlive()) {
+			redirect action:"index", method:"GET"
+			return
+		}
+		
+		respond new Champion(params)
     }
 
     @Transactional
@@ -37,6 +42,12 @@ class ChampionController {
             notFound()
             return
         }
+		
+		if (playerHasChampionsAlive()) {
+			transactionStatus.setRollbackOnly()
+			redirect action:"index", method:"GET"
+			return
+		}
 
 		// in order to associate User with Champion
 		// it must be done before hasErrors()
@@ -140,4 +151,10 @@ class ChampionController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
+	boolean playerHasChampionsAlive() {
+		User player = springSecurityService?.getCurrentUser()
+		
+		return Champion.findAllWhere(user: player, alive: true).size() > 0
+	}
 }

@@ -10,7 +10,7 @@
 			<div class="alert alert-info" role="alert">${flash.message}</div>
 		</g:if>
 		
-		<g:if test="${championCount == 0}">
+		<g:if test="${!hasChampionsAlive}">
 			
 			<!-- Carousel -->
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -72,12 +72,6 @@
 					<g:paginate total="${championCount ?: 0}" />
 				</div>
 			</g:if>
-
-			<g:link action="create">
-				<button type="button" class="btn btn-primary">
-					<g:message code="default.new.label" args="[entityName]" />
-				</button>
-			</g:link>
 			
 		</g:else>
 	</body>

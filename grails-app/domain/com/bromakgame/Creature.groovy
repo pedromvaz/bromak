@@ -10,12 +10,14 @@ class Creature {
 	String firstName
 	String lastName
 	String title
-	String gender
+	
+	boolean alive = true
 	
 	Creature father
 	Creature mother
 	
 	Race race
+	String gender
 	
 	String getFullName() {
 		String fullName = firstName

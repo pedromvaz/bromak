@@ -8,10 +8,9 @@
     -webkit-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
-	/*margin-right:10px*/
 }
 
 .img-thumbnail-50pc {
-	width:50%;
-	height:50%;
+	height:50px;
+	margin-right:10px
 }
