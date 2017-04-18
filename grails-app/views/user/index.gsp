@@ -28,13 +28,13 @@
 					<h3 class="panel-title"><g:message code="default.list.label" args="[entityName]" /></h3>
 				</div>
 				<div class="panel-body">
-					<!--<f:table collection="${userList}" class="table" />-->
 					<table class="table">
 						<thead>
 							<tr>
 								<th><g:message code="users.username.label" /></th>
 								<th><g:message code="users.email.label" /></th>
 								<th><g:message code="users.status.label" /></th>
+								<th><g:message code="roles.label" /></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -62,6 +62,7 @@
 											<span class="label label-danger"><g:message code="users.passwordExpired.label" /></span>
 										</g:if>
 									</td>
+									<td>${user.getAuthorities()}</td>
 								</tr>
 							</g:each>
 						</tbody>
