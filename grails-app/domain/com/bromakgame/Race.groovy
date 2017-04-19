@@ -11,9 +11,11 @@ class Race {
 	String description
 	boolean intelligent
 	boolean enabled
-
+	int startingPopulation
+	
     static constraints = {
 		name blank: false, unique: true
 		description blank: false
+		startingPopulation min: 1
     }
 }

@@ -12,6 +12,7 @@ class RaceControllerSpec extends Specification {
 
         params["name"] = 'Human'
 		params["description"] = 'An arrogante race'
+		params["startingPopulation"] = 10
     }
 
     void "Test the index action returns the correct model"() {

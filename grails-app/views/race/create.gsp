@@ -39,6 +39,9 @@
 							<label for="description" class="sr-only"><g:message code='races.description.label'/></label>
 							<input type="text" name="description" id="description" class="form-control" placeholder="<g:message code='races.description.label'/>" required>
 							
+							<label for="startingPopulation" class="sr-only"><g:message code='races.startingPopulation.label'/></label>
+							<input type="text" name="startingPopulation" id="startingPopulation" class="form-control" placeholder="<g:message code='races.startingPopulation.label'/>" required>
+							
 							<div class="checkbox">
 								<label>
 									<input type="checkbox" name="intelligent" id="intelligent">

@@ -34,25 +34,25 @@ class BootStrap {
 		
 		// intelligent ones
 		def humanRace = new Race(name: 'Human', description: 'An arrogant race.',
-			intelligent:true, enabled: true).save()
+			intelligent:true, enabled: true, startingPopulation: 20).save()
 		def dwarfRace = new Race(name: 'Dwarf', description: 'A greedy race.',
-			intelligent:true, enabled: true).save()
+			intelligent:true, enabled: true, startingPopulation: 15).save()
 		def elfRace = new Race(name: 'Elf', description: 'A peaceful race.',
-			intelligent:true, enabled: true).save()
+			intelligent:true, enabled: true, startingPopulation: 10).save()
 		def orcRace = new Race(name: 'Orc', description: 'A proud race.',
-			intelligent:true, enabled: true).save()
+			intelligent:true, enabled: true, startingPopulation: 25).save()
 		def goblinRace = new Race(name: 'Goblin', description: 'A coward race.',
-			intelligent:true, enabled: true).save()
+			intelligent:true, enabled: true, startingPopulation: 30).save()
 		def trollRace = new Race(name: 'Troll', description: 'A brutish race.',
-			intelligent:true, enabled: false).save()
+			intelligent:true, enabled: false, startingPopulation: 5).save()
 		
 		// savage ones
 		def wolfRace = new Race(name: 'Wolf', description: 'A race that works in packs.',
-			intelligent: false, enabled: true).save()
+			intelligent: false, enabled: true, startingPopulation: 15).save()
 		def bearRace = new Race(name: 'Bear', description: 'A growling race.',
-			intelligent: false, enabled: true).save()
+			intelligent: false, enabled: true, startingPopulation: 10).save()
 		def eagleRace = new Race(name: 'Eagle', description: 'A flying race.',
-			intelligent: false, enabled: true).save()
+			intelligent: false, enabled: true, startingPopulation: 5).save()
 		
 		assert Race.count() == 9
 		
