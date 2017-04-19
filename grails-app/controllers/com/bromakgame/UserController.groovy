@@ -50,12 +50,22 @@ class UserController {
 		
 		def roleUser = Role.findByAuthority('ROLE_PLAYER')
 		UserRole.create user, roleUser
-
+		
+		
+		
+		// if user registration, go to champion index page
+		String roleBasedController = "champion"
+		
+		// if admin creating new user, go to user index page
+		if (springSecurityService?.currentUser != null) {
+			roleBasedController = "user"
+		}
+		
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.username])
                 //redirect user
-				redirect controller:"champion", action:"index", method:"GET"
+				redirect controller:roleBasedController, action:"index", method:"GET"
             }
             '*' { respond user, [status: CREATED] }
         }

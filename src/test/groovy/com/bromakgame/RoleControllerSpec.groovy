@@ -54,7 +54,7 @@ class RoleControllerSpec extends Specification {
 			controller.save(role)
 
 		then:"A redirect is issued to the show action"
-			response.redirectedUrl == '/role/show/1'
+			response.redirectedUrl == '/role/index'
 			controller.flash.message != null
 			Role.count() == 1
 	}
