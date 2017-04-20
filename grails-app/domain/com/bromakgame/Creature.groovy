@@ -7,40 +7,18 @@ class Creature {
 	
 	private static final long serialVersionUID = 1
 	
-	String firstName
-	String lastName
-	String title
-	
+	Race race
+	String gender
 	boolean alive = true
 	
 	Creature father
 	Creature mother
-	
-	Race race
-	String gender
-	
-	String getFullName() {
-		String fullName = firstName
-		
-		if (title?.trim()) {
-			fullName = title + " " + fullName
-		}
-		
-		if (lastName?.trim()) {
-			fullName = fullName + " " + lastName
-		}
-		
-		return fullName
-	}
 	
 	String getGenderDesc() {
 		return (gender == "m") ? "Male" : "Female"
 	}
 	
     static constraints = {
-		firstName blank: false
-		lastName nullable: true
-		title nullable: true
 		gender inList: ["m", "f"]
 		father nullable: true
 		mother nullable: true

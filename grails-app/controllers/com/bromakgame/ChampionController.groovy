@@ -1,6 +1,8 @@
 package com.bromakgame
 
 import static org.springframework.http.HttpStatus.*
+import com.bromakgame.creatures.Community
+import com.bromakgame.creatures.Group
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
@@ -69,8 +71,11 @@ class ChampionController {
         champion.save flush:true
 		
 		if (user != null) {
-			user.addToChampions(champion).save()
+			user.champions.add(champion)
+			user.save()
 		}
+		
+		startCommunity(champion);
 		
         request.withFormat {
             form multipartForm {
@@ -83,6 +88,17 @@ class ChampionController {
             '*' { respond champion, [status: CREATED] }
         }
     }
+	
+	void startCommunity(Champion champion) {
+		int startingPop = champion.race.startingPopulation
+		
+		def community = new Community(totalCreatures: startingPop)
+		community.champions.add(champion)
+		community.save()
+		
+		champion.groups.add(community)
+		champion.save()
+	}
 
 	@Secured('ROLE_UNKNOWN')
     def edit(Champion champion) {

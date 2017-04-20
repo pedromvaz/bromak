@@ -2,9 +2,10 @@ package com.bromakgame
 
 import grails.test.mixin.*
 import spock.lang.*
+import com.bromakgame.creatures.Community
 
 @TestFor(ChampionController)
-@Mock([Champion, Race, User])
+@Mock([Champion, Race, User, Community])
 class ChampionControllerSpec extends Specification {
 
     def populateValidParams(params) {
