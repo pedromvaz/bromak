@@ -11,10 +11,9 @@ class ChampionControllerSpec extends Specification {
     def populateValidParams(params) {
         assert params != null
 
-        params["firstName"] = 'Charming'
-		params["title"] = 'Prince'
+        params["firstName"] = 'Aragorn'
 		params["gender"] = 'm'
-		params["race"] = new Race(name: 'Human', description: 'Human')
+		params["race"] = new Race(name: 'Human')
 		params["user"] = new User(username: 'User', email: 'user@email.com', password: 'pass')
     }
 

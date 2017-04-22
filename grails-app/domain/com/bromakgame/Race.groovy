@@ -13,6 +13,15 @@ class Race {
 	boolean enabled
 	int startingPopulation
 	
+	// should only be used for testing purposes
+	Race (String name) {
+		this.name = name
+		this.description = name
+		this.intelligent = true
+		this.enabled = true
+		this.startingPopulation = 3
+	}
+	
     static constraints = {
 		name blank: false, unique: true
 		description blank: false

@@ -2,7 +2,6 @@ package com.bromakgame
 
 import static org.springframework.http.HttpStatus.*
 import com.bromakgame.creatures.Community
-import com.bromakgame.creatures.Group
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
@@ -45,6 +44,8 @@ class ChampionController {
             return
         }
 		
+		// in case the user creates a Champion, then clicks "Back" in the browser
+		// and tries to create a second Champion
 		if (playerHasChampionsAlive()) {
 			transactionStatus.setRollbackOnly()
 			redirect action:"index", method:"GET"
@@ -73,27 +74,32 @@ class ChampionController {
 		if (user != null) {
 			user.champions.add(champion)
 			user.save()
+			
+			startCommunity(champion)
 		}
-		
-		startCommunity(champion);
 		
         request.withFormat {
             form multipartForm {
                 flash.message = message(
 					code: 'champions.created.message',
 					args: [champion.firstName])
-                //redirect champion
 				redirect action:"index", method:"GET"
             }
             '*' { respond champion, [status: CREATED] }
         }
     }
 	
+	boolean playerHasChampionsAlive() {
+		User player = springSecurityService?.getCurrentUser()
+		
+		return Champion.findAllWhere(user: player, alive: true).size() > 0
+	}
+	
 	void startCommunity(Champion champion) {
 		int startingPop = champion.race.startingPopulation
 		
 		def community = new Community(totalCreatures: startingPop)
-		community.champions.add(champion)
+		community.add(champion)
 		community.save()
 		
 		champion.groups.add(community)
@@ -167,10 +173,4 @@ class ChampionController {
             '*'{ render status: NOT_FOUND }
         }
     }
-	
-	boolean playerHasChampionsAlive() {
-		User player = springSecurityService?.getCurrentUser()
-		
-		return Champion.findAllWhere(user: player, alive: true).size() > 0
-	}
 }

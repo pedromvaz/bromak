@@ -4,14 +4,29 @@ import com.bromakgame.Creature
 
 class Group {
 	
-	private static final long serialVersionUID = 1
+	Set<Creature> creatures = new HashSet<>()
 	
-	int totalCreatures
+	boolean add(Creature creature) {
+		creatures.add(creature)
+	}
 	
-	Set<Creature> champions = new HashSet<>()
+	boolean remove(Creature creature) {
+		creatures.remove(creature)
+	}
+	
+	int size() {
+		creatures.size()
+	}
+	
+	boolean isEmpty() {
+		creatures.isEmpty()
+	}
+	
+	boolean contains(Creature creature) {
+		creatures.contains(creature)
+	}
 
     static constraints = {
-		totalCreatures min: 0
     }
 	
 	static mapping = {
