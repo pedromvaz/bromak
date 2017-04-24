@@ -6,9 +6,6 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<g:if test="${flash.message}">
-			<div class="alert alert-info" role="alert">${flash.message}</div>
-		</g:if>
 		
 		<g:if test="${!hasChampionsAlive}">
 			
@@ -42,30 +39,49 @@
 		</g:if>
 		<g:else>
 		
-			<div class="list-group">
-				<g:each in="${championList}" var="champion">
-					<a href="#" class="list-group-item">
-						<table>
-							<tbody>
-								<tr>
-									<td>
-										<g:if test="${champion.gender == 'm'}">
-											<img class="img-thumbnail-50pc" src="http://www.iconninja.com/files/40/368/11/man-user-male-avatar-young-person-icon.svg">
-										</g:if>
-										<g:else>
-											<img class="img-thumbnail-50pc" src="http://www.iconninja.com/files/311/30/378/female-young-woman-user-avatar-person-icon.svg">
-										</g:else>
-									</td>
-									<td>
-										<h4 class="list-group-item-heading">${champion.getFullName()}</h4>
-										<p class="list-group-item-text">${champion.getGenderDesc() + " " + champion.race.name}</p>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</a>
-				</g:each>
-			</div>
+			<g:if test="${flash.message}">
+				<div class="alert alert-info" role="alert">${flash.message}</div>
+			</g:if>
+			
+			<g:each in="${championList}" var="champion">
+				<div class="well col-sm-3">
+					<table class="table">
+						<thead>
+							<tr>
+								<th colspan="2">
+									<g:if test="${champion.gender == 'm'}">
+										<img class="img-thumbnail-75px" src="http://www.iconninja.com/files/40/368/11/man-user-male-avatar-young-person-icon.svg">
+									</g:if>
+									<g:else>
+										<img class="img-thumbnail-75px" src="http://www.iconninja.com/files/311/30/378/female-young-woman-user-avatar-person-icon.svg">
+									</g:else>
+								</th>
+							</tr>
+							<tr>
+								<th colspan="2">${champion.getFullName()}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Race</td>
+								<td>${champion.getGenderDesc() + " " + champion.race.name}</td>
+							</tr>
+							<tr>
+								<td>Communities</td>
+								<td>${champion.groups.size()}</td>
+							</tr>
+							<tr>
+								<td>Community Name</td>
+								<td>${champion.groups.getAt(0).toString()}</td>
+							</tr>
+							<tr>
+								<td>Community Size</td>
+								<td>${champion.groups.getAt(0).size()}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</g:each>
 			
 			<g:if test="${championCount > 10}">
 				<div class="pagination">

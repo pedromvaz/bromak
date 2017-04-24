@@ -75,8 +75,8 @@
 									<span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
-									<li class="dropdown-header">Champions</li>
-									<li><g:link controller="champion" action="index">List</g:link></li>
+									<li><g:link controller="champion" action="index">Champions</g:link></li>
+									<li><g:link controller="champion" action="index">Communities</g:link></li>
 								</ul>
 							</li>
 						</sec:ifAnyGranted>

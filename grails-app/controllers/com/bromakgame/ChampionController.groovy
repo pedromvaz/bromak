@@ -19,7 +19,10 @@ class ChampionController {
 		User player = springSecurityService?.getCurrentUser()
 		int champCount = Champion.findAllWhere(user: player).size()
 		
-		respond Champion.findAllWhere(user: player, params), model:[championCount: champCount, hasChampionsAlive: playerHasChampionsAlive()]
+		def model = [ championCount: champCount ]
+		model << [ hasChampionsAlive: playerHasChampionsAlive() ]
+		
+		respond Champion.findAllWhere(user: player, params), model: model
     }
 
 	@Secured('ROLE_UNKNOWN')
@@ -69,11 +72,11 @@ class ChampionController {
             return
         }
 
-        champion.save flush:true
+        champion.save(flush:true)
 		
 		if (user != null) {
 			user.champions.add(champion)
-			user.save()
+			user.save(flush:true)
 			
 			startCommunity(champion)
 		}
@@ -96,14 +99,24 @@ class ChampionController {
 	}
 	
 	void startCommunity(Champion champion) {
-		int startingPop = champion.race.startingPopulation
+		def race = champion.race
+		int startingPop = race.startingPopulation
 		
-		def community = new Community(totalCreatures: startingPop)
+		def community = new Community().save()
+		
+		for (int i = 0; i < startingPop; i += 2) {
+			def maleCreature = new Creature(race: race, gender: 'm').save()
+			def femaleCreature = new Creature(race: race, gender: 'f').save()
+			
+			community.add(maleCreature)
+			community.add(femaleCreature)
+		}
+		
 		community.add(champion)
 		community.save()
 		
 		champion.groups.add(community)
-		champion.save()
+		champion.save(flush:true)
 	}
 
 	@Secured('ROLE_UNKNOWN')

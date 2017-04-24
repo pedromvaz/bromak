@@ -1,7 +1,9 @@
 package com.bromakgame.creatures
 
 import com.bromakgame.Creature
+import groovy.transform.ToString
 
+@ToString
 class Group {
 	
 	Set<Creature> creatures = new HashSet<>()
@@ -24,6 +26,10 @@ class Group {
 	
 	boolean contains(Creature creature) {
 		creatures.contains(creature)
+	}
+	
+	String toString() {
+		this.class.getSimpleName() + " " + this.id
 	}
 
     static constraints = {
