@@ -72,7 +72,11 @@
 							</tr>
 							<tr>
 								<td>Community Name</td>
-								<td>${champion.groups.getAt(0).toString()}</td>
+								<td>
+									<g:link controller="community" action="show" id="${champion.groups.getAt(0).id}">
+										${champion.groups.getAt(0).toString()}
+									</g:link>
+								</td>
 							</tr>
 							<tr>
 								<td>Community Size</td>

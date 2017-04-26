@@ -19,6 +19,7 @@
 *= require dist/css/carousel
 *= require dist/css/pagination
 *= require dist/css/thumbnail
+*= require dist/css/progress-bars
 *
 * require dist/css/sticky-footer-navbar
 */
