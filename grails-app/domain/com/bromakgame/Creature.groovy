@@ -18,6 +18,14 @@ class Creature {
 		return (gender == "m") ? "Male" : "Female"
 	}
 	
+	boolean isMale() {
+		return gender == "m"
+	}
+	
+	boolean isFemale() {
+		return gender == "f"
+	}
+	
     static constraints = {
 		gender inList: ["m", "f"]
 		father nullable: true

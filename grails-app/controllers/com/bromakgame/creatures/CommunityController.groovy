@@ -13,11 +13,11 @@ class CommunityController {
 	@Secured('ROLE_UNKNOWN')
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Community.list(params), model:[communityCount: Community.count()]
+        respond Community.list(params), model: [communityCount: Community.count()]
     }
 
     def show(Community community) {
-        respond community
+        respond community, model: community?.percentile()
     }
 
 	@Secured('ROLE_UNKNOWN')

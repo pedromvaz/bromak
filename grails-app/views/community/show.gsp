@@ -13,25 +13,38 @@
 						<h3 class="panel-title"><g:message code="communities.population.label" /></h3>
 					</div>
 					<div class="panel-body">
-						<p />
-						<p>
-							<span class="progress-label">Champions</span>
-							<div class="progress">
-								<div class="progress-bar" role="progressbar" style="width:5%"></div>
-							</div>
-						</p>
-						<p>
+						<div class="col-sm-6">
 							<span class="progress-label"><g:message code="creatures.gender.male.label" /></span>
 							<div class="progress">
-								<div class="progress-bar" role="progressbar" style="width:40%"></div>
+								<div class="progress-bar" style="width:${maleChampions}%"></div>
+								<div class="progress-bar progress-bar-info" style="width:${males}%"></div>
 							</div>
-						</p>
-						<p>
+						</div>
+						<div class="col-sm-6">
 							<span class="progress-label"><g:message code="creatures.gender.female.label" /></span>
 							<div class="progress">
-								<div class="progress-bar" role="progressbar" style="width:55%"></div>
+								<div class="progress-bar" style="width:${femaleChampions}%"></div>
+								<div class="progress-bar progress-bar-info" style="width:${females}%"></div>
 							</div>
-						</p>
+						</div>
+						<div class="col-sm-12">
+							<span class="progress-label">Happiness</span>
+							<div class="progress">
+								<div class="progress-bar" style="width:70%"></div>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<span class="progress-label">Food</span>
+							<div class="progress">
+								<div class="progress-bar" style="width:90%"></div>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<span class="progress-label">Safety</span>
+							<div class="progress">
+								<div class="progress-bar" style="width:50%"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
