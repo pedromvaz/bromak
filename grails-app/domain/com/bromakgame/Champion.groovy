@@ -8,19 +8,14 @@ class Champion extends Creature {
 	
 	String firstName
 	String lastName
-	String title
 	
 	Set<Group> groups = new HashSet<>()
 	
 	String getFullName() {
-		String fullName = firstName
-		
-		if (title?.trim()) {
-			fullName = title + " " + fullName
-		}
+		String fullName = firstName.trim()
 		
 		if (lastName?.trim()) {
-			fullName = fullName + " " + lastName
+			fullName = fullName + " " + lastName.trim()
 		}
 		
 		return fullName
@@ -29,6 +24,5 @@ class Champion extends Creature {
     static constraints = {
 		firstName blank: false
 		lastName nullable: true
-		title nullable: true
     }
 }

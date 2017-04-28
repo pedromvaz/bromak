@@ -7,6 +7,9 @@ class Creature {
 	
 	private static final long serialVersionUID = 1
 	
+	public static final String MALE = "m"
+	public static final String FEMALE = "f"
+	
 	Race race
 	String gender
 	boolean alive = true
@@ -15,19 +18,19 @@ class Creature {
 	Creature mother
 	
 	String getGenderDesc() {
-		return (gender == "m") ? "Male" : "Female"
+		return (gender == MALE) ? "Male" : "Female"
 	}
 	
 	boolean isMale() {
-		return gender == "m"
+		return gender == MALE
 	}
 	
 	boolean isFemale() {
-		return gender == "f"
+		return gender == FEMALE
 	}
 	
     static constraints = {
-		gender inList: ["m", "f"]
+		gender inList: [MALE, FEMALE]
 		father nullable: true
 		mother nullable: true
     }

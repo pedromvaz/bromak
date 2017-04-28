@@ -3,6 +3,7 @@ package com.bromakgame
 import com.bromakgame.Role
 import com.bromakgame.User
 import com.bromakgame.UserRole
+import com.bromakgame.creatures.Community
 
 class BootStrap {
 
@@ -77,18 +78,29 @@ class BootStrap {
 		// Champions and Family Tree
 		// -------------------------
 		
-		def champFather = new Champion(firstName: 'Father', gender: 'm', race: humanRace, user: testPlayer).save()
-		def champMother = new Champion(firstName: 'Mother', gender: 'f', race: humanRace, user: testPlayer).save()
-		def champSon = new Champion(firstName: 'Son', gender: 'm', race: humanRace, user: testPlayer).save()
-		def champDaughter = new Champion(firstName: 'Daughter', gender: 'f', race: humanRace, user: testPlayer).save()
+		def elrond = new Champion(firstName: 'Elrond', gender: 'm', race: elfRace, user: testPlayer).save()
+		def celebrian = new Champion(firstName: 'Celebrian', gender: 'f', race: elfRace, user: testPlayer).save()
+		def elladan = new Champion(firstName: 'Elladan', gender: 'm', race: elfRace, user: testPlayer).save()
+		def elrohir = new Champion(firstName: 'Elrohir', gender: 'm', race: elfRace, user: testPlayer).save()
+		def arwen = new Champion(firstName: 'Arwen', gender: 'f', race: elfRace, user: testPlayer).save()
 		
-		assert Champion.count() == 4
+		assert Champion.count() == 5
 		
-		champSon.father = champFather
-		champSon.mother = champMother
+		for (child in [elladan, elrohir, arwen]) {
+			child.father = elrond
+			child.mother = celebrian
+		}
 		
-		champDaughter.father = champFather
-		champDaughter.mother = champMother
+		// -----------
+		// Communities
+		// -----------
+		
+		def community = new Community().save()
+		
+		for (champion in [elrond, celebrian, elladan, elrohir, arwen]) {
+			champion.groups.add(community)
+			community.add(champion)
+		}
     }
     
     def destroy = {
