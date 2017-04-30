@@ -1,4 +1,4 @@
-package com.bromakgame
+package com.bromakgame.creatures
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional

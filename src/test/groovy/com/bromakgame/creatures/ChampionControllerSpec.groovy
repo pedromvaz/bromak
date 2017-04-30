@@ -1,8 +1,9 @@
-package com.bromakgame
+package com.bromakgame.creatures
 
 import grails.test.mixin.*
 import spock.lang.*
-import com.bromakgame.creatures.Community
+import com.bromakgame.creatures.Race
+import com.bromakgame.User
 
 @TestFor(ChampionController)
 @Mock([Champion, Race, User, Community])

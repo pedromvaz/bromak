@@ -2,8 +2,8 @@ package com.bromakgame.creatures
 
 import grails.test.mixin.*
 import spock.lang.*
-import com.bromakgame.Creature
-import com.bromakgame.Race
+import com.bromakgame.creatures.Creature
+import com.bromakgame.creatures.Race
 
 @TestFor(Group)
 class GroupSpec extends Specification {

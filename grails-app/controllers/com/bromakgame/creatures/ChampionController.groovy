@@ -1,9 +1,10 @@
-package com.bromakgame
+package com.bromakgame.creatures
 
 import static org.springframework.http.HttpStatus.*
 import com.bromakgame.creatures.Community
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
+import com.bromakgame.User
 
 @Secured('ROLE_PLAYER')
 @Transactional(readOnly = true)

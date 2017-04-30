@@ -1,4 +1,4 @@
-package com.bromakgame
+package com.bromakgame.creatures
 
 import grails.test.mixin.*
 import spock.lang.*
@@ -6,8 +6,8 @@ import spock.lang.*
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(Champion)
-class ChampionSpec extends Specification {
+@TestFor(Creature)
+class CreatureSpec extends Specification {
 
     def setup() {
     }

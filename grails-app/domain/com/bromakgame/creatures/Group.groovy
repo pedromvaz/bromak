@@ -1,7 +1,5 @@
 package com.bromakgame.creatures
 
-import com.bromakgame.Creature
-import com.bromakgame.Champion
 import groovy.transform.ToString
 
 @ToString

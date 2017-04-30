@@ -41,16 +41,16 @@
 							
 							<div class="form-group">
 								<label for="raceId" class="sr-only"><g:message code='creatures.race.label'/></label>
-								<g:select class="form-control" name="race.id" from="${com.bromakgame.Race.findAllByIntelligentAndEnabled(true, true)}" optionKey="id" optionValue="name" />
+								<g:select class="form-control" name="race.id" from="${com.bromakgame.creatures.Race.findAllByIntelligentAndEnabled(true, true)}" optionKey="id" optionValue="name" />
 							</div>
 							
 							<div class="form-group">
 								<label class="radio-inline">
-									<input type="radio" name="gender" value="${com.bromakgame.Champion.MALE}">
+									<input type="radio" name="gender" value="${com.bromakgame.creatures.Champion.MALE}">
 									<g:message code="creatures.gender.male.label" />
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="gender" value="${com.bromakgame.Champion.FEMALE}">
+									<input type="radio" name="gender" value="${com.bromakgame.creatures.Champion.FEMALE}">
 									<g:message code="creatures.gender.female.label" />
 								</label>
 							</div>

@@ -1,4 +1,4 @@
-package com.bromakgame
+package com.bromakgame.creatures
 
 import groovy.transform.ToString
 

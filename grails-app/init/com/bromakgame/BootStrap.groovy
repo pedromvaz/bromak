@@ -4,6 +4,8 @@ import com.bromakgame.Role
 import com.bromakgame.User
 import com.bromakgame.UserRole
 import com.bromakgame.creatures.Community
+import com.bromakgame.creatures.Race
+import com.bromakgame.creatures.Champion
 
 class BootStrap {
 

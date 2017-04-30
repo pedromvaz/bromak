@@ -2,6 +2,7 @@ package com.bromakgame
 
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
+import com.bromakgame.creatures.Champion
 
 @EqualsAndHashCode(includes='username')
 @ToString(includes='username', includeNames=true, includePackage=false)

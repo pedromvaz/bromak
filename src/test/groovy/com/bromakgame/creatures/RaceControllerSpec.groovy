@@ -1,4 +1,4 @@
-package com.bromakgame
+package com.bromakgame.creatures
 
 import grails.test.mixin.*
 import spock.lang.*
