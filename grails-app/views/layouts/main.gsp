@@ -85,6 +85,7 @@
 						<sec:ifLoggedIn>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<img src="http://icons.iconarchive.com/icons/janik-baumgartner/woocons/32/User-icon.png" style="height:16px" />
 									<sec:loggedInUserInfo field='username'/>
 									<span class="caret"></span>
 								</a>
