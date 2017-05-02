@@ -64,6 +64,9 @@
 									<li role="separator" class="divider"></li>
 									<li class="dropdown-header">Creatures</li>
 									<li><g:link controller="race" action="index">Races</g:link></li>
+									<li role="separator" class="divider"></li>
+									<li class="dropdown-header">Learning</li>
+									<li><g:link controller="epoch" action="index">Epochs</g:link></li>
 								</ul>
 							</li>
 						</sec:ifAnyGranted>
