@@ -12,17 +12,27 @@
 		</g:if>
 		
 		<g:each in="${epochList}" var="epoch">
-			<div class="panel panel-default">
+			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">${epoch.name}</h3>
 				</div>
 				<div class="panel-body">
 					<p>${epoch.description}</p>
-					<h4>
+					<ul class="nav nav-pills" role="technologies">
 						<g:each in="${epoch.technologies}" var="technology">
-							<span class="label label-primary">${technology.name}</span>
+							<li>
+								<a href="#">
+									${technology.name}
+									<span class="badge">${technology.size()} skills</span>
+								</a>
+							</li>
 						</g:each>
-					</h4>
+						<li>
+							<g:link controller="technology" action="create">
+								<g:message code="default.new.label" args="['Technology']" />
+							</g:link>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</g:each>
@@ -34,7 +44,7 @@
 		</g:if>
 		
 		<g:link action="create">
-			<button type="button" class="btn btn-default">
+			<button type="button" class="btn btn-primary">
 				<g:message code="default.new.label" args="[entityName]" />
 			</button>
 		</g:link>

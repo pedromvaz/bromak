@@ -6,6 +6,10 @@ class Technology {
 	String description
 
 	Set<Skill> skills = new HashSet<>()
+	
+	int size() {
+		skills.size()
+	}
 
 	static constraints = {
 		name blank: false, unique: true

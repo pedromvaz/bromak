@@ -36,6 +36,12 @@
 						<div class="col-sm-12">
 							<span class="progress-label">Food</span>
 							<div class="progress">
+								<div class="progress-bar" style="width:60%"></div>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<span class="progress-label">Water</span>
+							<div class="progress">
 								<div class="progress-bar" style="width:90%"></div>
 							</div>
 						</div>
