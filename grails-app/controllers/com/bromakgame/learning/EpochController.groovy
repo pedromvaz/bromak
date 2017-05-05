@@ -15,6 +15,7 @@ class EpochController {
         respond Epoch.list(params), model:[epochCount: Epoch.count()]
     }
 
+	@Secured('ROLE_UNKNOWN')
     def show(Epoch epoch) {
         respond epoch
     }
@@ -49,10 +50,12 @@ class EpochController {
         }
     }
 
+	@Secured('ROLE_UNKNOWN')
     def edit(Epoch epoch) {
         respond epoch
     }
 
+	@Secured('ROLE_UNKNOWN')
     @Transactional
     def update(Epoch epoch) {
         if (epoch == null) {
@@ -78,6 +81,7 @@ class EpochController {
         }
     }
 
+	@Secured('ROLE_UNKNOWN')
     @Transactional
     def delete(Epoch epoch) {
 

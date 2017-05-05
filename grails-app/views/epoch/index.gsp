@@ -30,7 +30,7 @@
 							</li>
 						</g:each>
 						<li>
-							<g:link controller="technology" action="create">
+							<g:link controller="technology" action="create" params="[epochId:epoch.id]">
 								<g:message code="technologies.new.label" />
 							</g:link>
 						</li>
