@@ -42,7 +42,8 @@ class EpochController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'epoch.label', default: 'Epoch'), epoch.id])
-                redirect epoch
+                //redirect epoch
+				redirect action:"index", method:"GET"
             }
             '*' { respond epoch, [status: CREATED] }
         }

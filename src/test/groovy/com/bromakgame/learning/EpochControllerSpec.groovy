@@ -53,7 +53,7 @@ class EpochControllerSpec extends Specification {
             controller.save(epoch)
 
         then:"A redirect is issued to the show action"
-            response.redirectedUrl == '/epoch/show/1'
+            response.redirectedUrl == '/epoch/index'
             controller.flash.message != null
             Epoch.count() == 1
     }

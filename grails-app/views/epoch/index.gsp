@@ -23,13 +23,15 @@
 							<li>
 								<a href="#">
 									${technology.name}
-									<span class="badge">${technology.size()} skills</span>
+									<span class="badge">
+										<g:message code="technologies.skillCount.label" args="[technology.size()]" />
+									</span>
 								</a>
 							</li>
 						</g:each>
 						<li>
 							<g:link controller="technology" action="create">
-								<g:message code="default.new.label" args="['Technology']" />
+								<g:message code="technologies.new.label" />
 							</g:link>
 						</li>
 					</ul>
