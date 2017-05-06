@@ -34,11 +34,13 @@
 					<div class="panel-body">
 						<form action="/technology/save" method="POST" id="createTechnologyForm" class="form-signin" >
 							<label for="name" class="sr-only"><g:message code='technologies.name.label'/></label>
-							<input type="text" name="name" id="name" class="form-control" placeholder="<g:message code='technologies.name.label'/>" required autofocus>
+							<input type="text" name="name" id="name" class="form-control" placeholder="${message(code: 'technologies.name.label')}" required autofocus>
 							
-							<label for="description" class="sr-only"><g:message code='technologies.description.label'/></label>
-							<input type="text" name="description" id="description" class="form-control" placeholder="<g:message code='technologies.description.label'/>" required>
-
+							<div class="form-group">
+								<label for="description" class="sr-only"><g:message code='technologies.description.label'/></label>
+								<textarea class="form-control" rows="4" name="description" id="description" placeholder="${message(code: 'technologies.description.label')}" required></textarea>
+							</div>
+							
 							<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit">
 								<g:message code='default.button.create.label'/>
 							</button>

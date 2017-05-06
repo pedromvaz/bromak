@@ -34,13 +34,15 @@
 					<div class="panel-body">
 						<form action="/race/save" method="POST" id="createRaceForm" class="form-signin" >
 							<label for="name" class="sr-only"><g:message code='races.name.label'/></label>
-							<input type="text" name="name" id="name" class="form-control" placeholder="<g:message code='races.name.label'/>" required autofocus>
+							<input type="text" name="name" id="name" class="form-control" placeholder="${message(code: 'races.name.label')}" required autofocus>
 							
-							<label for="description" class="sr-only"><g:message code='races.description.label'/></label>
-							<input type="text" name="description" id="description" class="form-control" placeholder="<g:message code='races.description.label'/>" required>
+							<div class="form-group">
+								<label for="description" class="sr-only"><g:message code='races.description.label'/></label>
+								<textarea class="form-control" rows="4" name="description" id="description" placeholder="${message(code: 'races.description.label')}" required></textarea>
+							</div>
 							
 							<label for="startingPopulation" class="sr-only"><g:message code='races.startingPopulation.label'/></label>
-							<input type="text" name="startingPopulation" id="startingPopulation" class="form-control" placeholder="<g:message code='races.startingPopulation.label'/>" required>
+							<input type="text" name="startingPopulation" id="startingPopulation" class="form-control" placeholder="${message(code: 'races.startingPopulation.label')}" required>
 							
 							<div class="checkbox">
 								<label>

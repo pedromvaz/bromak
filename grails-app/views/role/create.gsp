@@ -34,10 +34,12 @@
 					<div class="panel-body">
 						<form action="/role/save" method="POST" id="createRoleForm" class="form-signin" >
 							<label for="authority" class="sr-only"><g:message code='roles.authority.label'/></label>
-							<input type="text" name="authority" id="authority" class="form-control" placeholder="<g:message code='roles.authority.label'/>" required autofocus>
+							<input type="text" name="authority" id="authority" class="form-control" placeholder="${message(code: 'roles.authority.label')}" required autofocus>
 
-							<label for="description" class="sr-only"><g:message code='roles.description.label'/></label>
-							<input type="text" name="description" id="description" class="form-control" placeholder="<g:message code='roles.description.label'/>" required>
+							<div class="form-group">
+								<label for="description" class="sr-only"><g:message code='roles.description.label'/></label>
+								<textarea class="form-control" rows="4" name="description" id="description" placeholder="${message(code: 'roles.description.label')}" required></textarea>
+							</div>
 							
 							<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit">
 								<g:message code='default.button.create.label'/>
