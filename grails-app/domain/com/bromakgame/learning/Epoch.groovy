@@ -5,26 +5,26 @@ class Epoch {
 	String name
 	String description
 
-	Set<Technology> technologies = new HashSet<>()
+	Set<Skill> skills = new HashSet<>()
 
-	boolean add(Technology tech) {
-		technologies.add(tech)
+	boolean add(Skill skill) {
+		skills.add(skill)
 	}
 
-	boolean remove(Technology tech) {
-		technologies.remove(tech)
+	boolean remove(Skill skill) {
+		skills.remove(skill)
 	}
 
 	int size() {
-		technologies.size()
+		skills.size()
 	}
 
 	boolean isEmpty() {
-		technologies.isEmpty()
+		skills.isEmpty()
 	}
 
-	boolean contains(Technology tech) {
-		technologies.contains(tech)
+	boolean contains(Skill skill) {
+		skills.contains(skill)
 	}
 
 	static constraints = {

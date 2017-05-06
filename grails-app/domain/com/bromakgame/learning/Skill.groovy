@@ -1,11 +1,13 @@
 package com.bromakgame.learning
 
+import com.bromakgame.creatures.Race
+
 class Skill {
 
 	String name
 	String description
 
-	Set<Ability> requiredAbilities = new HashSet<>()
+	Set<Race> races = new HashSet<>()
 
 	static constraints = {
 		name blank: false, unique: true

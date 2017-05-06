@@ -12,30 +12,26 @@
 		</g:if>
 		
 		<g:each in="${epochList}" var="epoch">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h3 class="panel-title">${epoch.name}</h3>
-				</div>
-				<div class="panel-body">
-					<p>${epoch.description}</p>
-					<ul class="nav nav-pills" role="technologies">
-						<g:each in="${epoch.technologies}" var="technology">
-							<li>
-								<a href="#">
-									${technology.name}
-									<span class="badge">
-										<g:message code="technologies.skillCount.label" args="[technology.size()]" />
-									</span>
-								</a>
-							</li>
-						</g:each>
-						<li>
-							<g:link controller="technology" action="create" params="[epochId:epoch.id]">
-								<g:message code="technologies.new.label" />
-							</g:link>
-						</li>
-					</ul>
-				</div>
+			<div class="list-group">
+				<a class="list-group-item active">
+					<h4 class="list-group-item-heading">${epoch.name}</h4>
+					<p class="list-group-item-text">${epoch.description}</p>
+				</a>
+				<g:each in="${epoch.skills}" var="skill">
+					<a class="list-group-item">
+						<h4 class="list-group-item-heading">${skill.name}</h4>
+						<p class="list-group-item-text">${skill.description}</p>
+						<!--<h5>
+							Races:
+							<g:each in="${skill.races}" var="race">
+								<span class="label label-default">${race.name}</span>
+							</g:each>
+						</h5>-->
+					</a>
+				</g:each>
+				<g:link controller="skill" action="create" params="[epochId:epoch.id]" class="list-group-item">
+					<g:message code="skills.new.label" />
+				</g:link>
 			</div>
 		</g:each>
 

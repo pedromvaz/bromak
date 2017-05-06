@@ -2,7 +2,6 @@ package com.bromakgame.creatures
 
 import groovy.transform.ToString
 import com.bromakgame.learning.Skill
-import com.bromakgame.learning.Knowledge
 
 @ToString
 class Creature {
@@ -18,7 +17,6 @@ class Creature {
 	Creature mother
 
 	Set<Skill> learnedSkills = new HashSet<>()
-	Set<Knowledge> obtainedKnowledge = new HashSet<>()
 
 	String getGenderDesc() {
 		return (gender == MALE) ? "Male" : "Female"

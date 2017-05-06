@@ -1,7 +1,7 @@
 package com.bromakgame.creatures
 
 import groovy.transform.ToString
-import com.bromakgame.learning.Ability
+import com.bromakgame.learning.Skill
 
 @ToString(excludes='enabled')
 class Race {
@@ -12,7 +12,7 @@ class Race {
 	boolean enabled
 	int startingPopulation
 
-	Set<Ability> innateAbilities = new HashSet<>()
+	Set<Skill> learnableSkills = new HashSet<>()
 
 	// should only be used for testing purposes
 	Race (String name) {

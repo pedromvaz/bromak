@@ -6,107 +6,108 @@ import grails.plugin.springsecurity.annotation.Secured
 
 @Secured('ROLE_ADMIN')
 @Transactional(readOnly = true)
-class TechnologyController {
+class SkillController {
 
 	static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 	@Secured('ROLE_UNKNOWN')
 	def index(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
-		respond Technology.list(params), model:[technologyCount: Technology.count()]
+		respond Skill.list(params), model:[skillCount: Skill.count()]
 	}
 
 	@Secured('ROLE_UNKNOWN')
-	def show(Technology technology) {
-		respond technology
+	def show(Skill skill) {
+		respond skill
 	}
 
 	def create() {
-		respond new Technology(params)
-		
+		respond new Skill(params)
+
 		if (session) {
 			session["epochId"] = params.epochId
 		}
 	}
 
 	@Transactional
-	def save(Technology technology) {
-		if (technology == null) {
+	def save(Skill skill) {
+		if (skill == null) {
 			transactionStatus.setRollbackOnly()
 			notFound()
 			return
 		}
 
-		if (technology.hasErrors()) {
+		if (skill.hasErrors()) {
 			transactionStatus.setRollbackOnly()
-			respond technology.errors, view:'create'
+			respond skill.errors, view:'create'
 			return
 		}
 
-		technology.save()
-		
+		skill.save flush:true
+
 		if (session && session["epochId"]) {
 			Epoch epoch = Epoch.get(session["epochId"])
-			
-			epoch.add(technology)
+
+			epoch.add(skill)
 			epoch.save(flush:true)
 		}
 
 		request.withFormat {
 			form multipartForm {
-				flash.message = message(code: 'default.created.message', args: [message(code: 'technology.label', default: 'Technology'), technology.id])
+				flash.message = message(code: 'default.created.message', args: [message(code: 'skill.label', default: 'Skill'), skill.id])
+				//redirect skill
 				redirect controller:"epoch", action:"index", method:"GET"
 			}
-			'*' { respond technology, [status: CREATED] }
+			'*' { respond skill, [status: CREATED] }
 		}
 	}
 
 	@Secured('ROLE_UNKNOWN')
-	def edit(Technology technology) {
-		respond technology
+	def edit(Skill skill) {
+		respond skill
 	}
 
 	@Secured('ROLE_UNKNOWN')
 	@Transactional
-	def update(Technology technology) {
-		if (technology == null) {
+	def update(Skill skill) {
+		if (skill == null) {
 			transactionStatus.setRollbackOnly()
 			notFound()
 			return
 		}
 
-		if (technology.hasErrors()) {
+		if (skill.hasErrors()) {
 			transactionStatus.setRollbackOnly()
-			respond technology.errors, view:'edit'
+			respond skill.errors, view:'edit'
 			return
 		}
 
-		technology.save flush:true
+		skill.save flush:true
 
 		request.withFormat {
 			form multipartForm {
-				flash.message = message(code: 'default.updated.message', args: [message(code: 'technology.label', default: 'Technology'), technology.id])
-				redirect technology
+				flash.message = message(code: 'default.updated.message', args: [message(code: 'skill.label', default: 'Skill'), skill.id])
+				redirect skill
 			}
-			'*'{ respond technology, [status: OK] }
+			'*'{ respond skill, [status: OK] }
 		}
 	}
 
 	@Secured('ROLE_UNKNOWN')
 	@Transactional
-	def delete(Technology technology) {
+	def delete(Skill skill) {
 
-		if (technology == null) {
+		if (skill == null) {
 			transactionStatus.setRollbackOnly()
 			notFound()
 			return
 		}
 
-		technology.delete flush:true
+		skill.delete flush:true
 
 		request.withFormat {
 			form multipartForm {
-				flash.message = message(code: 'default.deleted.message', args: [message(code: 'technology.label', default: 'Technology'), technology.id])
+				flash.message = message(code: 'default.deleted.message', args: [message(code: 'skill.label', default: 'Skill'), skill.id])
 				redirect action:"index", method:"GET"
 			}
 			'*'{ render status: NO_CONTENT }
@@ -116,7 +117,7 @@ class TechnologyController {
 	protected void notFound() {
 		request.withFormat {
 			form multipartForm {
-				flash.message = message(code: 'default.not.found.message', args: [message(code: 'technology.label', default: 'Technology'), params.id])
+				flash.message = message(code: 'default.not.found.message', args: [message(code: 'skill.label', default: 'Skill'), params.id])
 				redirect action: "index", method: "GET"
 			}
 			'*'{ render status: NOT_FOUND }

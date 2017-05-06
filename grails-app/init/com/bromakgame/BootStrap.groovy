@@ -6,7 +6,7 @@ import com.bromakgame.UserRole
 import com.bromakgame.creatures.Community
 import com.bromakgame.creatures.Race
 import com.bromakgame.learning.Epoch
-import com.bromakgame.learning.Technology
+import com.bromakgame.learning.Skill
 
 import com.bromakgame.creatures.Champion
 
@@ -107,23 +107,35 @@ class BootStrap {
 			community.add(champion)
 		}
 		
-		// -----------------------
-		// Epochs and Technologies
-		// -----------------------
+		// -----------------
+		// Epochs and Skills
+		// -----------------
 		
-		def hunting = new Technology(name: 'Hunting', description: 'Hunting').save()
-		def gathering = new Technology(name: 'Gathering', description: 'Gathering').save()
+		//def hunting = new Skill(name: 'Hunting', description: 'Hunting').save()
+		def tracking = new Skill(name: 'Tracking', description: 'Tracking animals by analysing footprints, blood stains and smells').save()
+		def throwing = new Skill(name: 'Throwing', description: 'Throwing weapons like stones and spears').save()
+		def stealth = new Skill(name: 'Stealth', description: 'Moving silently').save()
+		//def stoneCarving = new Skill(name: 'Stone Carving', description: 'Stone Carving').save()
+		def weaponCarving = new Skill(name: 'Weapon Carving', description: 'The carving of stone weapons').save()
+		def toolCarving = new Skill(name: 'Tool Carving', description: 'The carving of stone tools').save()
 		
-		def nomadic = new Epoch(name: 'Ancient Nomadic Era', description: 'The start of the Ancient Era, where Nomadic peoples were common.')
-		nomadic.add(hunting)
-		nomadic.add(gathering)
+		def nomadic = new Epoch(
+			name: 'Ancient Nomadic Era',
+			description: 'The start of the Ancient Era, where Nomadic peoples were common.')
+		nomadic.add(tracking)
+		nomadic.add(throwing)
+		nomadic.add(stealth)
+		nomadic.add(weaponCarving)
+		nomadic.add(toolCarving)
 		nomadic.save()
 		
-		def agriculture = new Technology(name: 'Agriculture', description: 'Agriculture').save()
-		def masonry = new Technology(name: 'Masonry', description: 'Masonry').save()
-		def pottery = new Technology(name: 'Pottery', description: 'Pottery').save()
+		def agriculture = new Skill(name: 'Agriculture', description: 'Agriculture').save()
+		def masonry = new Skill(name: 'Masonry', description: 'Masonry').save()
+		def pottery = new Skill(name: 'Pottery', description: 'Pottery').save()
 		
-		def sedentary = new Epoch(name: 'Ancient Sedentary Era', description: 'The end of the Ancient Era, where Nomadic peoples became Sedentary.')
+		def sedentary = new Epoch(
+			name: 'Ancient Sedentary Era',
+			description: 'The end of the Ancient Era, where Nomadic peoples became Sedentary.')
 		sedentary.add(agriculture)
 		sedentary.add(masonry)
 		sedentary.add(pottery)
