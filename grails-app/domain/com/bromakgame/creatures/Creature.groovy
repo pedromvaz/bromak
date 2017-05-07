@@ -16,7 +16,7 @@ class Creature {
 	Creature father
 	Creature mother
 
-	Set<Skill> learnedSkills = new HashSet<>()
+	static hasMany = [ learnedSkills : Skill ]
 
 	String getGenderDesc() {
 		return (gender == MALE) ? "Male" : "Female"
@@ -29,7 +29,7 @@ class Creature {
 	boolean isFemale() {
 		return gender == FEMALE
 	}
-
+	
     static constraints = {
 		gender inList: [MALE, FEMALE]
 		father nullable: true
@@ -39,5 +39,6 @@ class Creature {
 	// don't know if this is necessary, or implicit
 	static mapping = {
 		gender column: "gender", sqlType: "char", length: 1
+		learnedSkills lazy: false
 	}
 }

@@ -12,7 +12,7 @@ class Race {
 	boolean enabled
 	int startingPopulation
 
-	Set<Skill> learnableSkills = new HashSet<>()
+	static hasMany = [ learnableSkills : Skill ]
 
 	// should only be used for testing purposes
 	Race (String name) {
@@ -21,6 +21,18 @@ class Race {
 		this.intelligent = true
 		this.enabled = true
 		this.startingPopulation = 3
+	}
+	
+	static def getPlayableRaces() {
+		findAllByIntelligentAndEnabled(true, true)
+	}
+	
+	static def getAllThatCanLearn(long skillId) {
+		withCriteria {
+			learnableSkills {
+				eq 'id', skillId
+			}
+		}
 	}
 
     static constraints = {

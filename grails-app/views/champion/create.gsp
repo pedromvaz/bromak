@@ -41,7 +41,7 @@
 							
 							<div class="form-group">
 								<label for="raceId" class="sr-only"><g:message code='creatures.race.label'/></label>
-								<g:select class="form-control" name="race.id" from="${com.bromakgame.creatures.Race.findAllByIntelligentAndEnabled(true, true)}" optionKey="id" optionValue="name" />
+								<g:select class="form-control" name="race.id" from="${com.bromakgame.creatures.Race.getPlayableRaces()}" optionKey="id" optionValue="name" />
 							</div>
 							
 							<div class="form-group">

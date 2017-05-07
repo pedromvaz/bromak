@@ -54,6 +54,30 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-sm-6">
+				<ul class="list-group">
+					<li class="list-group-item active">
+						<h4 class="list-group-item-heading"><g:message code="communities.skills.label" /></h4>
+					</li>
+					<g:each in="${com.bromakgame.learning.Epoch.list()}" var="epoch">
+						<li class="list-group-item">
+							<h5 class="list-group-item-heading">${epoch.name}</h5>
+							<ul class="nav nav-pills">
+								<g:each in="${epoch.skills}" var="skill">
+									<li role="presentation">
+										<a>
+											${skill.name}
+											<span class="badge">
+												${this.community.countCreaturesThatKnowSkill(skill.id)}
+											</span>
+										</a>
+									</li>
+								</g:each>
+							</ul>
+						</li>
+					</g:each>
+				</ul>
+			</div>
 		</div>
 	</body>
 </html>

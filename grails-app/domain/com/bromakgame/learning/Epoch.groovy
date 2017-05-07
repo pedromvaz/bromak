@@ -5,27 +5,7 @@ class Epoch {
 	String name
 	String description
 
-	Set<Skill> skills = new HashSet<>()
-
-	boolean add(Skill skill) {
-		skills.add(skill)
-	}
-
-	boolean remove(Skill skill) {
-		skills.remove(skill)
-	}
-
-	int size() {
-		skills.size()
-	}
-
-	boolean isEmpty() {
-		skills.isEmpty()
-	}
-
-	boolean contains(Skill skill) {
-		skills.contains(skill)
-	}
+	static hasMany = [ skills : Skill ]
 
 	static constraints = {
 		name blank: false, unique: true

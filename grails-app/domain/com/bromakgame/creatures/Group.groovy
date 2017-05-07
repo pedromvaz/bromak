@@ -63,7 +63,22 @@ class Group {
 		
 		return percentile
 	}
-	
+
+	// TODO: This method must be optimized
+	int countCreaturesThatKnowSkill(long skillId) {
+		int total = 0
+		
+		for (Iterator<Creature> it = creatures.iterator(); it.hasNext(); ) {
+			Creature c = it.next()
+			
+			if (c.learnedSkills.find { it.id == skillId }) {
+				total++
+			}
+		}
+		
+		total
+	}
+
 	String toString() {
 		this.class.getSimpleName() + " " + this.id
 	}

@@ -4,12 +4,14 @@ import grails.test.mixin.*
 import spock.lang.*
 
 @TestFor(SkillController)
-@Mock(Skill)
+@Mock([Skill,Epoch])
 class SkillControllerSpec extends Specification {
 
 	def populateValidParams(params) {
 		assert params != null
 
+		params["epoch.name"] = 'Name'
+		params["epoch.description"] = 'Description'
 		params["name"] = 'Name'
 		params["description"] = 'Description'
 	}

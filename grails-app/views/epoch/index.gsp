@@ -22,7 +22,7 @@
 						<h4 class="list-group-item-heading">${skill.name}</h4>
 						<p class="list-group-item-text">${skill.description}</p>
 						<h4>
-							<g:each in="${skill.races}" var="race">
+							<g:each in="${com.bromakgame.creatures.Race.getAllThatCanLearn(skill.id)}" var="race">
 								<span class="label label-success">${race.name}</span>
 							</g:each>
 						</h4>
