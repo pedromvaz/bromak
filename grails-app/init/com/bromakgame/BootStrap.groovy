@@ -111,13 +111,16 @@ class BootStrap {
 		// Epochs and Skills
 		// -----------------
 		
-		//def hunting = new Skill(name: 'Hunting', description: 'Hunting').save()
+		// hunting
 		def tracking = new Skill(name: 'Tracking', description: 'Tracking animals by analysing footprints, blood stains and smells').save()
 		def throwing = new Skill(name: 'Throwing', description: 'Throwing weapons like stones and spears').save()
 		def stealth = new Skill(name: 'Stealth', description: 'Moving silently').save()
-		//def stoneCarving = new Skill(name: 'Stone Carving', description: 'Stone Carving').save()
-		def weaponCarving = new Skill(name: 'Weapon Carving', description: 'The carving of stone weapons').save()
-		def toolCarving = new Skill(name: 'Tool Carving', description: 'The carving of stone tools').save()
+		// stone carving
+		def stoneCarving = new Skill(name: 'Stone Carving', description: 'The carving of stone weapons and tools.').save()
+		// basic clothing
+		def leatherworking = new Skill(name: 'Leatherworking', description: 'Skinning the leather from animals to make basic clothing.').save()
+		// cave painting
+		def cavePainting = new Skill(name: 'Cave Painting', description: 'Painting deeds in cave walls.').save()
 		
 		def nomadic = new Epoch(
 			name: 'Ancient Nomadic Era',
@@ -125,9 +128,19 @@ class BootStrap {
 		nomadic.add(tracking)
 		nomadic.add(throwing)
 		nomadic.add(stealth)
-		nomadic.add(weaponCarving)
-		nomadic.add(toolCarving)
+		nomadic.add(stoneCarving)
+		nomadic.add(leatherworking)
+		nomadic.add(cavePainting)
 		nomadic.save()
+		
+		def intelligentRaces = Race.findAllByIntelligent(true)
+		
+		for (skill in nomadic.skills) {
+			for (race in intelligentRaces) {
+				skill.add(race)
+			}
+			skill.save()
+		}
 		
 		def agriculture = new Skill(name: 'Agriculture', description: 'Agriculture').save()
 		def masonry = new Skill(name: 'Masonry', description: 'Masonry').save()

@@ -21,12 +21,11 @@
 					<a class="list-group-item">
 						<h4 class="list-group-item-heading">${skill.name}</h4>
 						<p class="list-group-item-text">${skill.description}</p>
-						<!--<h5>
-							Races:
+						<h4>
 							<g:each in="${skill.races}" var="race">
-								<span class="label label-default">${race.name}</span>
+								<span class="label label-success">${race.name}</span>
 							</g:each>
-						</h5>-->
+						</h4>
 					</a>
 				</g:each>
 				<g:link controller="skill" action="create" params="[epochId:epoch.id]" class="list-group-item">
