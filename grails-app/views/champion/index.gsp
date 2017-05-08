@@ -44,46 +44,29 @@
 			</g:if>
 			
 			<g:each in="${championList}" var="champion">
-				<div class="well col-sm-3">
-					<table class="table">
-						<thead>
-							<tr>
-								<th colspan="2">
-									<g:if test="${champion.gender == 'm'}">
-										<img class="img-thumbnail-75px" src="http://www.iconninja.com/files/40/368/11/man-user-male-avatar-young-person-icon.svg">
-									</g:if>
-									<g:else>
-										<img class="img-thumbnail-75px" src="http://www.iconninja.com/files/311/30/378/female-young-woman-user-avatar-person-icon.svg">
-									</g:else>
-								</th>
-							</tr>
-							<tr>
-								<th colspan="2">${champion.getFullName()}</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Race</td>
-								<td>${champion.getGenderDesc() + " " + champion.race.name}</td>
-							</tr>
-							<tr>
-								<td>Communities</td>
-								<td>${champion.groups.size()}</td>
-							</tr>
-							<tr>
-								<td>Community Name</td>
-								<td>
-									<g:link controller="community" action="show" id="${champion.groups.getAt(0).id}">
-										${champion.groups.getAt(0).toString()}
-									</g:link>
-								</td>
-							</tr>
-							<tr>
-								<td>Community Size</td>
-								<td>${champion.groups.getAt(0).size()}</td>
-							</tr>
-						</tbody>
-					</table>
+				<div class="col-sm-3">
+					<ul class="list-group">
+						<li class="list-group-item active">
+							<h4 class="list-group-item-heading">${champion.getFullName()}</h4>
+							<p class="list-group-item-text">${champion.getGenderDesc() + " " + champion.race.name}</p>
+						</li>
+						<li class="list-group-item">
+							<img data-src="holder.js/64x64" class="img-thumbnail">
+						</li>
+						<li class="list-group-item">
+							<b>Communities:</b>
+						</li>
+						<g:each in="${champion.groups}" var="community">
+							<li class="list-group-item">
+								<g:link controller="community" action="show" id="${community.id}">
+									${community.toString()}
+								</g:link>
+								<span class="badge">
+									${community.size()}
+								</span>
+							</li>
+						</g:each>
+					</ul>
 				</div>
 			</g:each>
 			
