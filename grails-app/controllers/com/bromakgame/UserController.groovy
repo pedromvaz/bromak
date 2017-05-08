@@ -3,6 +3,7 @@ package com.bromakgame
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
+import grails.plugin.springsecurity.SpringSecurityUtils
 
 @Secured('ROLE_ADMIN')
 @Transactional(readOnly = true)
@@ -12,6 +13,19 @@ class UserController {
 	
 	def springSecurityService
 
+	@Secured(['ROLE_ADMIN','ROLE_PLAYER'])
+	def home() {
+		if (SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
+			redirect controller: 'user', action: 'index'
+			return
+		}
+		
+		if (SpringSecurityUtils.ifAllGranted('ROLE_PLAYER')) {
+			redirect controller: 'champion', action: 'index'
+			return
+		}
+	}
+	
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond User.list(params), model:[userCount: User.count()]

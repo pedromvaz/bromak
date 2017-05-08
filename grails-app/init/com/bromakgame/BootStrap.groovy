@@ -19,11 +19,9 @@ class BootStrap {
 		// -----------------------
 		
         def adminRole = new Role(authority: 'ROLE_ADMIN', description: 'An administrator of the bromak website').save()
-        def playerRole = new Role(authority: 'ROLE_PLAYER', description: 'A player on the bromak website').save()
+        def adminUser = new User(username: 'admin', email: 'admin@bromakgame.com', password: 'admin', enabled: true).save()
 
-        def testAdmin = new User(username: 'admin', email: 'admin@bromakgame.com', password: 'admin', enabled: true).save()
-
-        UserRole.create testAdmin, adminRole
+        UserRole.create adminUser, adminRole
 
         UserRole.withSession {
             it.flush()
@@ -31,7 +29,7 @@ class BootStrap {
         }
 
         assert User.count() == 1
-        assert Role.count() == 2
+        assert Role.count() == 1
         assert UserRole.count() == 1
 		
 		// --------------
@@ -65,10 +63,11 @@ class BootStrap {
 		// ------
 		// Player
 		// ------
-		
-		def testPlayer = new User(username: 'player', email: 'player@bromakgame.com', password: 'player', enabled: true).save()
 
-        UserRole.create testPlayer, playerRole
+		def playerRole = new Role(authority: 'ROLE_PLAYER', description: 'A player on the bromak website').save()
+		def playerUser = new User(username: 'player', email: 'player@bromakgame.com', password: 'player', enabled: true).save()
+
+        UserRole.create playerUser, playerRole
 
         UserRole.withSession {
             it.flush()
@@ -83,11 +82,11 @@ class BootStrap {
 		// Champions and Family Tree
 		// -------------------------
 		
-		def elrond = new Champion(firstName: 'Elrond', gender: 'm', race: elfRace, user: testPlayer).save()
-		def celebrian = new Champion(firstName: 'Celebrian', gender: 'f', race: elfRace, user: testPlayer).save()
-		def elladan = new Champion(firstName: 'Elladan', gender: 'm', race: elfRace, user: testPlayer).save()
-		def elrohir = new Champion(firstName: 'Elrohir', gender: 'm', race: elfRace, user: testPlayer).save()
-		def arwen = new Champion(firstName: 'Arwen', gender: 'f', race: elfRace, user: testPlayer).save()
+		def elrond = new Champion(firstName: 'Elrond', gender: 'm', race: elfRace, user: playerUser).save()
+		def celebrian = new Champion(firstName: 'Celebrian', gender: 'f', race: elfRace, user: playerUser).save()
+		def elladan = new Champion(firstName: 'Elladan', gender: 'm', race: elfRace, user: playerUser).save()
+		def elrohir = new Champion(firstName: 'Elrohir', gender: 'm', race: elfRace, user: playerUser).save()
+		def arwen = new Champion(firstName: 'Arwen', gender: 'f', race: elfRace, user: playerUser).save()
 		
 		assert Champion.count() == 5
 		

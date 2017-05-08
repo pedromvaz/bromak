@@ -32,3 +32,5 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 // (using the logout.postOnly config override above)
 // to avoid having to create a GSP form that POSTs to /logout.
 grails.plugin.springsecurity.logout.postOnly = false
+
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/user/home'
