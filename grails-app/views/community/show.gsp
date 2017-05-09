@@ -11,6 +11,7 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title"><g:message code="communities.population.label" /></h3>
+						<small><g:message code="communities.population.description" /></small>
 					</div>
 					<div class="panel-body">
 						<div class="col-sm-6">
@@ -55,26 +56,29 @@
 				</div>
 			</div>
 			<div class="col-sm-6">
-				<ul class="list-group">
-					<li class="list-group-item active">
-						<h4 class="list-group-item-heading"><g:message code="communities.skills.label" /></h4>
-					</li>
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title"><g:message code="communities.skills.label" /></h3>
+						<small><g:message code="communities.skills.description" /></small>
+					</div>
 					<g:each in="${com.bromakgame.learning.Epoch.list()}" var="epoch">
-						<li class="list-group-item">
-							<h5 class="list-group-item-heading">${epoch.name}</h5>
-							<ul class="nav nav-pills">
+						<div class="list-group">
+							<a class="list-group-item" data-toggle="collapse" href="#collapse${epoch.id}">
+								<b>${epoch.name}</b>
+							</a>
+						</div>
+						<div id="collapse${epoch.id}" class="panel-collapse collapse">
+							<ul class="list-group">
 								<g:each in="${epoch.skills}" var="skill">
-									<li role="presentation">
-										<a>
-											${skill.name}
-											<span class="badge">
-												${this.community.countCreaturesThatKnowSkill(skill.id)}
-											</span>
-										</a>
+									<li class="list-group-item">
+										${skill.name}
+										<span class="badge">
+											${this.community.countCreaturesThatKnowSkill(skill.id)}
+										</span>
 									</li>
 								</g:each>
 							</ul>
-						</li>
+						</div>
 					</g:each>
 				</ul>
 			</div>
