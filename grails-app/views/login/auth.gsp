@@ -14,15 +14,19 @@
 			<div class="col-sm-4">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h3 class="panel-title"><g:message code='springSecurity.login.header'/></h3>
+						<g:message code='springSecurity.login.header'/>
 					</div>
 					<div class="panel-body">
-						<form action="${postUrl ?: '/login/authenticate'}" method="POST" id="loginForm" class="form-signin">
-							<label for="username" class="sr-only"><g:message code='springSecurity.login.username.label'/></label>
-							<input type="text" name="${usernameParameter ?: 'username'}" id="username" class="form-control" placeholder="<g:message code='springSecurity.login.username.label'/>" required autofocus>
+						<form action="${postUrl ?: '/login/authenticate'}" method="POST" id="loginForm">
+							<div class="form-group">
+								<label for="username" class="sr-only"><g:message code='springSecurity.login.username.label'/></label>
+								<input type="text" name="${usernameParameter ?: 'username'}" id="username" class="form-control" placeholder="<g:message code='springSecurity.login.username.label'/>" required autofocus>
+							</div>
 							
-							<label for="password" class="sr-only"><g:message code='springSecurity.login.password.label'/></label>
-							<input type="password" name="${passwordParameter ?: 'password'}" id="password" class="form-control" placeholder="<g:message code='springSecurity.login.password.label'/>" required>
+							<div class="form-group">
+								<label for="password" class="sr-only"><g:message code='springSecurity.login.password.label'/></label>
+								<input type="password" name="${passwordParameter ?: 'password'}" id="password" class="form-control" placeholder="<g:message code='springSecurity.login.password.label'/>" required>
+							</div>
 							
 							<!--<div class="checkbox">
 								<label>
@@ -30,7 +34,9 @@
 								</label>
 							</div>-->
 							
-							<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit"><g:message code='springSecurity.login.button'/></button>
+							<button class="btn btn-primary btn-block" type="submit" id="submit">
+								<g:message code='springSecurity.login.button'/>
+							</button>
 						</form>
 					</div>
 				</div>
@@ -41,11 +47,5 @@
 				</div>
 			</div>
 		</div>
-		
-		<script>
-			(function() {
-				document.forms['loginForm'].elements['${usernameParameter ?: 'username'}'].focus();
-			})();
-		</script>
 	</body>
 </html>

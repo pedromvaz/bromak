@@ -15,10 +15,8 @@
 *
 *= require dist/css/bootstrap.min
 *= require dist/css/navbar-fixed-top
-*= require dist/css/signin
 *= require dist/css/carousel
 *= require dist/css/pagination
-*= require dist/css/thumbnail
 *= require dist/css/progress-bars
 *
 * require dist/css/sticky-footer-navbar

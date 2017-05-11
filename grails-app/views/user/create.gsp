@@ -29,18 +29,24 @@
 			<div class="col-sm-4">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h3 class="panel-title"><g:message code="default.create.label" args="[entityName]" /></h3>
+						<g:message code="default.create.label" args="[entityName]" />
 					</div>
 					<div class="panel-body">
-						<form action="/user/save" method="POST" id="createUserForm" class="form-signin" >
-							<label for="username" class="sr-only"><g:message code='users.username.label'/></label>
-							<input type="text" name="username" id="username" class="form-control" placeholder="<g:message code='users.username.label'/>" required autofocus>
+						<form action="/user/save" method="POST" id="createUserForm">
+							<div class="form-group">
+								<label for="username" class="sr-only"><g:message code='users.username.label'/></label>
+								<input type="text" name="username" id="username" class="form-control" placeholder="<g:message code='users.username.label'/>" required autofocus>
+							</div>
 							
-							<label for="email" class="sr-only"><g:message code='users.email.label'/></label>
-							<input type="email" name="email" id="email" class="form-control" placeholder="<g:message code='users.email.label'/>" required>
+							<div class="form-group">
+								<label for="email" class="sr-only"><g:message code='users.email.label'/></label>
+								<input type="email" name="email" id="email" class="form-control" placeholder="<g:message code='users.email.label'/>" required>
+							</div>
 							
-							<label for="password" class="sr-only"><g:message code='users.password.label'/></label>
-							<input type="password" name="password" id="password" class="form-control" placeholder="<g:message code='users.password.label'/>" required>
+							<div class="form-group">
+								<label for="password" class="sr-only"><g:message code='users.password.label'/></label>
+								<input type="password" name="password" id="password" class="form-control" placeholder="<g:message code='users.password.label'/>" required>
+							</div>
 							
 							<sec:ifAnyGranted roles="ROLE_ADMIN">
 								<div class="checkbox">
@@ -72,7 +78,7 @@
 								</div>
 							</sec:ifAnyGranted>
 							
-							<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit">
+							<button class="btn btn-primary btn-block" type="submit" id="submit">
 								<g:message code='default.button.create.label'/>
 							</button>
 						</form>

@@ -29,15 +29,27 @@
 			<div class="col-sm-4">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h3 class="panel-title"><g:message code="default.create.label" args="[entityName]" /></h3>
+						<g:message code="default.create.label" args="[entityName]" />
 					</div>
 					<div class="panel-body">
-						<form action="/champion/save" method="POST" id="createChampionForm" class="form-signin" >
-							<label for="firstName" class="sr-only"><g:message code='creatures.firstName.label'/></label>
-							<input type="text" name="firstName" id="firstName" class="form-control" placeholder="<g:message code='creatures.firstName.label'/>" required autofocus>
-							
-							<label for="lastName" class="sr-only"><g:message code='creatures.lastName.label'/></label>
-							<input type="text" name="lastName" id="lastName" class="form-control" placeholder="<g:message code='creatures.lastName.label'/>">
+						<form action="/champion/save" method="POST" id="createChampionForm">
+							<div class="form-group">
+								<label for="firstName" class="sr-only"><g:message code='creatures.firstName.label'/></label>
+								<div class="input-group">
+									<input type="text" name="firstName" id="firstName" class="form-control" placeholder="${message(code: 'creatures.firstName.label')}" required readonly>
+									
+									<span class="input-group-btn">
+										<button class="btn btn-primary" type="button" id="setName" onclick="generateRandomName()">
+											<g:message code='creatures.name.generate'/>
+										</button>
+									</span>
+									
+									<!--
+									<label for="lastName" class="sr-only"><g:message code='creatures.lastName.label'/></label>
+									<input type="text" name="lastName" id="lastName" class="form-control" placeholder="<g:message code='creatures.lastName.label'/>">
+									-->
+								</div>
+							</div>
 							
 							<div class="form-group">
 								<label for="raceId" class="sr-only"><g:message code='creatures.race.label'/></label>
@@ -55,10 +67,39 @@
 								</label>
 							</div>
 							
-							<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit">
+							<button class="btn btn-primary btn-block" type="submit" id="submit">
 								<g:message code='default.button.create.label'/>
 							</button>
 						</form>
+						
+						<g:javascript>
+							var RandExp = require('randexp');
+
+							function generateRandomName() {
+								document.getElementById('firstName').value =
+									createRandomWord(4);
+									//new RandExp(/[aeiouy][^aeiouy][aeiouy]/).gen();
+							}
+
+							function createRandomWord(length) {
+								var consonants = 'bcdfghjklmnpqrstvwxyz',
+									vowels = 'aeiou',
+									rand = function(limit) {
+										return Math.floor(Math.random()*limit);
+									},
+									i, word='', length = parseInt(length,10),
+									consonants = consonants.split(''),
+									vowels = vowels.split('');
+								for (i=0;i<length/2;i++) {
+									var randConsonant = consonants[rand(consonants.length)],
+										randVowel = vowels[rand(vowels.length)];
+									word += (i===0) ? randConsonant.toUpperCase() : randConsonant;
+									word += i*2<length-1 ? randVowel : '';
+								}
+								return word;
+							}
+						</g:javascript>
+						
 					</div>
 				</div>
 			</div>
