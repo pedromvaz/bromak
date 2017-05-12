@@ -19,5 +19,7 @@
 *= require dist/css/pagination
 *= require dist/css/progress-bars
 *
+*= require fontastic/fontastic
+*
 * require dist/css/sticky-footer-navbar
 */
