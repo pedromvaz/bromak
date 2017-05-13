@@ -8,6 +8,9 @@
 </head>
 <body>
     
+	<!-- Temporary -->
+	<div style="height:70px"></div>
+	
 	<!-- Carousel -->
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->

@@ -6,6 +6,9 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
+		<div class="page-header">
+			<h2><g:message code="epochs.index.header" /></h2>
+		</div>
 		
 		<g:if test="${flash.message}">
 			<div class="alert alert-info" role="alert">${flash.message}</div>

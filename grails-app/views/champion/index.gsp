@@ -9,6 +9,9 @@
 		
 		<g:if test="${!hasChampionsAlive}">
 			
+			<!-- Temporary -->
+			<div style="height:70px"></div>
+			
 			<!-- Carousel -->
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				<!-- Indicators -->
@@ -38,7 +41,10 @@
 			
 		</g:if>
 		<g:else>
-		
+			<div class="page-header">
+				<h2><g:message code="champions.index.header" /></h2>
+			</div>
+			
 			<g:if test="${flash.message}">
 				<div class="alert alert-info" role="alert">${flash.message}</div>
 			</g:if>

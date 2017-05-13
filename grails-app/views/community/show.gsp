@@ -6,6 +6,14 @@
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
+		
+		<div class="page-header">
+			<h2>
+				${community.toString()}
+				<small><g:message code="communities.show.header" /></small>
+			</h2>
+		</div>
+
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="panel panel-primary">

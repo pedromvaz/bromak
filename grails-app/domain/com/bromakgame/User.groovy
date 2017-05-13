@@ -15,6 +15,7 @@ class User implements Serializable {
 	String username
 	String email
 	String password
+	Date dateCreated
 	boolean enabled = true // must be true, so new players can play right away
 	boolean accountExpired
 	boolean accountLocked

@@ -37,20 +37,22 @@ class SkillController {
 			return
 		}
 
+		if (session && session["epochId"]) {
+			Epoch epoch = Epoch.get(session["epochId"])
+
+			epoch.addToSkills(skill)
+			epoch.save()
+		}
+
+		skill.validate()
+
 		if (skill.hasErrors()) {
 			transactionStatus.setRollbackOnly()
 			respond skill.errors, view:'create'
 			return
 		}
 
-		skill.save flush:true
-
-		if (session && session["epochId"]) {
-			Epoch epoch = Epoch.get(session["epochId"])
-
-			epoch.add(skill)
-			epoch.save(flush:true)
-		}
+		skill.save(flush:true)
 
 		request.withFormat {
 			form multipartForm {
