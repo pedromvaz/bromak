@@ -8,6 +8,7 @@ import com.bromakgame.creatures.Race
 @TestFor(Community)
 class CommunitySpec extends Specification {
 
+	@Shared name
 	@Shared human
 	@Shared c1, c2, c3, c4, c5, c6, c7
 	@Shared group1, group2, group3
@@ -15,15 +16,16 @@ class CommunitySpec extends Specification {
 	def community
 	
 	def setupSpec() {
+		name = new String("Name")
 		human = new Race(name: 'Human')
-		c1 = new Creature(race: human, gender: 'm')
-		c2 = new Creature(race: human, gender: 'f')
-		c3 = new Creature(race: human, gender: 'f')
-		c3 = new Creature(race: human, gender: 'm')
-		c4 = new Creature(race: human, gender: 'm')
-		c5 = new Creature(race: human, gender: 'f')
-		c6 = new Creature(race: human, gender: 'f')
-		c7 = new Creature(race: human, gender: 'm')
+		c1 = new Creature(firstName: name, race: human, gender: 'm')
+		c2 = new Creature(firstName: name, race: human, gender: 'f')
+		c3 = new Creature(firstName: name, race: human, gender: 'f')
+		c3 = new Creature(firstName: name, race: human, gender: 'm')
+		c4 = new Creature(firstName: name, race: human, gender: 'm')
+		c5 = new Creature(firstName: name, race: human, gender: 'f')
+		c6 = new Creature(firstName: name, race: human, gender: 'f')
+		c7 = new Creature(firstName: name, race: human, gender: 'm')
 		
 		group1 = new Group()
 		group1.add(c1)

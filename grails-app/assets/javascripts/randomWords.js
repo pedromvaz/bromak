@@ -9,17 +9,10 @@ var rand = function(limit) {
 };
 
 function createRandomWord() {
-	var formats = ["CCV", "CVC", "CVV", "VCC", "VCV", "VVC"];
-	formats.push("CCVC");
-	formats.push("CCVV");
-	formats.push("CVCC");
-	formats.push("CVCV");
-	formats.push("CVVC");
-	formats.push("VCCV");
-	formats.push("VCVC");
-	formats.push("VCVV");
-	formats.push("VVCC");
-	formats.push("VVCV");
+	var formats = "CCV CVC CVV VCC VCV VVC";
+	formats += " CCVC CCVV CVCC CVCV CVVC";
+	formats += " VCCV VCVC VCVV VVCC VVCV";
+	formats = formats.split(" ");
 
 	return createRandomWordWithFormat(formats[rand(formats.length)]);
 }

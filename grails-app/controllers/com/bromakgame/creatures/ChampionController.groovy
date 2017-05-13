@@ -106,8 +106,8 @@ class ChampionController {
 		def community = new Community().save()
 		
 		for (int i = 0; i < startingPop; i += 2) {
-			def maleCreature = new Creature(race: race, gender: 'm').save()
-			def femaleCreature = new Creature(race: race, gender: 'f').save()
+			def maleCreature = new Creature(firstName: Creature.createRandomWord(), race: race, gender: 'm').save()
+			def femaleCreature = new Creature(firstName: Creature.createRandomWord(), race: race, gender: 'f').save()
 			
 			community.add(maleCreature)
 			community.add(femaleCreature)
