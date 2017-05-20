@@ -54,6 +54,14 @@ class UserController {
             return
         }
 
+		// only admin can be logged in at this point
+		// players don't see the enabled checkbox, so it must be true when an account is created
+		// admins see the enabled checkbox, so it must be false if they don't tick the checkbox
+		boolean isPlayer = (springSecurityService?.currentUser == null)
+		
+		user.enabled = params.enabled ?: isPlayer
+		user.validate()
+
         if (user.hasErrors()) {
             transactionStatus.setRollbackOnly()
             respond user.errors, view:'create'
