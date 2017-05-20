@@ -1,4 +1,4 @@
-package com.bromakgame
+package com.bromakgame.users
 
 import grails.gorm.DetachedCriteria
 import groovy.transform.ToString

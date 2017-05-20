@@ -1,4 +1,4 @@
-package com.bromakgame
+package com.bromakgame.users
 
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString

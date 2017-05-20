@@ -1,6 +1,6 @@
 package com.bromakgame.creatures
 
-import com.bromakgame.User
+import com.bromakgame.users.User
 
 class Champion extends Creature {
 
