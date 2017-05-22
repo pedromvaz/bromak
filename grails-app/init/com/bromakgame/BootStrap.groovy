@@ -3,6 +3,8 @@ package com.bromakgame
 import com.bromakgame.users.Role
 import com.bromakgame.users.User
 import com.bromakgame.users.UserRole
+import com.bromakgame.worlds.World
+
 import com.bromakgame.creatures.Community
 import com.bromakgame.creatures.Race
 import com.bromakgame.learning.Epoch
@@ -154,6 +156,14 @@ class BootStrap {
 		.addToSkills(masonry)
 		.addToSkills(pottery)
 		.save()
+		
+		// ---------------
+		// World & Regions
+		// ---------------
+		
+		def world = new World(width: 2000, height: 1000)
+		
+		world.generate()
     }
     
     def destroy = {
