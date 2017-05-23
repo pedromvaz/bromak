@@ -1,17 +1,33 @@
 package com.bromakgame.worlds
 
+/**
+ * A world is a grid of adjacent regions, all correctly placed since regions are hexagon-like.
+ * 
+ * The world's radius defines how many "levels" of regions it contains:
+ * - A 0-radius world only contains one region
+ * - A 1-radius world is a 0-radius world plus an outer "ring" of 6 adjacent regions
+ * - A 2-radius world is a 1-radius world plus an outer "ring" of 12 adjacent regions
+ * - And so forth, and so forth
+ * 
+ * See the following image for clarification: http://alumnus.caltech.edu/~leif/FRP/UG_ChamberGMH.png
+ */
 class World {
+	int radius
 
-	public static final double MINIMUM_RADIUS = 3.0
-	
-	int width
-	int height
-	
-	Random rand = new Random()
+	public World(int radius) {
+		this.radius = radius
+
+		this.addToRegions(new Region(0.0, 0.0))
+
+		for (int r = 0; r <= radius; r++) {
+			
+		}
+	}
 
 	static hasMany = [ regions : Region ]
 
 	static constraints = {
+		radius min: 0
 	}
 
 	void generate() {
@@ -20,6 +36,10 @@ class World {
 }
 
 /*
+public static final double MINIMUM_RADIUS = 3.0
+
+Random rand = new Random()
+
 void generate() {
 	double startingAngle = rand.nextFloat() * 2 * Math.PI
 	double startingRadius = Math.min(width, height) * 0.5
