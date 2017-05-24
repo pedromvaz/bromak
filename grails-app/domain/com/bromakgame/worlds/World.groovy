@@ -1,5 +1,8 @@
 package com.bromakgame.worlds
 
+import com.bromakgame.math.Position
+import com.bromakgame.math.Vector
+
 /**
  * A world is a grid of adjacent regions, all correctly placed since regions are hexagon-like.
  * 
@@ -16,12 +19,6 @@ class World {
 
 	public World(int radius) {
 		this.radius = radius
-
-		this.addToRegions(new Region(0.0, 0.0))
-
-		for (int r = 0; r <= radius; r++) {
-			
-		}
 	}
 
 	static hasMany = [ regions : Region ]
@@ -31,7 +28,52 @@ class World {
 	}
 
 	void generate() {
-		
+		Position next_region = new Position(x: 0.0, y: 0.0)
+		Vector next_region_v1 = new Vector(
+			magnitude: 3.0 * Area.HEX_MAXIMAL_RADIUS,
+			direction: -Math.PI / 6)
+		Vector next_region_v2 = new Vector(
+			magnitude: 2.0 * Area.HEX_MINIMAL_RADIUS,
+			direction: 0.0)
+
+		this.addToRegions(
+			new Region(
+				next_region.x,
+				next_region.y))
+
+		for (int ring = 1; ring <= radius; ring++) {
+			// for each radius level (a.k.a. ring), move the starting position
+			// towards the region directly below and to the right
+			// from the current region (see image referenced in class header)
+			next_region.add(next_region_v1)
+			next_region.add(next_region_v2)
+			
+			// we must rotate 120 degrees counter-clockwise
+			// (60 here + 60 inside loop) for the first region in the ring
+			next_region_v1.rotate(Math.PI / 3.0)
+			next_region_v2.rotate(Math.PI / 3.0)
+			
+			for (int side = 0; side < 6; side++) {
+				// rotate both vectors by 60 degrees counter-clockwise
+				next_region_v1.rotate(Math.PI / 3.0)
+				next_region_v2.rotate(Math.PI / 3.0)
+				
+				for (int count = 0; count < ring; count++) {
+					next_region.add(next_region_v1)
+					next_region.add(next_region_v2)
+					
+					this.addToRegions(
+						new Region(
+							next_region.x,
+							next_region.y))
+				}
+			}
+			
+			// we must rotate 60 degrees clockwise
+			// before heading into the next ring
+			next_region_v1.rotate(-Math.PI / 3.0)
+			next_region_v2.rotate(-Math.PI / 3.0)
+		}
 	}
 }
 

@@ -14,13 +14,13 @@ class Region {
 		this.x = x
 		this.y = y
 
-		this.addToAreas(new Area(x, y))
+		this.addToAreas(new Area(x: x, y: y))
 
 		for (int a = 0; a < 6; a++) {
 			this.addToAreas(
 				new Area(
-					x + stride * Math.cos(Math.PI / 3 * a),
-					y + stride * Math.sin(Math.PI / 3 * a)))
+					x: x + stride * Math.cos(Math.PI / 3 * a),
+					y: y + stride * Math.sin(Math.PI / 3 * a)))
 		}
 	}
 

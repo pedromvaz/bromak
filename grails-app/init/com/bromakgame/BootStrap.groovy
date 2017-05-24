@@ -161,7 +161,7 @@ class BootStrap {
 		// World & Regions
 		// ---------------
 		
-		def world = new World(width: 2000, height: 1000)
+		def world = new World(radius: 1)
 		
 		world.generate()
     }
