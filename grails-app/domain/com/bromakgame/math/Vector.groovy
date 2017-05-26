@@ -9,7 +9,10 @@ class Vector {
 	}
 
 	void scale(double scale) {
-		this.magnitude *= scale
+		this.magnitude *= Math.abs(scale)
+		
+		if (scale < 0)
+			this.rotate(Math.PI)
 	}
 
 	double getX() {
@@ -25,5 +28,6 @@ class Vector {
 	}
 
 	static constraints = {
+		magnitude min: 0.0000000001
 	}
 }
