@@ -19,10 +19,7 @@ class VectorSpec extends Specification {
 	}
 
 	double truncate(double value) {
-		// we need the signal and to use the absolute value
-		// otherwise it will truncate the negative numbers incorrectly, failing the tests
-		double signal = (value > 0.0) ? 1 : -1
-		return signal * Math.floor(Math.abs(value) * NUM_DECIMAL_PLACES) / NUM_DECIMAL_PLACES
+		return Math.round(value * NUM_DECIMAL_PLACES) / NUM_DECIMAL_PLACES
 	}
 
 	void "Test rotating the vector"() {

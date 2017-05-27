@@ -4,7 +4,7 @@ import com.bromakgame.users.Role
 import com.bromakgame.users.User
 import com.bromakgame.users.UserRole
 import com.bromakgame.worlds.World
-
+import com.bromakgame.worlds.Region
 import com.bromakgame.creatures.Community
 import com.bromakgame.creatures.Race
 import com.bromakgame.learning.Epoch
@@ -161,9 +161,13 @@ class BootStrap {
 		// World & Regions
 		// ---------------
 		
-		def world = new World(radius: 1)
+		def world = new World(radius: 2)
 		
 		world.generate()
+		
+		world.save(flush:true)
+		
+		assert Region.count() == 19
     }
     
     def destroy = {
