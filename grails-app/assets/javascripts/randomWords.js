@@ -18,8 +18,8 @@ function createRandomWord() {
 }
 
 function createRandomWordWithFormat(format) {
-	var consonants = 'bcdfghjklmnpqrstvwxyz'.split('');
-	var vowels = 'aeiou'.split('');
+	var consonants = 'bcdfghjklmnpqrstvwxz'.split('');
+	var vowels = 'aeiouy'.split('');
 	var word = '';
 
 	for (var i = 0; i < format.length; i++) {

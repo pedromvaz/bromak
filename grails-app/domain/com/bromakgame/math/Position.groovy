@@ -15,5 +15,7 @@ class Position {
 	}
 
 	static constraints = {
+		x scale: 5
+		y scale: 5
 	}
 }

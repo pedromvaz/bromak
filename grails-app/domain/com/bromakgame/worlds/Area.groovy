@@ -10,6 +10,8 @@ class Area {
 	static belongsTo = [ region : Region ]
 
 	static constraints = {
+		x scale: 5
+		y scale: 5
 	}
 
 	double getX() {

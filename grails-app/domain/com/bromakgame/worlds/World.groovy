@@ -65,7 +65,10 @@ class World {
 					this.addToRegions(
 						new Region(
 							next_region.x,
-							next_region.y))
+							next_region.y,
+							Region.getRandomHeightBetween(
+								Region.TOPOGRAPHY_EPIPELAGIC_START,
+								Region.TOPOGRAPHY_MOUNTAIN_START)))
 				}
 			}
 			

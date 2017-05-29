@@ -28,6 +28,7 @@ class Vector {
 	}
 
 	static constraints = {
-		magnitude min: 0.0000000001
+		magnitude min: 0.0000000001, scale: 5
+		direction scale: 5
 	}
 }

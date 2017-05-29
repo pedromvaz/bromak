@@ -5,6 +5,7 @@ import com.bromakgame.users.User
 import com.bromakgame.users.UserRole
 import com.bromakgame.worlds.World
 import com.bromakgame.worlds.Region
+import com.bromakgame.worlds.Area
 import com.bromakgame.creatures.Community
 import com.bromakgame.creatures.Race
 import com.bromakgame.learning.Epoch
@@ -161,15 +162,26 @@ class BootStrap {
 		// World & Regions
 		// ---------------
 		
-		def world = new World(radius: 2)
+		def worldRadius = 2
+		def world = new World(radius: worldRadius)
 		
 		world.generate()
 		
 		world.save(flush:true)
 		
-		assert Region.count() == 19
-    }
-    
-    def destroy = {
-    }
+		assert World.count() == 1
+		assert Region.count() == numRegionsByRadius(worldRadius)
+		assert Area.count() == numRegionsByRadius(worldRadius) * 7
+	}
+
+	private int numRegionsByRadius(int radius) {
+		if (radius == 0) {
+			return 1
+		} else {
+			return radius * 6 + numRegionsByRadius(radius - 1)
+		}
+	}
+
+	def destroy = {
+	}
 }

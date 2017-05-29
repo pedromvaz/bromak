@@ -55,8 +55,8 @@ class Creature {
 	}
 
 	static String createRandomWordWithFormat(String format) {
-		def consonants = "bcdfghjklmnpqrstvwxyz".split("")
-		def vowels = "aeiou".split("")
+		def consonants = "bcdfghjklmnpqrstvwxz".split("")
+		def vowels = "aeiouy".split("")
 		String word = ""
 
 		for (int i = 0; i < format.length(); i++) {
