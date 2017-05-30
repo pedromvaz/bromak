@@ -163,7 +163,7 @@ class BootStrap {
 		// ---------------
 		
 		def worldRadius = 2
-		def world = new World(radius: worldRadius)
+		def world = new World(name: "Bromak", radius: worldRadius)
 		
 		world.generate()
 		

@@ -15,11 +15,8 @@ import com.bromakgame.math.Vector
  * See the following image for clarification: http://alumnus.caltech.edu/~leif/FRP/UG_ChamberGMH.png
  */
 class World {
+	String name
 	int radius
-
-	public World(int radius) {
-		this.radius = radius
-	}
 
 	static hasMany = [ regions : Region ]
 
