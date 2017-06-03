@@ -15,7 +15,6 @@ class WorldController {
 		respond World.list(params), model:[worldCount: World.count()]
 	}
 
-	@Secured('ROLE_UNKNOWN')
 	def show(World world) {
 		respond world
 	}

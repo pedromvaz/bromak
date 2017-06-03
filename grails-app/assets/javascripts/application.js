@@ -6,6 +6,8 @@
 // to create separate JavaScript files as needed.
 //
 //= require jquery-2.2.0.min
+//= require jquery-ui-1.12.1/jquery
+//= require jquery-ui-1.12.1/jquery-ui.min
 //= require bootstrap
 //= require_tree .
 //= require_self

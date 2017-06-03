@@ -21,5 +21,7 @@
 *
 *= require fontastic/fontastic
 *
+*= require world/hexagon
+*
 * require dist/css/sticky-footer-navbar
 */

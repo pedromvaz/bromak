@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'world.label', default: 'World')}" />
-        <title><g:message code="default.show.label" args="[entityName]" /></title>
-    </head>
-    <body>
-        <a href="#show-world" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="show-world" class="content scaffold-show" role="main">
-            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:display bean="world" />
-            <g:form resource="${this.world}" method="DELETE">
-                <fieldset class="buttons">
-                    <g:link class="edit" action="edit" resource="${this.world}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                    <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                </fieldset>
-            </g:form>
-        </div>
-    </body>
+	<head>
+		<meta name="layout" content="main" />
+		<g:set var="entityName" value="${message(code: 'world.label', default: 'World')}" />
+		<title><g:message code="default.show.label" args="[entityName]" /></title>
+		<script src="/assets/jquery-ui-1.12.1/jquery.js" ></script>
+		<script src="/assets/jquery-ui-1.12.1/jquery-ui.min.js" ></script>
+		<script>
+			$(document).ready(function() {
+				$("#hexGrid").draggable();
+			});
+		</script>
+	</head>
+	<body>
+		<div class="page-header">
+			<h2>${this.world.name}</h2>
+			<h4><g:message code="worlds.show.header" /></h4>
+		</div>
+		
+		<div id="hexViewport">
+			<div id="hexGrid">
+				<div class="hex-row">
+					<div class="hex"></div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>

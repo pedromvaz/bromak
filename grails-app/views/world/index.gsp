@@ -27,7 +27,11 @@
 			<tbody>
 				<g:each in="${worldList}" var="world">
 					<tr>
-						<td>${world.name}</td>
+						<td>
+							<g:link controller="world" action="show" id="${world.id}">
+								${world.name}
+							</g:link>
+						</td>
 						<td>${world.radius}</td>
 						<td></td>
 						<td></td>
