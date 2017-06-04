@@ -29,4 +29,16 @@ class Area {
 	double getY(int precision) {
 		return Math.round(y * Math.pow(10, precision)) / Math.pow(10, precision)
 	}
+
+	String getTopographyIcon() {
+		double topography = region.getTopography();
+		
+		if (topography >= Region.TOPOGRAPHY_HILL_START) {
+			return "icon-mountains"
+		} else if (topography < Region.TOPOGRAPHY_SEA_LEVEL) {
+			return "icon-air"
+		} else {
+			return ""
+		}
+	}
 }

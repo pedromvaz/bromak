@@ -4,7 +4,7 @@ import grails.test.mixin.*
 import spock.lang.*
 
 @TestFor(WorldController)
-@Mock(World)
+@Mock([World, Region, Area])
 class WorldControllerSpec extends Specification {
 
 	def populateValidParams(params) {

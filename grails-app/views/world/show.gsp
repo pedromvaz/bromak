@@ -20,11 +20,10 @@
 		
 		<div id="hexViewport">
 			<div id="hexGrid">
-				<div class="hex-row">
-					<g:each in="${areas}" var="area">
-						<div class="hex" style="left: ${area.x}px; top: ${area.y+1}px"></div>
-					</g:each>
-				</div>
+				<g:each in="${areas}" var="area">
+					<div class="hex" style="left: ${area.x}px; top: ${area.y+1}px"></div>
+					<div class="hexIcon ${area.getTopographyIcon()}" style="left: ${area.x+33}px; top: ${area.y+13}px"></div>
+				</g:each>
 			</div>
 		</div>
 	</body>

@@ -98,3 +98,45 @@
 .icon-user:before {
   content: "\74";
 }
+.icon-flame:before {
+  content: "\75";
+}
+.icon-zap:before {
+  content: "\76";
+}
+.icon-air:before {
+  content: "\77";
+}
+.icon-brush:before {
+  content: "\78";
+}
+.icon-feather:before {
+  content: "\79";
+}
+.icon-leaf:before {
+  content: "\7a";
+}
+.icon-mountains:before {
+  content: "\41";
+}
+.icon-male-user-1:before {
+  content: "\42";
+}
+.icon-crhistmas-spruce-tree:before {
+  content: "\43";
+}
+.icon-park2:before {
+  content: "\44";
+}
+.icon-fire-station:before {
+  content: "\45";
+}
+.icon-campsite:before {
+  content: "\46";
+}
+.icon-wetland:before {
+  content: "\47";
+}
+.icon-dam:before {
+  content: "\48";
+}
