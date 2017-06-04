@@ -16,7 +16,13 @@ class WorldController {
 	}
 
 	def show(World world) {
-		respond world
+		def regions = Region.findAllByWorld(world)
+		def areas = Area.findAllByRegionInList(regions)
+
+		//println("Found " + Region.countByWorld(world))
+		//println("Found " + Area.countByRegionInList(regions))
+
+		respond world, model: [ areas: areas ]
 	}
 
 	def create() {
@@ -36,6 +42,8 @@ class WorldController {
 			respond world.errors, view:'create'
 			return
 		}
+
+		world.generate()
 
 		world.save flush:true
 

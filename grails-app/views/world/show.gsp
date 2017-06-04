@@ -21,7 +21,9 @@
 		<div id="hexViewport">
 			<div id="hexGrid">
 				<div class="hex-row">
-					<div class="hex"></div>
+					<g:each in="${areas}" var="area">
+						<div class="hex" style="left: ${area.x}px; top: ${area.y+1}px"></div>
+					</g:each>
 				</div>
 			</div>
 		</div>
