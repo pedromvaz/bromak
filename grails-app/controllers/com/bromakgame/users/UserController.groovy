@@ -57,10 +57,10 @@ class UserController {
 		// only admin can be logged in at this point
 		// players don't see the enabled checkbox, so it must be true when an account is created
 		// admins see the enabled checkbox, so it must be false if they don't tick the checkbox
-		boolean isPlayer = (springSecurityService?.currentUser == null)
+		//boolean isPlayer = (springSecurityService?.currentUser == null)
 		
-		user.enabled = params.enabled ?: isPlayer
-		user.validate()
+		//user.enabled = params.enabled ?: isPlayer
+		//user.validate()
 
         if (user.hasErrors()) {
             transactionStatus.setRollbackOnly()
@@ -72,25 +72,31 @@ class UserController {
 		
 		def roleUser = Role.findByAuthority('ROLE_PLAYER')
 		UserRole.create user, roleUser
-		
-		
-		
-		// if user registration, go to champion index page
-		String roleBasedController = "champion"
-		
+
+		// only send activation email if not running a unit test,
+		// and if user was not enabled by admin at creation time
+		if (springSecurityService != null && !user.enabled) {
+			sendActivationEmail(user)
+		}
+
 		// if admin creating new user, go to user index page
 		if (springSecurityService?.currentUser != null) {
-			roleBasedController = "user"
+			request.withFormat {
+				form multipartForm {
+					flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.username])
+					redirect controller:"user", action:"index", method:"GET"
+				}
+			}
 		}
-		
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.username])
-                //redirect user
-				redirect controller:roleBasedController, action:"index", method:"GET"
-            }
-            '*' { respond user, [status: CREATED] }
-        }
+		// else this is a new player, so go to login page
+		else {
+			request.withFormat {
+				form multipartForm {
+					flash.message = message(code: 'users.accountActivationEmailSent.label')
+					redirect controller:"login", action:"auth"
+				}
+			}
+		}
     }
 
 	//@Secured(['ROLE_ADMIN', 'ROLE_PLAYER'])
@@ -157,4 +163,36 @@ class UserController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
+	private void sendActivationEmail(User user) {
+		sendMail {
+			to user.email
+			subject "Welcome to Bromak!"
+			html view: "/emails/activation", model: [username: user.username, encodedEmail: user.encodeActivationString()]
+		}
+	}
+
+	@Secured('IS_AUTHENTICATED_ANONYMOUSLY')
+	def activate() {
+		User user = User.findByUsername(params.username)
+		
+		if (springSecurityService.passwordEncoder.isPasswordValid(params.hash, user.activationString(), null)) {
+			user.enabled = true
+			user.save flush:true
+			
+			request.withFormat {
+				form multipartForm {
+					flash.message = message(code: 'users.accountActivationSucceeded.label')
+					redirect controller: "login", action: "auth"
+				}
+			}
+		} else {
+			request.withFormat {
+				form multipartForm {
+					flash.message = message(code: 'users.accountActivationFailed.label')
+					redirect controller: "login", action: "auth"
+				}
+			}
+		}
+	}
 }

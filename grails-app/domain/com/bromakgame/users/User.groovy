@@ -41,6 +41,14 @@ class User implements Serializable {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
 
+	String encodeActivationString() {
+		return springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(activationString()) : null
+	}
+	
+	String activationString() {
+		return username + email
+	}
+
 	static transients = ['springSecurityService']
 
 	static constraints = {

@@ -76,6 +76,19 @@ grails:
                 scriptlets: html
                 taglib: none
                 staticparts: none
+    mail:
+        host: "smtp.gmail.com"
+        port: 465
+        username: "bromakgame@gmail.com"
+        password: "ilTbifsg9!"
+        default:
+            from: "bromakgame@gmail.com"
+        props:
+            mail.smtp.auth: "true"
+            mail.smtp.socketFactory.port: "465"
+            mail.smtp.socketFactory.class: "javax.net.ssl.SSLSocketFactory"
+            mail.smtp.socketFactory.fallback: "false"
+
 endpoints:
     jmx:
         unique-names: true
