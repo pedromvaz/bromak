@@ -38,72 +38,75 @@
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
-					<!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>-->
-					<a class="navbar-brand" href="/">bromak</a>
+					<a class="navbar-brand" href="/">
+						<span class="glyphicon glyphicon-tint"></span>
+						bromak
+					</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="#about">About</a></li>
-						<li><a href="#contact">Contact</a></li>
-						
 						<sec:ifAnyGranted roles="ROLE_ADMIN">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									Admin
-									<span class="caret"></span>
-								</a>
-								<ul class="dropdown-menu">
-									<li class="dropdown-header">User Accounts</li>
-									<li><g:link controller="user" action="index">Users</g:link></li>
-									<li><g:link controller="role" action="index">Roles</g:link></li>
-									<li role="separator" class="divider"></li>
-									<li class="dropdown-header">Creatures</li>
-									<li><g:link controller="race" action="index">Races</g:link></li>
-									<li role="separator" class="divider"></li>
-									<li class="dropdown-header">Learning</li>
-									<li><g:link controller="epoch" action="index">Epochs</g:link></li>
-									<li role="separator" class="divider"></li>
-									<li class="dropdown-header">Servers</li>
-									<li><g:link controller="world" action="index">Worlds</g:link></li>
-								</ul>
-							</li>
+							<li><g:link controller="user" action="index">
+								<span class="glyphicon glyphicon-user"></span>
+								Users
+							</g:link></li>
+							<li><g:link controller="role" action="index">
+								<span class="glyphicon glyphicon-knight"></span>
+								Roles
+							</g:link></li>
+							<li><g:link controller="race" action="index">
+								<span class="icon-paw"></span>
+								Races
+							</g:link></li>
+							<li><g:link controller="epoch" action="index">
+								<span class="glyphicon glyphicon-hourglass"></span>
+								Epochs
+							</g:link></li>
+							<li><g:link controller="world" action="index">
+								<span class="glyphicon glyphicon-globe"></span>
+								Worlds
+							</g:link></li>
 						</sec:ifAnyGranted>
-						
 						<sec:ifAnyGranted roles="ROLE_PLAYER">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									Player
-									<span class="caret"></span>
-								</a>
-								<ul class="dropdown-menu">
-									<li><g:link controller="champion" action="index">Champions</g:link></li>
-									<li><g:link controller="champion" action="index">Communities</g:link></li>
-								</ul>
-							</li>
+							<li><g:link controller="champion" action="index">
+								<span class="icon-street-view"></span>
+								Champions
+							</g:link></li>
+							<li><g:link controller="champion" action="index">
+								<span class="glyphicon glyphicon-tent"></span>
+								Communities
+							</g:link></li>
 						</sec:ifAnyGranted>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<sec:ifLoggedIn>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									<span class="icon-user"></span>
+									<span class="glyphicon glyphicon-user"></span>
 									<sec:loggedInUserInfo field='username'/>
 									<span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
-									<li class="dropdown-header">User Account</li>
-									<li><g:link controller="logout">Logout</g:link></li>
+									<li><g:link controller="user" action="settings">
+										<span class="glyphicon glyphicon-cog"></span>
+										Settings
+									</g:link></li>
+									<li><g:link controller="logout">
+										<span class="glyphicon glyphicon-log-out"></span>
+										Logout
+									</g:link></li>
 								</ul>
 							</li>
 						</sec:ifLoggedIn>
 						<sec:ifNotLoggedIn>
-							<li><g:link controller="login" action="auth">Login</g:link></li>
-							<li><g:link controller="user" action="create">Register</g:link></li>
+							<li><g:link controller="login" action="auth">
+								<span class="glyphicon glyphicon-log-in"></span>
+								Login
+							</g:link></li>
+							<li><g:link controller="user" action="create">
+								<span class="glyphicon glyphicon-pencil"></span>
+								Register
+							</g:link></li>
 						</sec:ifNotLoggedIn>
 					</ul>
 				</div>

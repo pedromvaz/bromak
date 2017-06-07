@@ -140,3 +140,66 @@
 .icon-dam:before {
   content: "\48";
 }
+.icon-child:before {
+  content: "\49";
+}
+.icon-female:before {
+  content: "\4a";
+}
+.icon-exclamation-circle:before {
+  content: "\4b";
+}
+.icon-exclamation-triangle:before {
+  content: "\4c";
+}
+.icon-pagelines:before {
+  content: "\4d";
+}
+.icon-paperclip:before {
+  content: "\4e";
+}
+.icon-street-view:before {
+  content: "\4f";
+}
+.icon-users:before {
+  content: "\50";
+}
+.icon-organization:before {
+  content: "\51";
+}
+.icon-foot:before {
+  content: "\52";
+}
+.icon-guide-dog:before {
+  content: "\53";
+}
+.icon-paw-1:before {
+  content: "\54";
+}
+.icon-skull:before {
+  content: "\55";
+}
+.icon-social-squidoo:before {
+  content: "\56";
+}
+.icon-trees:before {
+  content: "\57";
+}
+.icon-address:before {
+  content: "\58";
+}
+.icon-flag:before {
+  content: "\59";
+}
+.icon-network:before {
+  content: "\5a";
+}
+.icon-tools:before {
+  content: "\30";
+}
+.icon-water:before {
+  content: "\31";
+}
+.icon-baidu:before {
+  content: "\32";
+}

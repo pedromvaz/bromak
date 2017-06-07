@@ -13,11 +13,11 @@
 * require mobile
 * require_self
 *
-*= require dist/css/bootstrap.min
-*= require dist/css/navbar-fixed-top
-*= require dist/css/carousel
-*= require dist/css/pagination
-*= require dist/css/progress-bars
+*= require bootstrap/css/bootstrap.min
+*= require bootstrap/css/navbar-fixed-top
+*= require bootstrap/css/carousel
+*= require bootstrap/css/pagination
+*= require bootstrap/css/progress-bars
 *
 *= require fontastic/fontastic
 *
