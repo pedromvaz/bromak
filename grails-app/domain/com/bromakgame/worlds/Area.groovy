@@ -41,4 +41,21 @@ class Area {
 			return ""
 		}
 	}
+
+	String getTopographyAndBiomeColor() {
+		double topography = region.getTopography();
+		double biome = 0.0;
+		
+		if (topography >= Region.TOPOGRAPHY_MOUNTAIN_START) {
+			return "mountain";
+		} else if (topography >= Region.TOPOGRAPHY_HILL_START) {
+			return "hill";
+		} else if (topography >= Region.TOPOGRAPHY_SEA_LEVEL) {
+			return "grasslands";
+		} else if (topography >= Region.TOPOGRAPHY_EPIPELAGIC_START) {
+			return "shallows";
+		} else {
+			return "ocean";
+		}
+	}
 }

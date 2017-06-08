@@ -58,7 +58,7 @@ class World {
 				for (int count = 0; count < ring; count++) {
 					next_region.add(next_region_v1)
 					next_region.add(next_region_v2)
-					
+					/*
 					this.addToRegions(
 						new Region(
 							next_region.x,
@@ -66,6 +66,14 @@ class World {
 							Region.getRandomHeightBetween(
 								Region.TOPOGRAPHY_EPIPELAGIC_START,
 								Region.TOPOGRAPHY_MOUNTAIN_START)))
+					*/
+					this.addToRegions(
+						new Region(
+							next_region.x,
+							next_region.y,
+							Region.getRandomHeightBetween(
+								Region.TOPOGRAPHY_OCEAN_FLOOR,
+								Region.TOPOGRAPHY_MOUNTAIN_TOP)))
 				}
 			}
 			
