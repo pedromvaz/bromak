@@ -163,7 +163,8 @@ class BootStrap {
 		// ---------------
 		
 		def worldRadius = 2
-		def world = new World(name: "Bromak", radius: worldRadius)
+		def world = new World(name: "Bromak", radius: worldRadius, maxNumPlayers: 10)
+		world.owner = adminUser
 		
 		world.generate()
 		

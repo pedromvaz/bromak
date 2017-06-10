@@ -2,9 +2,10 @@ package com.bromakgame.worlds
 
 import grails.test.mixin.*
 import spock.lang.*
+import com.bromakgame.users.User
 
 @TestFor(WorldController)
-@Mock([World, Region, Area])
+@Mock([World, Region, Area, User])
 class WorldControllerSpec extends Specification {
 
 	def populateValidParams(params) {
@@ -12,6 +13,15 @@ class WorldControllerSpec extends Specification {
 
 		params["name"] = 'bromak'
 		params["radius"] = 2
+		params["maxNumPlayers"] = 10
+		
+		params["owner.username"] = 'pedro'
+		params["owner.email"] = 'pedro@bromakgame.com'
+		params["owner.password"] = "pedro"
+		params["owner.enabled"] = true
+		params["owner.accountExpired"] = false
+		params["owner.accountLocked"] = false
+		params["owner.passwordExpired"] = false
 	}
 
 	void "Test the index action returns the correct model"() {

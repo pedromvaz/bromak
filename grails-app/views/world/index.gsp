@@ -18,7 +18,9 @@
 			<thead>
 				<tr>
 					<th><g:message code="worlds.name.label" /></th>
+					<th><g:message code="worlds.owner.label" /></th>
 					<th><g:message code="worlds.radius.label" /></th>
+					<th><g:message code="worlds.maxNumPlayers.label" /></th>
 					<th><g:message code="worlds.numRegions.label" /></th>
 					<th><g:message code="worlds.numChampions.label" /></th>
 					<th><g:message code="worlds.numSettlements.label" /></th>
@@ -32,7 +34,9 @@
 								${world.name}
 							</g:link>
 						</td>
+						<td>${world.owner.username}</td>
 						<td>${world.radius}</td>
+						<td>${world.maxNumPlayers}</td>
 						<td></td>
 						<td></td>
 						<td></td>

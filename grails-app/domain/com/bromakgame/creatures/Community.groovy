@@ -16,7 +16,7 @@ class Community extends Group {
 		int size = 0
 		
 		for (Iterator<Group> it = groups.iterator(); it.hasNext(); ) {
-			Group g = it.next();
+			Group g = it.next()
 			size += g.size()
 		}
 		

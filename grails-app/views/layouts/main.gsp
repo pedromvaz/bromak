@@ -68,6 +68,10 @@
 							</g:link></li>
 						</sec:ifAnyGranted>
 						<sec:ifAnyGranted roles="ROLE_PLAYER">
+							<li><g:link controller="world" action="choose">
+								<span class="glyphicon glyphicon-globe"></span>
+								Worlds
+							</g:link></li>
 							<li><g:link controller="champion" action="index">
 								<span class="icon-street-view"></span>
 								Champions

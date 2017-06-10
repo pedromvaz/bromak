@@ -1,6 +1,7 @@
 package com.bromakgame.worlds
 
 import static org.springframework.http.HttpStatus.*
+import com.bromakgame.users.User
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
@@ -9,6 +10,8 @@ import grails.plugin.springsecurity.annotation.Secured
 class WorldController {
 
 	static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
+	transient springSecurityService
 
 	def index(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
@@ -35,6 +38,17 @@ class WorldController {
 			transactionStatus.setRollbackOnly()
 			notFound()
 			return
+		}
+
+		// in order to associate User with World
+		// it must be done before hasErrors()
+		// and a new validate() must be run to validate User is now set
+		// hasErrors() will use result from last validate()
+		User user = springSecurityService?.getCurrentUser()
+
+		if (user != null) {
+			world.owner = user
+			world.validate()
 		}
 
 		if (world.hasErrors()) {
@@ -116,5 +130,15 @@ class WorldController {
 			}
 			'*'{ render status: NOT_FOUND }
 		}
+	}
+
+	@Secured('ROLE_PLAYER')
+	def choose() {
+		User player = springSecurityService?.getCurrentUser()
+		
+		def single_results = World.findAllByOwner(player, [sort: "name"])
+		def multi_results = World.findAllByMaxNumPlayersGreaterThan(1, [sort: "name"])
+		
+		respond single_results, model : [ singleplayer : single_results, multiplayer : multi_results ]
 	}
 }

@@ -40,6 +40,11 @@
 					<input class="form-control" type="number" name="radius" id="radius" value="0" min="0" required />
 				</div>
 				
+				<div class="form-group">
+					<label for="maxNumPlayers"><g:message code='worlds.maxNumPlayers.label'/></label>
+					<input class="form-control" type="number" name="maxNumPlayers" id="maxNumPlayers" value="2" min="2" required />
+				</div>
+				
 				<button class="btn btn-primary btn-block" type="submit" id="submit">
 					<g:message code='default.button.create.label'/>
 				</button>
