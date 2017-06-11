@@ -21,7 +21,7 @@ class UserController {
 		}
 		
 		if (SpringSecurityUtils.ifAllGranted('ROLE_PLAYER')) {
-			redirect controller: 'champion', action: 'index'
+			redirect controller: 'world', action: 'choose'
 			return
 		}
 	}

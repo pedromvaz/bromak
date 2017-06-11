@@ -32,38 +32,16 @@ class WorldController {
 		respond new World(params)
 	}
 
+	@Secured(['ROLE_ADMIN', 'ROLE_PLAYER'])
 	@Transactional
 	def save(World world) {
-		if (world == null) {
-			transactionStatus.setRollbackOnly()
-			notFound()
+		if (!saveOrUpdate(world, true)) {
 			return
 		}
-
-		// in order to associate User with World
-		// it must be done before hasErrors()
-		// and a new validate() must be run to validate User is now set
-		// hasErrors() will use result from last validate()
-		User user = springSecurityService?.getCurrentUser()
-
-		if (user != null) {
-			world.owner = user
-			world.validate()
-		}
-
-		if (world.hasErrors()) {
-			transactionStatus.setRollbackOnly()
-			respond world.errors, view:'create'
-			return
-		}
-
-		world.generate()
-
-		world.save flush:true
 
 		request.withFormat {
 			form multipartForm {
-				flash.message = message(code: 'default.created.message', args: [message(code: 'world.label', default: 'World'), world.id])
+				flash.message = message(code: 'default.created.message', args: [message(code: 'worlds.label'), world.id])
 				redirect action:"index", method:"GET"
 			}
 			'*' { respond world, [status: CREATED] }
@@ -78,27 +56,54 @@ class WorldController {
 	@Secured('ROLE_UNKNOWN')
 	@Transactional
 	def update(World world) {
-		if (world == null) {
-			transactionStatus.setRollbackOnly()
-			notFound()
+		if (!saveOrUpdate(world, false)) {
 			return
 		}
-
-		if (world.hasErrors()) {
-			transactionStatus.setRollbackOnly()
-			respond world.errors, view:'edit'
-			return
-		}
-
-		world.save flush:true
 
 		request.withFormat {
 			form multipartForm {
-				flash.message = message(code: 'default.updated.message', args: [message(code: 'world.label', default: 'World'), world.id])
+				flash.message = message(code: 'default.updated.message', args: [message(code: 'worlds.label'), world.id])
 				redirect world
 			}
 			'*'{ respond world, [status: OK] }
 		}
+	}
+
+	@Secured(['ROLE_ADMIN', 'ROLE_PLAYER'])
+	@Transactional
+	private boolean saveOrUpdate(World world, boolean isCreate) {
+		if (world == null) {
+			transactionStatus.setRollbackOnly()
+			notFound()
+			return false
+		}
+
+		// in order to associate User with World
+		// it must be done before hasErrors()
+		// and a new validate() must be run to validate User is now set
+		// hasErrors() will use result from last validate()
+		if (isCreate) {
+			User user = springSecurityService?.getCurrentUser()
+
+			if (user != null) {
+				world.owner = user
+				world.validate()
+			}
+		}
+
+		if (world.hasErrors()) {
+			transactionStatus.setRollbackOnly()
+			respond world.errors, view: (isCreate ? 'create' : 'edit')
+			return false
+		}
+
+		if (isCreate) {
+			world.generate()
+		}
+
+		world.save(flush:true)
+		
+		return true
 	}
 
 	@Secured('ROLE_UNKNOWN')
@@ -115,7 +120,7 @@ class WorldController {
 
 		request.withFormat {
 			form multipartForm {
-				flash.message = message(code: 'default.deleted.message', args: [message(code: 'world.label', default: 'World'), world.id])
+				flash.message = message(code: 'default.deleted.message', args: [message(code: 'worlds.label'), world.id])
 				redirect action:"index", method:"GET"
 			}
 			'*'{ render status: NO_CONTENT }
@@ -125,7 +130,7 @@ class WorldController {
 	protected void notFound() {
 		request.withFormat {
 			form multipartForm {
-				flash.message = message(code: 'default.not.found.message', args: [message(code: 'world.label', default: 'World'), params.id])
+				flash.message = message(code: 'default.not.found.message', args: [message(code: 'worlds.label'), params.id])
 				redirect action: "index", method: "GET"
 			}
 			'*'{ render status: NOT_FOUND }
@@ -139,6 +144,30 @@ class WorldController {
 		def single_results = World.findAllByOwner(player, [sort: "name"])
 		def multi_results = World.findAllByMaxNumPlayersGreaterThan(1, [sort: "name"])
 		
-		respond single_results, model : [ singleplayer : single_results, multiplayer : multi_results ]
+		boolean startedTutorials = World.countByNameAndOwner(message(code: 'tutorials.world.name'), player) > 0
+		
+		def model = [ singleplayer : single_results ]
+		model << [ multiplayer : multi_results ]
+		model << [ startedTutorials : startedTutorials ]
+		
+		respond single_results, model : model
+	}
+
+	@Secured('ROLE_PLAYER')
+	@Transactional
+	def tutorials() {
+		User player = springSecurityService?.getCurrentUser()
+		
+		World tutorials = World.findByNameAndOwner(message(code: 'tutorials.world.name'), player)
+		
+		if (!tutorials) {
+			tutorials = new World(name: "Tutorials", radius: 0, maxNumPlayers: 1)
+			
+			if (!saveOrUpdate(tutorials, true)) {
+				return
+			}
+		}
+		
+		respond tutorials
 	}
 }
