@@ -25,7 +25,7 @@ class WorldController {
 		//println("Found " + Region.countByWorld(world))
 		//println("Found " + Area.countByRegionInList(regions))
 
-		respond world, model: [ areas: areas ]
+		respond world, model: [ areas: areas, regions: regions ]
 	}
 
 	def create() {

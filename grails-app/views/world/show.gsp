@@ -22,7 +22,12 @@
 			<div id="hexGrid">
 				<g:each in="${areas}" var="area">
 					<div class="hex ${area.getTopographyAndBiomeColor()}" style="left: ${area.x+1}px; top: ${area.y+1}px"></div>
-					<div class="hexIcon ${area.getTopographyIcon()}" style="left: ${area.x+33}px; top: ${area.y+13}px"></div>
+					<!--<div class="hexIcon ${area.getTopographyIcon()}" style="left: ${area.x+33}px; top: ${area.y+13}px"></div>-->
+				</g:each>
+				<g:each in="${regions}" var="region">
+					<div class="regionIcon hills" style="left: ${region.x-8}px; top: ${region.y-30}px">
+						<img src="${resource(dir:'images',file:'world/svg/hills.svg')}" style="width: 120px;height: 120px" />
+					</div>
 				</g:each>
 			</div>
 		</div>

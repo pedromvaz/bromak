@@ -46,6 +46,8 @@ class Area {
 		double topography = region.getTopography()
 		double biome = 0.0
 		
+		return ""
+		/*
 		if (topography >= Region.TOPOGRAPHY_MOUNTAIN_START) {
 			return "mountain"
 		} else if (topography >= Region.TOPOGRAPHY_HILL_START) {
@@ -57,5 +59,6 @@ class Area {
 		} else {
 			return "ocean"
 		}
+		*/
 	}
 }
