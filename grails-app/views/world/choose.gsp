@@ -49,7 +49,7 @@
 						<p class="list-group-item-text">A list of private worlds where only the logged in user can play</p>
 					</a>
 					<g:each in="${singleplayer}" var="world">
-						<g:link action="tutorials" class="list-group-item" id="${world.id}">${world.name}</g:link>
+						<g:link action="tutorials" class="list-group-item">${world.name}</g:link>
 					</g:each>
 					<g:unless test="${startedTutorials}">
 						<g:link action="tutorials" class="list-group-item list-group-item-success">
