@@ -66,6 +66,10 @@
 								<span class="glyphicon glyphicon-globe"></span>
 								Worlds
 							</g:link></li>
+							<li><g:link controller="questType" action="index">
+								<span class="glyphicon glyphicon-exclamation-sign"></span>
+								Quest Types
+							</g:link></li>
 						</sec:ifAnyGranted>
 						<sec:ifAnyGranted roles="ROLE_PLAYER">
 							<li><g:link controller="world" action="choose">
