@@ -19,8 +19,8 @@
 				<tr>
 					<th><g:message code="questTypes.name.label" /></th>
 					<th><g:message code="questTypes.description.label" /></th>
-					<th><g:message code="questTypes.objectives.label" /></th>
 					<th><g:message code="questTypes.groupCap.label" /></th>
+					<th><g:message code="questTypes.objectives.label" /></th>
 					<th></th>
 					<th></th>
 				</tr>
@@ -30,12 +30,20 @@
 					<tr>
 						<td>${questType.name}</td>
 						<td>${questType.description}</td>
-						<td>${questType.objectives}</td>
 						<td>${questType.groupCap}</td>
 						<td>
-							<!--<g:link action="edit" id="${questType.id}">-->
+							<g:if test="${questType.objectives.size() == 0}">
+								<span class="glyphicon glyphicon glyphicon-remove-sign" style="color:red"></span>
+								None
+							</g:if>
+							<g:else>
+								${questType.objectives.size()}
+							</g:else>
+						</td>
+						<td>
+							<g:link action="edit" id="${questType.id}">
 								<span class="glyphicon glyphicon-edit"></span> Edit
-							<!--</g:link>-->
+							</g:link>
 						</td>
 						<td>
 							<!--<g:link action="delete" id="${questType.id}">-->

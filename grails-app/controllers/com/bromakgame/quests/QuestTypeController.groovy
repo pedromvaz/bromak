@@ -71,7 +71,7 @@ class QuestTypeController {
 		request.withFormat {
 			form multipartForm {
 				flash.message = message(code: 'default.updated.message', args: [message(code: 'questType.label', default: 'QuestType'), questType.id])
-				redirect questType
+				redirect action:"index", method:"GET"
 			}
 			'*'{ respond questType, [status: OK] }
 		}

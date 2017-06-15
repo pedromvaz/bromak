@@ -29,47 +29,26 @@
 				</div>
 			</g:hasErrors>
 
-			<form action="/questType/save" method="POST" id="createQuestTypeForm">
+			<g:form action="save">
 				<div class="form-group">
-					<label for="name" class="sr-only"><g:message code='questTypes.name.label'/></label>
+					<label for="name"><g:message code='questTypes.name.label'/></label>
 					<input type="text" name="name" id="name" class="form-control" placeholder="${message(code: 'questTypes.name.label')}" required autofocus>
 				</div>
 
 				<div class="form-group">
-					<label for="description" class="sr-only"><g:message code='questTypes.description.label'/></label>
+					<label for="description"><g:message code='questTypes.description.label'/></label>
 					<textarea class="form-control" rows="4" name="description" id="description" placeholder="${message(code: 'questTypes.description.label')}" required></textarea>
 				</div>
 
 				<div class="form-group">
-					<label for="groupCap" class="sr-only"><g:message code='questTypes.groupCap.label'/></label>
+					<label for="groupCap"><g:message code='questTypes.groupCap.label'/></label>
 					<input class="form-control" type="number" name="groupCap" id="groupCap" value="1" min="1" required />
-				</div>
-
-				<div class="form-group">
-					<table class="table">
-						<thead>
-							<tr>
-								<th><g:message code='questTypes.objectives.label'/></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" value="">
-											Kill a wild animal
-										</label>
-									</div>
-								</td>
-						</tbody>
-					</table>
 				</div>
 
 				<button class="btn btn-primary btn-block" type="submit" id="submit">
 					<g:message code='default.button.create.label'/>
 				</button>
-			</form>
+			</g:form>
 		</div>
 	</body>
 </html>

@@ -119,7 +119,7 @@ class QuestTypeControllerSpec extends Specification {
 
 		then:"A redirect is issued to the show action"
 			questType != null
-			response.redirectedUrl == "/questType/show/$questType.id"
+			response.redirectedUrl == "/questType/index"
 			flash.message != null
 	}
 
