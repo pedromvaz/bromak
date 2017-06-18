@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main" />
-		<g:set var="entityName" value="${message(code: 'questType.label', default: 'Quest Type')}" />
+		<g:set var="entityName" value="${message(code: 'questTypes.label')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -28,7 +28,11 @@
 			<tbody>
 				<g:each in="${questTypeList}" var="questType">
 					<tr>
-						<td>${questType.name}</td>
+						<td>
+							<g:link action="show" id="${questType.id}">
+								${questType.name}
+							</g:link>
+						</td>
 						<td>${questType.description}</td>
 						<td>${questType.groupCap}</td>
 						<td>

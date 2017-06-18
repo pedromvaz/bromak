@@ -114,11 +114,14 @@ class BootStrap {
 		// -----------------
 		
 		// hunting
+		def bashing = new Skill(
+			name: 'Bashing',
+			description: 'Using hard objects as weapons, like branches and rocks')
 		def tracking = new Skill(
 			name: 'Tracking',
 			description: 'Tracking animals by analysing footprints, blood stains and smells')
 		def throwing = new Skill(name: 'Throwing', description: 'Throwing weapons like stones and spears')
-		def stealth = new Skill(name: 'Stealth', description: 'Moving silently')
+		def stealth = new Skill(name: 'Stealth', description: 'Moving silently and using surrounding objects as cover')
 		// stone carving
 		def stoneCarving = new Skill(name: 'Stone Carving', description: 'The carving of stone weapons and tools.')
 		// basic clothing
@@ -131,6 +134,7 @@ class BootStrap {
 		def nomadic = new Epoch(
 			name: 'Ancient Nomadic Era',
 			description: 'The start of the Ancient Era, where Nomadic peoples were common.')
+		.addToSkills(bashing)
 		.addToSkills(tracking)
 		.addToSkills(throwing)
 		.addToSkills(stealth)
