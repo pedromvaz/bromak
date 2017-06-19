@@ -1,13 +1,14 @@
 package com.bromakgame.quests
 
-import com.bromakgame.learning.Skill
+import com.bromakgame.learning.SkillCategory
 
 class Objective {
 	String description
+	SkillCategory skillCategory
 
-	static hasMany = [ primarySkills : Skill, secondarySkills : Skill ]
 	static belongsTo = [ questType : QuestType ]
 
 	static constraints = {
+		description blank: false
 	}
 }

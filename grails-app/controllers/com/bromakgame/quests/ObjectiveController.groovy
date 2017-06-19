@@ -1,7 +1,7 @@
 package com.bromakgame.quests
 
 import static org.springframework.http.HttpStatus.*
-import com.bromakgame.learning.Epoch
+import com.bromakgame.learning.SkillCategory
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
@@ -21,7 +21,7 @@ class ObjectiveController {
 	}
 
 	def create() {
-		respond new Objective(params)
+		respond new Objective(params), model: [ skillCategories : SkillCategory.listOrderByName() ]
 		
 		if (session) {
 			session["questTypeId"] = params.questTypeId
@@ -63,7 +63,7 @@ class ObjectiveController {
 	}
 
 	def edit(Objective objective) {
-		respond objective, model: [ epochs : Epoch.getAll() ]
+		respond objective, model: [ skillCategories : SkillCategory.listOrderByName() ]
 	}
 
 	@Transactional

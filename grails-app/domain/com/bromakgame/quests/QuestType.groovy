@@ -10,6 +10,8 @@ class QuestType {
 	static hasMany = [ objectives : Objective ]
 
 	static constraints = {
+		name blank: false, unique: true
+		description nullable: true, blank: false
 		groupCap min: 1
 	}
 }

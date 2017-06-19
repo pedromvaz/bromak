@@ -1,21 +1,17 @@
-package com.bromakgame.quests
+package com.bromakgame.learning
 
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(ObjectiveController)
-@Mock([Objective,QuestType])
-class ObjectiveControllerSpec extends Specification {
+@TestFor(SkillCategoryController)
+@Mock(SkillCategory)
+class SkillCategoryControllerSpec extends Specification {
 
 	def populateValidParams(params) {
 		assert params != null
 
-		params["description"] = 'Execute a stealth approach'
-		params["questType.name"] = 'Animal Hunting'
-		params["questType.description"] = 'Hunting of wild animals'
-		params["questType.groupCap"] = 4
-		params["skillCategory.name"] = 'Combat'
-		params["skillCategory.description"] = 'Various forms of combat'
+		params["name"] = 'Combat'
+		params["description"] = 'Various forms of combat'
 	}
 
 	void "Test the index action returns the correct model"() {
@@ -24,8 +20,8 @@ class ObjectiveControllerSpec extends Specification {
 			controller.index()
 
 		then:"The model is correct"
-			!model.objectiveList
-			model.objectiveCount == 0
+			!model.skillCategoryList
+			model.skillCategoryCount == 0
 	}
 
 	void "Test the create action returns the correct model"() {
@@ -33,7 +29,7 @@ class ObjectiveControllerSpec extends Specification {
 			controller.create()
 
 		then:"The model is correctly created"
-			model.objective!= null
+			model.skillCategory!= null
 	}
 
 	void "Test the save action correctly persists an instance"() {
@@ -41,25 +37,25 @@ class ObjectiveControllerSpec extends Specification {
 		when:"The save action is executed with an invalid instance"
 			request.contentType = FORM_CONTENT_TYPE
 			request.method = 'POST'
-			def objective = new Objective()
-			objective.validate()
-			controller.save(objective)
+			def skillCategory = new SkillCategory()
+			skillCategory.validate()
+			controller.save(skillCategory)
 
 		then:"The create view is rendered again with the correct model"
-			model.objective!= null
+			model.skillCategory!= null
 			view == 'create'
 
 		when:"The save action is executed with a valid instance"
 			response.reset()
 			populateValidParams(params)
-			objective = new Objective(params)
+			skillCategory = new SkillCategory(params)
 
-			controller.save(objective)
+			controller.save(skillCategory)
 
 		then:"A redirect is issued to the show action"
-			response.redirectedUrl == '/objective/show/1'
+			response.redirectedUrl == '/skillCategory/show/1'
 			controller.flash.message != null
-			Objective.count() == 1
+			SkillCategory.count() == 1
 	}
 
 	void "Test that the show action returns the correct model"() {
@@ -71,11 +67,11 @@ class ObjectiveControllerSpec extends Specification {
 
 		when:"A domain instance is passed to the show action"
 			populateValidParams(params)
-			def objective = new Objective(params)
-			controller.show(objective)
+			def skillCategory = new SkillCategory(params)
+			controller.show(skillCategory)
 
 		then:"A model is populated containing the domain instance"
-			model.objective == objective
+			model.skillCategory == skillCategory
 	}
 
 	void "Test that the edit action returns the correct model"() {
@@ -87,11 +83,11 @@ class ObjectiveControllerSpec extends Specification {
 
 		when:"A domain instance is passed to the edit action"
 			populateValidParams(params)
-			def objective = new Objective(params)
-			controller.edit(objective)
+			def skillCategory = new SkillCategory(params)
+			controller.edit(skillCategory)
 
 		then:"A model is populated containing the domain instance"
-			model.objective == objective
+			model.skillCategory == skillCategory
 	}
 
 	void "Test the update action performs an update on a valid domain instance"() {
@@ -101,28 +97,28 @@ class ObjectiveControllerSpec extends Specification {
 			controller.update(null)
 
 		then:"A 404 error is returned"
-			response.redirectedUrl == '/objective/index'
+			response.redirectedUrl == '/skillCategory/index'
 			flash.message != null
 
 		when:"An invalid domain instance is passed to the update action"
 			response.reset()
-			def objective = new Objective()
-			objective.validate()
-			controller.update(objective)
+			def skillCategory = new SkillCategory()
+			skillCategory.validate()
+			controller.update(skillCategory)
 
 		then:"The edit view is rendered again with the invalid instance"
 			view == 'edit'
-			model.objective == objective
+			model.skillCategory == skillCategory
 
 		when:"A valid domain instance is passed to the update action"
 			response.reset()
 			populateValidParams(params)
-			objective = new Objective(params).save(flush: true)
-			controller.update(objective)
+			skillCategory = new SkillCategory(params).save(flush: true)
+			controller.update(skillCategory)
 
 		then:"A redirect is issued to the show action"
-			objective != null
-			response.redirectedUrl == "/objective/show/$objective.id"
+			skillCategory != null
+			response.redirectedUrl == "/skillCategory/show/$skillCategory.id"
 			flash.message != null
 	}
 
@@ -133,23 +129,23 @@ class ObjectiveControllerSpec extends Specification {
 			controller.delete(null)
 
 		then:"A 404 is returned"
-			response.redirectedUrl == '/objective/index'
+			response.redirectedUrl == '/skillCategory/index'
 			flash.message != null
 
 		when:"A domain instance is created"
 			response.reset()
 			populateValidParams(params)
-			def objective = new Objective(params).save(flush: true)
+			def skillCategory = new SkillCategory(params).save(flush: true)
 
 		then:"It exists"
-			Objective.count() == 1
+			SkillCategory.count() == 1
 
 		when:"The domain instance is passed to the delete action"
-			controller.delete(objective)
+			controller.delete(skillCategory)
 
 		then:"The instance is deleted"
-			Objective.count() == 0
-			response.redirectedUrl == '/objective/index'
+			SkillCategory.count() == 0
+			response.redirectedUrl == '/skillCategory/index'
 			flash.message != null
 	}
 }

@@ -10,6 +10,7 @@ import com.bromakgame.creatures.Community
 import com.bromakgame.creatures.Race
 import com.bromakgame.learning.Epoch
 import com.bromakgame.learning.Skill
+import com.bromakgame.learning.SkillCategory
 
 import com.bromakgame.creatures.Champion
 
@@ -109,6 +110,8 @@ class BootStrap {
 			community.add(champion)
 		}
 		
+		assert Community.count() == 1
+		
 		// -----------------
 		// Epochs and Skills
 		// -----------------
@@ -116,20 +119,22 @@ class BootStrap {
 		// hunting
 		def bashing = new Skill(
 			name: 'Bashing',
-			description: 'Using hard objects as weapons, like branches and rocks')
+			description: 'Using hard objects as weapons, like branches and rocks').save()
 		def tracking = new Skill(
 			name: 'Tracking',
-			description: 'Tracking animals by analysing footprints, blood stains and smells')
-		def throwing = new Skill(name: 'Throwing', description: 'Throwing weapons like stones and spears')
-		def stealth = new Skill(name: 'Stealth', description: 'Moving silently and using surrounding objects as cover')
+			description: 'Tracking animals by analysing footprints, blood stains and smells').save()
+		def throwing = new Skill(name: 'Throwing', description: 'Throwing weapons like stones and spears').save()
+		def stealth = new Skill(name: 'Stealth', description: 'Moving silently and using surrounding objects as cover').save()
 		// stone carving
-		def stoneCarving = new Skill(name: 'Stone Carving', description: 'The carving of stone weapons and tools.')
+		def stoneCarving = new Skill(name: 'Stone Carving', description: 'The carving of stone weapons and tools.').save()
 		// basic clothing
 		def leatherworking = new Skill(
 			name: 'Leatherworking',
-			description: 'Skinning the leather from animals to make basic clothing.')
+			description: 'Skinning the leather from animals to make basic clothing.').save()
 		// cave painting
-		def cavePainting = new Skill(name: 'Cave Painting', description: 'Painting deeds in cave walls.')
+		def cavePainting = new Skill(name: 'Cave Painting', description: 'Painting deeds in cave walls.').save()
+		
+		assert Skill.count() == 7
 		
 		def nomadic = new Epoch(
 			name: 'Ancient Nomadic Era',
@@ -143,6 +148,8 @@ class BootStrap {
 		.addToSkills(cavePainting)
 		.save()
 		
+		assert Epoch.count() == 1
+		
 		for (race in Race.findAllByIntelligent(true)) {
 			for (skill in nomadic.skills) {
 				race.addToLearnableSkills(skill)
@@ -150,9 +157,11 @@ class BootStrap {
 			race.save()
 		}
 		
-		def agriculture = new Skill(name: 'Agriculture', description: 'Agriculture')
-		def masonry = new Skill(name: 'Masonry', description: 'Masonry')
-		def pottery = new Skill(name: 'Pottery', description: 'Pottery')
+		def agriculture = new Skill(name: 'Agriculture', description: 'Agriculture').save()
+		def masonry = new Skill(name: 'Masonry', description: 'Masonry').save()
+		def pottery = new Skill(name: 'Pottery', description: 'Pottery').save()
+		
+		assert Skill.count() == 10
 		
 		def sedentary = new Epoch(
 			name: 'Ancient Sedentary Era',
@@ -160,6 +169,31 @@ class BootStrap {
 		.addToSkills(agriculture)
 		.addToSkills(masonry)
 		.addToSkills(pottery)
+		.save()
+		
+		assert Epoch.count() == 2
+		
+		// ----------------
+		// Skill Categories
+		// ----------------
+		
+		def combat = new SkillCategory(
+			name: 'Combat',
+			description: 'Various forms of combat')
+		.addToSkills(bashing)
+		.addToSkills(throwing)
+		.save()
+		
+		def stealthCategory = new SkillCategory(
+			name: 'Stealth',
+			description: 'Moving silently and using surrounding objects as cover')
+		.addToSkills(stealth)
+		.save()
+		
+		def trackingCategory = new SkillCategory(
+			name: 'Tracking',
+			description: 'Tracking animals by analysing footprints, blood stains and smells')
+		.addToSkills(tracking)
 		.save()
 		
 		// ---------------
