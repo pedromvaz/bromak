@@ -56,8 +56,7 @@
 						<thead>
 							<tr>
 								<th><g:message code="objectives.description.label" /></th>
-								<th><g:message code="objectives.primarySkills.label" /></th>
-								<th><g:message code="objectives.secondarySkills.label" /></th>
+								<th><g:message code="objectives.skillCategory.label" /></th>
 								<th></th>
 							</tr>
 						</thead>
@@ -69,8 +68,7 @@
 											${objective.description}
 										</g:link>
 									</td>
-									<td></td>
-									<td></td>
+									<td>${objective.skillCategory.name}</td>
 									<td>
 										<g:link controller="objective" action="edit" id="${objective.id}">
 											<span class="glyphicon glyphicon-edit"></span> Edit
@@ -81,7 +79,7 @@
 						</tbody>
 					</table>
 					
-					<g:link controller="objective" action="create" params="[questTypeId:questType.id]">
+					<g:link controller="objective" action="create" params="[questType:questType.id]">
 						<button type="button" class="btn btn-primary">
 							<g:message code="objectives.new.label" />
 						</button>

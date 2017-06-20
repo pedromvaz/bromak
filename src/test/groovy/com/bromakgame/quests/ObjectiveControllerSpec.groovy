@@ -2,9 +2,10 @@ package com.bromakgame.quests
 
 import grails.test.mixin.*
 import spock.lang.*
+import com.bromakgame.learning.SkillCategory
 
 @TestFor(ObjectiveController)
-@Mock([Objective,QuestType])
+@Mock([Objective,QuestType,SkillCategory])
 class ObjectiveControllerSpec extends Specification {
 
 	def populateValidParams(params) {
@@ -57,7 +58,7 @@ class ObjectiveControllerSpec extends Specification {
 			controller.save(objective)
 
 		then:"A redirect is issued to the show action"
-			response.redirectedUrl == '/objective/show/1'
+			response.redirectedUrl == '/questType/show'
 			controller.flash.message != null
 			Objective.count() == 1
 	}

@@ -29,10 +29,15 @@
 				</div>
 			</g:hasErrors>
 
-			<g:form action="save">
+			<g:form action="save" params="['questType.id':params.questType]">
 				<div class="form-group">
 					<label for="description"><g:message code='objectives.description.label'/></label>
 					<textarea class="form-control" rows="4" name="description" id="description" placeholder="${message(code: 'objectives.description.label')}" required></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="skillCategory.id"><g:message code='skillCategories.label'/></label>
+					<g:select class="form-control" name="skillCategory.id" from="${skillCategories}" optionKey="id" optionValue="name" />
 				</div>
 
 				<button class="btn btn-primary btn-block" type="submit" id="submit">

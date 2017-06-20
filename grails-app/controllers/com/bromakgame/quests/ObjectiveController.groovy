@@ -22,10 +22,6 @@ class ObjectiveController {
 
 	def create() {
 		respond new Objective(params), model: [ skillCategories : SkillCategory.listOrderByName() ]
-		
-		if (session) {
-			session["questTypeId"] = params.questTypeId
-		}
 	}
 
 	@Transactional
@@ -35,15 +31,6 @@ class ObjectiveController {
 			notFound()
 			return
 		}
-		
-		if (session && session["questTypeId"]) {
-			QuestType questType = QuestType.get(session["questTypeId"])
-
-			questType.addToObjectives(objective)
-			questType.save()
-		}
-
-		objective.validate()
 
 		if (objective.hasErrors()) {
 			transactionStatus.setRollbackOnly()
@@ -56,9 +43,8 @@ class ObjectiveController {
 		request.withFormat {
 			form multipartForm {
 				flash.message = message(code: 'default.created.message', args: [message(code: 'objective.label', default: 'Objective'), objective.id])
-				redirect objective
+				redirect controller: 'questType', action: 'show', id: objective.questType.id
 			}
-			'*' { respond objective, [status: CREATED] }
 		}
 	}
 
@@ -87,7 +73,6 @@ class ObjectiveController {
 				flash.message = message(code: 'default.updated.message', args: [message(code: 'objective.label', default: 'Objective'), objective.id])
 				redirect objective
 			}
-			'*'{ respond objective, [status: OK] }
 		}
 	}
 
