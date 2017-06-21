@@ -14,7 +14,7 @@
 			</div>
 
 			<g:if test="${flash.message}">
-				<div class="message" role="status">${flash.message}</div>
+				<div class="alert alert-info" role="alert">${flash.message}</div>
 			</g:if>
 
 			<g:hasErrors bean="${this.objective}">
@@ -32,7 +32,7 @@
 			<g:form action="save" params="['questType.id':params.questType]">
 				<div class="form-group">
 					<label for="description"><g:message code='objectives.description.label'/></label>
-					<textarea class="form-control" rows="4" name="description" id="description" placeholder="${message(code: 'objectives.description.label')}" required></textarea>
+					<textarea class="form-control" rows="4" name="description" id="description" placeholder="${message(code: 'objectives.description.label')}" required autofocus></textarea>
 				</div>
 
 				<div class="form-group">

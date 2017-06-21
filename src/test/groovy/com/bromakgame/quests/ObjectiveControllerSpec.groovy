@@ -123,7 +123,7 @@ class ObjectiveControllerSpec extends Specification {
 
 		then:"A redirect is issued to the show action"
 			objective != null
-			response.redirectedUrl == "/objective/show/$objective.id"
+			response.redirectedUrl == '/questType/show'
 			flash.message != null
 	}
 

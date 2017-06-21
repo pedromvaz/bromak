@@ -14,7 +14,7 @@
 			</div>
 
 			<g:if test="${flash.message}">
-				<div class="message" role="status">${flash.message}</div>
+				<div class="alert alert-info" role="alert">${flash.message}</div>
 			</g:if>
 
 			<g:hasErrors bean="${this.questType}">
@@ -58,21 +58,23 @@
 								<th><g:message code="objectives.description.label" /></th>
 								<th><g:message code="objectives.skillCategory.label" /></th>
 								<th></th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<g:each in="${questType.objectives}" var="objective">
 								<tr>
-									<td>
-										<g:link controller="objective" action="show" id="${objective.id}">
-											${objective.description}
-										</g:link>
-									</td>
+									<td>${objective.description}</td>
 									<td>${objective.skillCategory.name}</td>
 									<td>
 										<g:link controller="objective" action="edit" id="${objective.id}">
 											<span class="glyphicon glyphicon-edit"></span> Edit
 										</g:link>
+									</td>
+									<td>
+										<!--<g:link controller="objective" action="delete" id="${objective.id}">-->
+											<span class="glyphicon glyphicon-trash"></span> Remove
+										<!--</g:link>-->
 									</td>
 								</tr>
 							</g:each>

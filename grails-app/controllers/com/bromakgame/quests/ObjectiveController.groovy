@@ -16,6 +16,7 @@ class ObjectiveController {
 		respond Objective.list(params), model: [objectiveCount: Objective.count()]
 	}
 
+	@Secured('ROLE_UNKNOWN')
 	def show(Objective objective) {
 		respond objective
 	}
@@ -71,11 +72,12 @@ class ObjectiveController {
 		request.withFormat {
 			form multipartForm {
 				flash.message = message(code: 'default.updated.message', args: [message(code: 'objective.label', default: 'Objective'), objective.id])
-				redirect objective
+				redirect controller: 'questType', action: 'show', id: objective.questType.id
 			}
 		}
 	}
 
+	@Secured('ROLE_UNKNOWN')
 	@Transactional
 	def delete(Objective objective) {
 
