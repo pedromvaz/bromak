@@ -53,7 +53,7 @@ class SkillCategoryControllerSpec extends Specification {
 			controller.save(skillCategory)
 
 		then:"A redirect is issued to the show action"
-			response.redirectedUrl == '/skillCategory/show/1'
+			response.redirectedUrl == '/skillCategory/index'
 			controller.flash.message != null
 			SkillCategory.count() == 1
 	}
@@ -118,7 +118,7 @@ class SkillCategoryControllerSpec extends Specification {
 
 		then:"A redirect is issued to the show action"
 			skillCategory != null
-			response.redirectedUrl == "/skillCategory/show/$skillCategory.id"
+			response.redirectedUrl == "/skillCategory/index"
 			flash.message != null
 	}
 

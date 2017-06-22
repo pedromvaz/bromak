@@ -42,9 +42,8 @@ class SkillCategoryController {
 		request.withFormat {
 			form multipartForm {
 				flash.message = message(code: 'default.created.message', args: [message(code: 'skillCategory.label', default: 'SkillCategory'), skillCategory.id])
-				redirect skillCategory
+				redirect action:"index", method:"GET"
 			}
-			'*' { respond skillCategory, [status: CREATED] }
 		}
 	}
 
@@ -71,9 +70,8 @@ class SkillCategoryController {
 		request.withFormat {
 			form multipartForm {
 				flash.message = message(code: 'default.updated.message', args: [message(code: 'skillCategory.label', default: 'SkillCategory'), skillCategory.id])
-				redirect skillCategory
+				redirect action:"index", method:"GET"
 			}
-			'*'{ respond skillCategory, [status: OK] }
 		}
 	}
 

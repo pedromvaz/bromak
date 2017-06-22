@@ -58,10 +58,27 @@
 								<span class="icon-paw"></span>
 								Races
 							</g:link></li>
-							<li><g:link controller="epoch" action="index">
-								<span class="glyphicon glyphicon-hourglass"></span>
-								Epochs
-							</g:link></li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<span class="glyphicon glyphicon-education"></span>
+									<g:message code="skills.header" />
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><g:link controller="epoch" action="index">
+										<span class="glyphicon glyphicon-hourglass"></span>
+										<g:message code="epochs.index.header" />
+									</g:link></li>
+									<li><g:link controller="skillCategory" action="index">
+										<span class="glyphicon glyphicon-tag"></span>
+										<g:message code="skillCategories.header" />
+									</g:link></li>
+									<li><g:link controller="skill" action="index">
+										<span class="glyphicon glyphicon-education"></span>
+										<g:message code="skills.header" />
+									</g:link></li>
+								</ul>
+							</li>
 							<li><g:link controller="world" action="index">
 								<span class="glyphicon glyphicon-globe"></span>
 								Worlds

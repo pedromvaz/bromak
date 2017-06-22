@@ -1,28 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'skill.label', default: 'Skill')}" />
-        <title><g:message code="default.list.label" args="[entityName]" /></title>
-    </head>
-    <body>
-        <a href="#list-skill" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="list-skill" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-                <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:table collection="${skillList}" />
+	<head>
+		<meta name="layout" content="main" />
+		<g:set var="entityName" value="${message(code: 'skills.label')}" />
+		<title><g:message code="skills.header" /></title>
+	</head>
+	<body>
+		<div class="page-header">
+			<h2><g:message code="skills.header" /></h2>
+		</div>
+		
+		<g:if test="${flash.message}">
+			<div class="alert alert-info" role="alert">${flash.message}</div>
+		</g:if>
+		
+		<table class="table">
+			<thead>
+				<tr>
+					<th><g:message code="skills.name.label" /></th>
+					<th><g:message code="skills.description.label" /></th>
+					<th><g:message code="skills.category.label" /></th>
+					<th><g:message code="skills.epoch.label" /></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<g:each in="${skillList}" var="skill">
+					<tr>
+						<td>${skill.name}</td>
+						<td>${skill.description}</td>
+						<td>${skill.category?.name}</td>
+						<td>${skill.epoch?.name}</td>
+						<td>
+							<g:link action="edit" id="${skill.id}">
+								<span class="glyphicon glyphicon-edit"></span> Edit
+							</g:link>
+						</td>
+						<td>
+							<!--<g:link action="delete" id="${skill.id}">-->
+								<span class="glyphicon glyphicon-trash"></span> Remove
+							<!--</g:link>-->
+						</td>
+					</tr>
+				</g:each>
+			</tbody>
+		</table>
 
-            <div class="pagination">
-                <g:paginate total="${skillCount ?: 0}" />
-            </div>
-        </div>
-    </body>
+		<g:if test="${skillCount > 10}">
+			<div class="pagination">
+				<g:paginate total="${skillCount ?: 0}" />
+			</div>
+		</g:if>
+
+		<g:link class="btn btn-primary disabled" action="create">
+			<g:message code="default.new.label" args="[entityName]" />
+		</g:link>
+	</body>
 </html>
