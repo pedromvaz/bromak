@@ -12,6 +12,8 @@ class SkillControllerSpec extends Specification {
 
 		params["epoch.name"] = 'Name'
 		params["epoch.description"] = 'Description'
+		params["category.name"] = 'Name'
+		params["category.description"] = 'Description'
 		params["name"] = 'Name'
 		params["description"] = 'Description'
 	}
@@ -55,7 +57,7 @@ class SkillControllerSpec extends Specification {
 			controller.save(skill)
 
 		then:"A redirect is issued to the show action"
-			response.redirectedUrl == '/epoch/index'
+			response.redirectedUrl == '/skill/index'
 			controller.flash.message != null
 			Skill.count() == 1
 	}
@@ -120,7 +122,7 @@ class SkillControllerSpec extends Specification {
 
 		then:"A redirect is issued to the show action"
 			skill != null
-			response.redirectedUrl == "/skill/show/$skill.id"
+			response.redirectedUrl == "/skill/index"
 			flash.message != null
 	}
 

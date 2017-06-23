@@ -19,6 +19,7 @@
 				<tr>
 					<th><g:message code="skillCategories.name.label" /></th>
 					<th><g:message code="skillCategories.description.label" /></th>
+					<th><g:message code="skillCategories.skills.label" /></th>
 					<th></th>
 					<th></th>
 				</tr>
@@ -28,6 +29,20 @@
 					<tr>
 						<td>${category.name}</td>
 						<td>${category.description}</td>
+						<td>
+							<div class="dropdown">
+								<button class="btn btn-default dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-education"></span>
+									${category.getSkillCount()}
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<g:each in="${category.skills}" var="skill">
+										<li><a>${skill.name}</a></li>
+									</g:each>
+								</ul>
+							</div>
+						</td>
 						<td>
 							<g:link action="edit" id="${category.id}">
 								<span class="glyphicon glyphicon-edit"></span> Edit
@@ -49,10 +64,8 @@
 			</div>
 		</g:if>
 
-		<g:link action="create">
-			<button type="button" class="btn btn-primary">
-				<g:message code="default.new.label" args="[entityName]" />
-			</button>
+		<g:link action="create" class="btn btn-primary">
+			<g:message code="default.new.label" args="[entityName]" />
 		</g:link>
 	</body>
 </html>

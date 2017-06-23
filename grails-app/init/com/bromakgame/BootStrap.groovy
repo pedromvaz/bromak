@@ -112,9 +112,9 @@ class BootStrap {
 		
 		assert Community.count() == 1
 		
-		// -----------------
-		// Epochs and Skills
-		// -----------------
+		// ------
+		// Skills
+		// ------
 		
 		// hunting
 		def bashing = new Skill(
@@ -123,18 +123,49 @@ class BootStrap {
 		def tracking = new Skill(
 			name: 'Tracking',
 			description: 'Tracking animals by analysing footprints, blood stains and smells').save()
-		def throwing = new Skill(name: 'Throwing', description: 'Throwing weapons like stones and spears').save()
-		def stealth = new Skill(name: 'Stealth', description: 'Moving silently and using surrounding objects as cover').save()
+		def throwing = new Skill(
+			name: 'Throwing',
+			description: 'Throwing weapons like stones and spears').save()
+		def stealth = new Skill(
+			name: 'Stealth',
+			description: 'Moving silently and using surrounding objects as cover').save()
 		// stone carving
-		def stoneCarving = new Skill(name: 'Stone Carving', description: 'The carving of stone weapons and tools.').save()
+		def stoneCarving = new Skill(
+			name: 'Stone Carving',
+			description: 'The carving of stone weapons and tools.').save()
 		// basic clothing
 		def leatherworking = new Skill(
 			name: 'Leatherworking',
 			description: 'Skinning the leather from animals to make basic clothing.').save()
 		// cave painting
-		def cavePainting = new Skill(name: 'Cave Painting', description: 'Painting deeds in cave walls.').save()
+		def cavePainting = new Skill(
+			name: 'Cave Painting',
+			description: 'Painting deeds in cave walls.').save()
 		
-		assert Skill.count() == 7
+		/*
+		for (race in Race.findAllByIntelligent(true)) {
+			for (skill in nomadic.skills) {
+				race.addToLearnableSkills(skill)
+			}
+			race.save()
+		}
+		*/
+		
+		def agriculture = new Skill(
+			name: 'Agriculture',
+			description: 'Agriculture').save()
+		def masonry = new Skill(
+			name: 'Masonry',
+			description: 'Masonry').save()
+		def pottery = new Skill(
+			name: 'Pottery',
+			description: 'Pottery').save()
+		
+		assert Skill.count() == 10
+		
+		// ------
+		// Epochs
+		// ------
 		
 		def nomadic = new Epoch(
 			name: 'Ancient Nomadic Era',
@@ -147,21 +178,6 @@ class BootStrap {
 		.addToSkills(leatherworking)
 		.addToSkills(cavePainting)
 		.save()
-		
-		assert Epoch.count() == 1
-		
-		for (race in Race.findAllByIntelligent(true)) {
-			for (skill in nomadic.skills) {
-				race.addToLearnableSkills(skill)
-			}
-			race.save()
-		}
-		
-		def agriculture = new Skill(name: 'Agriculture', description: 'Agriculture').save()
-		def masonry = new Skill(name: 'Masonry', description: 'Masonry').save()
-		def pottery = new Skill(name: 'Pottery', description: 'Pottery').save()
-		
-		assert Skill.count() == 10
 		
 		def sedentary = new Epoch(
 			name: 'Ancient Sedentary Era',
@@ -195,6 +211,8 @@ class BootStrap {
 			description: 'Tracking animals by analysing footprints, blood stains and smells')
 		.addToSkills(tracking)
 		.save()
+		
+		assert SkillCategory.count() == 3
 		
 		// ---------------
 		// World & Regions

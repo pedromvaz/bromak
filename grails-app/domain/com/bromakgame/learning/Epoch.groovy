@@ -11,4 +11,8 @@ class Epoch {
 		name blank: false, unique: true
 		description nullable: true, blank: false
 	}
+	
+	int getSkillCount() {
+		skills?.size() ?: 0
+	}
 }

@@ -21,11 +21,7 @@ class SkillController {
 	}
 
 	def create() {
-		respond new Skill(params)
-
-		if (session) {
-			session["epochId"] = params.epochId
-		}
+		respond new Skill(params), model: [ categories: SkillCategory.listOrderByName(), epochs: Epoch.listOrderByName() ]
 	}
 
 	@Transactional
@@ -35,15 +31,6 @@ class SkillController {
 			notFound()
 			return
 		}
-
-		if (session && session["epochId"]) {
-			Epoch epoch = Epoch.get(session["epochId"])
-
-			epoch.addToSkills(skill)
-			epoch.save()
-		}
-
-		skill.validate()
 
 		if (skill.hasErrors()) {
 			transactionStatus.setRollbackOnly()
@@ -57,18 +44,15 @@ class SkillController {
 			form multipartForm {
 				flash.message = message(code: 'default.created.message', args: [message(code: 'skill.label', default: 'Skill'), skill.id])
 				//redirect skill
-				redirect controller:"epoch", action:"index", method:"GET"
+				redirect action:"index", method:"GET"
 			}
-			'*' { respond skill, [status: CREATED] }
 		}
 	}
 
-	@Secured('ROLE_UNKNOWN')
 	def edit(Skill skill) {
-		respond skill
+		respond skill, model: [ categories: SkillCategory.listOrderByName(), epochs: Epoch.listOrderByName() ]
 	}
 
-	@Secured('ROLE_UNKNOWN')
 	@Transactional
 	def update(Skill skill) {
 		if (skill == null) {
@@ -88,9 +72,8 @@ class SkillController {
 		request.withFormat {
 			form multipartForm {
 				flash.message = message(code: 'default.updated.message', args: [message(code: 'skill.label', default: 'Skill'), skill.id])
-				redirect skill
+				redirect action:"index", method:"GET"
 			}
-			'*'{ respond skill, [status: OK] }
 		}
 	}
 

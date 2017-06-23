@@ -53,7 +53,7 @@
 			</div>
 		</g:if>
 
-		<g:link class="btn btn-primary disabled" action="create">
+		<g:link class="btn btn-primary" action="create">
 			<g:message code="default.new.label" args="[entityName]" />
 		</g:link>
 	</body>

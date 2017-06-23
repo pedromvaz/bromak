@@ -12,7 +12,10 @@ class SkillCategoryController {
 
 	def index(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
-		respond SkillCategory.list(params), model:[skillCategoryCount: SkillCategory.count()]
+		params.sort = "name"
+		params.order = "asc"
+		params.fetch = [skills: "eager"]
+		respond SkillCategory.list(params), model: [skillCategoryCount: SkillCategory.count()]
 	}
 
 	def show(SkillCategory skillCategory) {

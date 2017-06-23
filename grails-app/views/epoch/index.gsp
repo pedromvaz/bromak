@@ -14,28 +14,49 @@
 			<div class="alert alert-info" role="alert">${flash.message}</div>
 		</g:if>
 		
-		<g:each in="${epochList}" var="epoch">
-			<div class="list-group">
-				<a class="list-group-item active">
-					<h4 class="list-group-item-heading">${epoch.name}</h4>
-					<p class="list-group-item-text">${epoch.description}</p>
-				</a>
-				<g:each in="${epoch.skills}" var="skill">
-					<a class="list-group-item">
-						<h4 class="list-group-item-heading">${skill.name}</h4>
-						<p class="list-group-item-text">${skill.description}</p>
-						<h4>
-							<g:each in="${com.bromakgame.creatures.Race.getAllThatCanLearn(skill.id)}" var="race">
-								<span class="label label-success">${race.name}</span>
-							</g:each>
-						</h4>
-					</a>
+		<table class="table">
+			<thead>
+				<tr>
+					<th><g:message code="epochs.name.label" /></th>
+					<th><g:message code="skillCategories.description.label" /></th>
+					<th><g:message code="skillCategories.skills.label" /></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<g:each in="${epochList}" var="epoch">
+					<tr>
+						<td>${epoch.name}</td>
+						<td>${epoch.description}</td>
+						<td>
+							<div class="dropdown">
+								<button class="btn btn-default dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-education"></span>
+									${epoch.getSkillCount()}
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<g:each in="${epoch.skills}" var="skill">
+										<li><a>${skill.name}</a></li>
+									</g:each>
+								</ul>
+							</div>
+						</td>
+						<td>
+							<g:link action="edit" id="${epoch.id}">
+								<span class="glyphicon glyphicon-edit"></span> Edit
+							</g:link>
+						</td>
+						<td>
+							<!--<g:link action="delete" id="${epoch.id}">-->
+								<span class="glyphicon glyphicon-trash"></span> Remove
+							<!--</g:link>-->
+						</td>
+					</tr>
 				</g:each>
-				<g:link controller="skill" action="create" params="[epochId:epoch.id]" class="list-group-item">
-					<g:message code="skills.new.label" />
-				</g:link>
-			</div>
-		</g:each>
+			</tbody>
+		</table>
 
 		<g:if test="${epochCount > 10}">
 			<div class="pagination">
@@ -43,10 +64,8 @@
 			</div>
 		</g:if>
 		
-		<g:link action="create">
-			<button type="button" class="btn btn-primary">
-				<g:message code="default.new.label" args="[entityName]" />
-			</button>
+		<g:link action="create" class="btn btn-primary">
+			<g:message code="default.new.label" args="[entityName]" />
 		</g:link>
 	</body>
 </html>

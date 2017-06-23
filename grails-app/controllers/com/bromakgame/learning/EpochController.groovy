@@ -43,19 +43,15 @@ class EpochController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'epoch.label', default: 'Epoch'), epoch.id])
-                //redirect epoch
 				redirect action:"index", method:"GET"
             }
-            '*' { respond epoch, [status: CREATED] }
         }
     }
 
-	@Secured('ROLE_UNKNOWN')
     def edit(Epoch epoch) {
         respond epoch
     }
 
-	@Secured('ROLE_UNKNOWN')
     @Transactional
     def update(Epoch epoch) {
         if (epoch == null) {
@@ -75,9 +71,8 @@ class EpochController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'epoch.label', default: 'Epoch'), epoch.id])
-                redirect epoch
+                redirect action:"index", method:"GET"
             }
-            '*'{ respond epoch, [status: OK] }
         }
     }
 

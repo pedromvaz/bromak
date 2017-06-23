@@ -118,7 +118,7 @@ class EpochControllerSpec extends Specification {
 
         then:"A redirect is issued to the show action"
             epoch != null
-            response.redirectedUrl == "/epoch/show/$epoch.id"
+            response.redirectedUrl == "/epoch/index"
             flash.message != null
     }
 
