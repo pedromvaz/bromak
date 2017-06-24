@@ -203,3 +203,9 @@
 .icon-baidu:before {
   content: "\32";
 }
+.icon-book-open:before {
+  content: "\33";
+}
+.icon-person:before {
+  content: "\34";
+}
