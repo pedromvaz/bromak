@@ -12,7 +12,7 @@
 			</div>
 			
 			<g:if test='${flash.message}'>
-				<div class="alert alert-danger" role="alert">${flash.message}</div>
+				<div class="alert alert-success" role="alert">${flash.message}</div>
 			</g:if>
 			
 			<form action="${postUrl ?: '/login/authenticate'}" method="POST" id="loginForm">

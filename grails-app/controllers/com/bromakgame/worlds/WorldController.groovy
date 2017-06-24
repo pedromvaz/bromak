@@ -157,11 +157,12 @@ class WorldController {
 	@Transactional
 	def tutorials() {
 		User player = springSecurityService?.getCurrentUser()
+		String worldName = message(code: 'tutorials.world.name')
 		
-		World tutorials = World.findByNameAndOwner(message(code: 'tutorials.world.name'), player)
+		World tutorials = World.findByNameAndOwner(worldName, player)
 		
 		if (!tutorials) {
-			tutorials = new World(name: "Tutorials", radius: 0, maxNumPlayers: 1)
+			tutorials = new World(name: worldName, radius: 0, maxNumPlayers: 1)
 			
 			if (!saveOrUpdate(tutorials, true)) {
 				return

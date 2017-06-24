@@ -20,16 +20,19 @@
 		</div>
 		
 		<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+			<div class="alert alert-info" role="alert">${flash.message}</div>
 		</g:if>
 		
 		<div class="row">
 			<div class="col-sm-2"></div>
 			
-			<div class="col-sm-8">
+			<div class="col-sm-4">
 				<ul class="list-group">
 					<li class="list-group-item active">
-						<h4 class="list-group-item-heading"><g:message code="worlds.public.label" /></h4>
+						<h4 class="list-group-item-heading">
+							<span class="icon-organization"></span>
+							<g:message code="worlds.public.label" />
+						</h4>
 						<p class="list-group-item-text">A list of public worlds where multiple users play simultaneously</p>
 					</li>
 					<g:each in="${multiplayer}" var="world">
@@ -37,15 +40,14 @@
 					</g:each>
 				</ul>
 			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-sm-2"></div>
 			
-			<div class="col-sm-8">
+			<div class="col-sm-4">
 				<div class="list-group">
 					<a class="list-group-item active">
-						<h4 class="list-group-item-heading"><g:message code="worlds.private.label" /></h4>
+						<h4 class="list-group-item-heading">
+							<span class="icon-person"></span>
+							<g:message code="worlds.private.label" />
+						</h4>
 						<p class="list-group-item-text">A list of private worlds where only the logged in user can play</p>
 					</a>
 					<g:each in="${singleplayer}" var="world">
@@ -57,7 +59,7 @@
 							<p class="list-group-item-text">Learn how to play</p>
 						</g:link>
 					</g:unless>
-				</ul>
+				</div>
 			</div>
 		</div>
 	</body>

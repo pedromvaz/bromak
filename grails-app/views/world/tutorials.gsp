@@ -15,17 +15,39 @@
 		</div>
 		
 		<div class="col-sm-3">
-			<div class="list-group">
-				<a class="list-group-item active">
-					<g:message code="tutorials.tutorial.header" /> 1
-				</a>
-				<a class="list-group-item">
-					<img src="${resource(dir:'images',file:'world/svg/hills.svg')}" style="width: 120px;height: 120px" />
-				</a>
-				<g:link action="tutorials" class="list-group-item list-group-item-success">
-					Start Tutorial
-				</g:link>
-			</ul>
+			<h4>Summon your first Champion</h4>
+			
+			<img src="${resource(dir:'images',file:'stone-age/male-troglodyte-bw.svg')}" style="width: 50%;margin: auto;display: block" />
+			
+			<p>This is the Champion you will use throughout the tutorials. You can choose its name, race and gender.</p>
+			
+			<g:link class="btn btn-success btn-block" controller="champion" action="create" params="['world.id':world.id]">
+				Summon Champion
+			</g:link>
+		</div>
+		
+		<div class="col-sm-3">
+			<h4>Animal hunting</h4>
+			
+			<img src="${resource(dir:'images',file:'stone-age/deer-bw.svg')}" style="width: 50%;margin: auto;display: block" />
+			
+			<p>Your first quest will be to hunt a deer with some members from your community.</p>
+			
+			<g:link class="btn btn-success btn-block disabled" controller="champion" action="create">
+				Prepare for the hunt
+			</g:link>
+		</div>
+		
+		<div class="col-sm-3">
+			<h4>Winter is coming</h4>
+			
+			<img src="${resource(dir:'images',file:'stone-age/leathers-bw.svg')}" style="width: 50%;margin: auto;display: block" />
+			
+			<p>Your community must learn to skin the animals they hunt, for clothing, otherwise they won't last the winter.</p>
+			
+			<g:link class="btn btn-success btn-block disabled" controller="champion" action="create">
+				Learn to skin
+			</g:link>
 		</div>
 	</body>
 </html>
