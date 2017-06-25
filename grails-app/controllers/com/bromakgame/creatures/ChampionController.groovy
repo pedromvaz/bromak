@@ -113,11 +113,11 @@ class ChampionController {
 			def femaleCreature = new Creature(firstName: Creature.createRandomWord(), race: race, gender: 'f',
 				world: world).save()
 			
-			community.add(maleCreature)
-			community.add(femaleCreature)
+			community.addToCreatures(maleCreature)
+			community.addToCreatures(femaleCreature)
 		}
 		
-		community.add(champion)
+		community.addToCreatures(champion)
 		community.save()
 		
 		champion.save(flush:true)

@@ -5,28 +5,6 @@ import groovy.transform.ToString
 @ToString
 class Group {
 	
-	Set<Creature> creatures = new HashSet<>()
-	
-	boolean add(Creature creature) {
-		creatures.add(creature)
-	}
-	
-	boolean remove(Creature creature) {
-		creatures.remove(creature)
-	}
-	
-	int size() {
-		creatures.size()
-	}
-	
-	boolean isEmpty() {
-		creatures.isEmpty()
-	}
-	
-	boolean contains(Creature creature) {
-		creatures.contains(creature)
-	}
-	
 	Map percentile() {
 		int males = 0
 		int females = 0
@@ -83,9 +61,12 @@ class Group {
 		this.class.getSimpleName() + " " + this.id
 	}
 
+	static hasMany = [ creatures : Creature ]
+
     static constraints = {
+		creatures nullable: true
     }
-	
+
 	static mapping = {
 		 table '`group`'
 	}

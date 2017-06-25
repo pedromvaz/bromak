@@ -17,7 +17,7 @@ class CommunityController {
     }
 
     def show(Community community) {
-        respond community, model: community?.percentile()
+        respond community
     }
 
 	@Secured('ROLE_UNKNOWN')

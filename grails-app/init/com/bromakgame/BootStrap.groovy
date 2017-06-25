@@ -231,7 +231,7 @@ class BootStrap {
 		def community = new Community().save()
 		
 		for (champion in [elrond, celebrian, elladan, elrohir, arwen]) {
-			community.add(champion)
+			community.addToCreatures(champion)
 		}
 		
 		assert Community.count() == 1
