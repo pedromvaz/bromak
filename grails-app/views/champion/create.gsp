@@ -14,7 +14,7 @@
 			</div>
 			
 			<g:if test="${flash.message}">
-				<div class="message" role="status">${flash.message}</div>
+				<div class="alert alert-info" role="alert">${flash.message}</div>
 			</g:if>
 
 			<g:hasErrors bean="${this.champion}">
@@ -29,7 +29,7 @@
 				</div>
 			</g:hasErrors>
 			
-			<form action="/champion/save" method="POST" id="createChampionForm">
+			<g:form action="save">
 				<div class="form-group">
 					<label for="firstName" class="sr-only"><g:message code='creatures.firstName.label'/></label>
 					<div class="input-group">
@@ -67,7 +67,7 @@
 				<button class="btn btn-primary btn-block" type="submit" id="submit">
 					<g:message code='default.button.create.label'/>
 				</button>
-			</form>
+			</g:form>
 
 			<g:javascript>
 				function generateRandomName() {

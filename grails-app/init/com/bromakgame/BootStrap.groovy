@@ -70,47 +70,19 @@ class BootStrap {
 
 		def playerRole = new Role(authority: 'ROLE_PLAYER', description: 'A player on the bromak website').save()
 		def playerUser = new User(username: 'player', email: 'player@bromakgame.com', password: 'player', enabled: true).save()
+		def pedroUser = new User(username: 'pedro', email: 'pedro@bromakgame.com', password: 'pedro', enabled: true).save()
 
         UserRole.create playerUser, playerRole
+		UserRole.create pedroUser, playerRole
 
         UserRole.withSession {
             it.flush()
             it.clear()
         }
 
-        assert User.count() == 2
+        assert User.count() == 3
         assert Role.count() == 2
-        assert UserRole.count() == 2
-		
-		// -------------------------
-		// Champions and Family Tree
-		// -------------------------
-		
-		def elrond = new Champion(firstName: 'Elrond', gender: 'm', race: elfRace, user: playerUser).save()
-		def celebrian = new Champion(firstName: 'Celebrian', gender: 'f', race: elfRace, user: playerUser).save()
-		def elladan = new Champion(firstName: 'Elladan', gender: 'm', race: elfRace, user: playerUser).save()
-		def elrohir = new Champion(firstName: 'Elrohir', gender: 'm', race: elfRace, user: playerUser).save()
-		def arwen = new Champion(firstName: 'Arwen', gender: 'f', race: elfRace, user: playerUser).save()
-		
-		assert Champion.count() == 5
-		
-		for (child in [elladan, elrohir, arwen]) {
-			child.father = elrond
-			child.mother = celebrian
-		}
-		
-		// -----------
-		// Communities
-		// -----------
-		
-		def community = new Community().save()
-		
-		for (champion in [elrond, celebrian, elladan, elrohir, arwen]) {
-			champion.groups.add(community)
-			community.add(champion)
-		}
-		
-		assert Community.count() == 1
+        assert UserRole.count() == 3
 		
 		// ------
 		// Skills
@@ -229,6 +201,41 @@ class BootStrap {
 		assert World.count() == 1
 		assert Region.count() == numRegionsByRadius(worldRadius)
 		assert Area.count() == numRegionsByRadius(worldRadius) * 7
+		
+		// -------------------------
+		// Champions and Family Tree
+		// -------------------------
+		
+		def elrond = new Champion(firstName: 'Elrond', gender: 'm', race: elfRace,
+			user: playerUser, world: world).save()
+		def celebrian = new Champion(firstName: 'Celebrian', gender: 'f', race: elfRace,
+			user: playerUser, world: world).save()
+		def elladan = new Champion(firstName: 'Elladan', gender: 'm', race: elfRace,
+			user: playerUser, world: world).save()
+		def elrohir = new Champion(firstName: 'Elrohir', gender: 'm', race: elfRace,
+			user: playerUser, world: world).save()
+		def arwen = new Champion(firstName: 'Arwen', gender: 'f', race: elfRace,
+			user: playerUser, world: world).save()
+		
+		assert Champion.count() == 5
+		
+		for (child in [elladan, elrohir, arwen]) {
+			child.father = elrond
+			child.mother = celebrian
+		}
+		
+		// ---------
+		// Community
+		// ---------
+		
+		def community = new Community().save()
+		
+		for (champion in [elrond, celebrian, elladan, elrohir, arwen]) {
+			champion.groups.add(community)
+			community.add(champion)
+		}
+		
+		assert Community.count() == 1
 	}
 
 	private int numRegionsByRadius(int radius) {

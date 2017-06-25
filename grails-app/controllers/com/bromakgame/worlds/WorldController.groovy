@@ -1,6 +1,7 @@
 package com.bromakgame.worlds
 
 import static org.springframework.http.HttpStatus.*
+import com.bromakgame.creatures.Champion
 import com.bromakgame.users.User
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
@@ -18,7 +19,14 @@ class WorldController {
 		respond World.list(params), model:[worldCount: World.count()]
 	}
 
+	@Secured('ROLE_PLAYER')
 	def show(World world) {
+		
+		// despicable hack to point to tutorials page in case it is a tutorial world
+		if (message(code: 'tutorials.world.name').equals(world?.name)) {
+			redirect action: 'tutorials'
+		}
+		
 		def regions = Region.findAllByWorld(world)
 		def areas = Area.findAllByRegionInList(regions)
 
@@ -44,7 +52,6 @@ class WorldController {
 				flash.message = message(code: 'default.created.message', args: [message(code: 'worlds.label'), world.id])
 				redirect action:"index", method:"GET"
 			}
-			'*' { respond world, [status: CREATED] }
 		}
 	}
 
@@ -65,7 +72,6 @@ class WorldController {
 				flash.message = message(code: 'default.updated.message', args: [message(code: 'worlds.label'), world.id])
 				redirect world
 			}
-			'*'{ respond world, [status: OK] }
 		}
 	}
 
@@ -123,7 +129,6 @@ class WorldController {
 				flash.message = message(code: 'default.deleted.message', args: [message(code: 'worlds.label'), world.id])
 				redirect action:"index", method:"GET"
 			}
-			'*'{ render status: NO_CONTENT }
 		}
 	}
 
@@ -133,7 +138,6 @@ class WorldController {
 				flash.message = message(code: 'default.not.found.message', args: [message(code: 'worlds.label'), params.id])
 				redirect action: "index", method: "GET"
 			}
-			'*'{ render status: NOT_FOUND }
 		}
 	}
 
@@ -169,6 +173,11 @@ class WorldController {
 			}
 		}
 		
-		respond tutorials
+		Champion champion = Champion.findByWorld(tutorials)
+		
+		// must set the session variable for the [possible] champion creation
+		session["worldId"] = tutorials.id
+		
+		respond tutorials, model : [hasChampion : champion != null]
 	}
 }

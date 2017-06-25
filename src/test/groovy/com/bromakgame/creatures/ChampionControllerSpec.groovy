@@ -4,9 +4,10 @@ import grails.test.mixin.*
 import spock.lang.*
 import com.bromakgame.creatures.Race
 import com.bromakgame.users.User
+import com.bromakgame.worlds.World
 
 @TestFor(ChampionController)
-@Mock([Champion, Race, User, Community])
+@Mock([Champion, Race, User, World, Community])
 class ChampionControllerSpec extends Specification {
 
     def populateValidParams(params) {
@@ -14,8 +15,9 @@ class ChampionControllerSpec extends Specification {
 
         params["firstName"] = 'Aragorn'
 		params["gender"] = 'm'
-		params["race"] = new Race(name: 'Human')
+		params["race.name"] = 'Human'
 		params["user"] = new User(username: 'User', email: 'user@email.com', password: 'pass')
+		params["world"] = new World(name: 'Bromak', radius: 2, maxNumPlayers: 10)
     }
 
     void "Test the index action returns the correct model"() {
@@ -57,7 +59,7 @@ class ChampionControllerSpec extends Specification {
             controller.save(champion)
 
         then:"A redirect is issued to the champion list"
-            response.redirectedUrl == '/champion/index'
+            response.redirectedUrl == '/world/show'
             controller.flash.message != null
             Champion.count() == 1
     }

@@ -17,13 +17,26 @@
 		<div class="col-sm-3">
 			<h4>Summon your first Champion</h4>
 			
-			<img src="${resource(dir:'images',file:'stone-age/male-troglodyte-bw.svg')}" style="width: 50%;margin: auto;display: block" />
+			<g:if test="${hasChampion}">
+				<img src="${resource(dir:'images',file:'stone-age/male-troglodyte-color.svg')}" style="width: 50%;margin: auto;display: block" />
+			</g:if>
+			<g:else>
+				<img src="${resource(dir:'images',file:'stone-age/male-troglodyte-bw.svg')}" style="width: 50%;margin: auto;display: block" />
+			</g:else>
 			
 			<p>This is the Champion you will use throughout the tutorials. You can choose its name, race and gender.</p>
 			
-			<g:link class="btn btn-success btn-block" controller="champion" action="create" params="['world.id':world.id]">
-				Summon Champion
-			</g:link>
+			<g:if test="${hasChampion}">
+				<g:link class="btn btn-default btn-block disabled">
+					<span class="glyphicon glyphicon-ok" style="color:green"></span>
+					Summon Champion
+				</g:link>
+			</g:if>
+			<g:else>
+				<g:link controller="champion" action="create" class="btn btn-success btn-block">
+					Summon Champion
+				</g:link>
+			</g:else>
 		</div>
 		
 		<div class="col-sm-3">

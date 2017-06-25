@@ -2,6 +2,7 @@ package com.bromakgame.creatures
 
 import groovy.transform.ToString
 import com.bromakgame.learning.Skill
+import com.bromakgame.worlds.World
 
 @ToString
 class Creature {
@@ -12,6 +13,7 @@ class Creature {
 	String firstName
 	String lastName
 
+	World world
 	Race race
 	String gender
 	boolean alive = true

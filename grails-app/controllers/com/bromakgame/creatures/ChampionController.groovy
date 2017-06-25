@@ -5,6 +5,7 @@ import com.bromakgame.creatures.Community
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 import com.bromakgame.users.User
+import com.bromakgame.worlds.World
 
 @Secured('ROLE_PLAYER')
 @Transactional(readOnly = true)
@@ -64,6 +65,7 @@ class ChampionController {
 		
 		if (user != null) {
 			champion.user = user
+			champion.world = World.get(session.worldId)
 			champion.validate()
 		}
 
@@ -87,9 +89,8 @@ class ChampionController {
                 flash.message = message(
 					code: 'champions.created.message',
 					args: [champion.firstName])
-				redirect action:"index", method:"GET"
+				redirect controller:"world", action:"show", id: champion.world.id
             }
-            '*' { respond champion, [status: CREATED] }
         }
     }
 	
@@ -101,13 +102,16 @@ class ChampionController {
 	
 	void startCommunity(Champion champion) {
 		def race = champion.race
+		def world = champion.world
 		int startingPop = race.startingPopulation
 		
 		def community = new Community().save()
 		
 		for (int i = 0; i < startingPop; i += 2) {
-			def maleCreature = new Creature(firstName: Creature.createRandomWord(), race: race, gender: 'm').save()
-			def femaleCreature = new Creature(firstName: Creature.createRandomWord(), race: race, gender: 'f').save()
+			def maleCreature = new Creature(firstName: Creature.createRandomWord(), race: race, gender: 'm',
+				world: world).save()
+			def femaleCreature = new Creature(firstName: Creature.createRandomWord(), race: race, gender: 'f',
+				world: world).save()
 			
 			community.add(maleCreature)
 			community.add(femaleCreature)
@@ -149,14 +153,12 @@ class ChampionController {
 					args: [message(code: 'champion.label', default: 'Champion'), champion.id])
                 redirect champion
             }
-            '*'{ respond champion, [status: OK] }
         }
     }
 
 	@Secured('ROLE_UNKNOWN')
     @Transactional
     def delete(Champion champion) {
-
         if (champion == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -172,7 +174,6 @@ class ChampionController {
 					args: [message(code: 'champion.label', default: 'Champion'), champion.id])
                 redirect action:"index", method:"GET"
             }
-            '*'{ render status: NO_CONTENT }
         }
     }
 
@@ -184,7 +185,6 @@ class ChampionController {
 					args: [message(code: 'champion.label', default: 'Champion'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
         }
     }
 }
