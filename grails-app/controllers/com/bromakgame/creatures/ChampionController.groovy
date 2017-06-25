@@ -78,7 +78,7 @@ class ChampionController {
         champion.save(flush:true)
 		
 		if (user != null) {
-			user.champions.add(champion)
+			user.addToChampions(champion)
 			user.save(flush:true)
 			
 			startCommunity(champion)

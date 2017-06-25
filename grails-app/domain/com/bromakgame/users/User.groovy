@@ -20,8 +20,6 @@ class User implements Serializable {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
-	
-	Set<Champion> champions = new HashSet<>()
 
 	Set<Role> getAuthorities() {
 		UserRole.findAllByUser(this)*.role
@@ -48,6 +46,8 @@ class User implements Serializable {
 	String activationString() {
 		return username + email
 	}
+
+	static hasMany = [ champions : Champion ]
 
 	static constraints = {
 		password blank: false, password: true
