@@ -120,7 +120,6 @@ class ChampionController {
 		community.add(champion)
 		community.save()
 		
-		champion.groups.add(community)
 		champion.save(flush:true)
 	}
 

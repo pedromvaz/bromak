@@ -231,7 +231,6 @@ class BootStrap {
 		def community = new Community().save()
 		
 		for (champion in [elrond, celebrian, elladan, elrohir, arwen]) {
-			champion.groups.add(community)
 			community.add(champion)
 		}
 		

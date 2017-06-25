@@ -59,19 +59,21 @@
 						<li class="list-group-item">
 							<img data-src="holder.js/64x64" class="img-thumbnail">
 						</li>
+						<!--
 						<li class="list-group-item">
 							<b>Communities:</b>
 						</li>
-						<g:each in="${champion.groups}" var="community">
+						<geach in="{champion.groups}" var="community">
 							<li class="list-group-item">
-								<g:link controller="community" action="show" id="${community.id}">
-									${community.toString()}
+								<g:link controller="community" action="show" id="{community.id}">
+									{community.toString()}
 								</g:link>
 								<span class="badge">
-									${community.size()}
+									{community.size()}
 								</span>
 							</li>
-						</g:each>
+						</geach>
+						-->
 					</ul>
 				</div>
 			</g:each>
