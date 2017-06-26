@@ -92,7 +92,7 @@ class UserController {
 		else {
 			request.withFormat {
 				form multipartForm {
-					flash.message = message(code: 'users.accountActivationEmailSent.label')
+					flash.success = message(code: 'users.accountActivationEmailSent.label')
 					redirect controller:"login", action:"auth"
 				}
 			}
@@ -128,7 +128,6 @@ class UserController {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
                 redirect user
             }
-            '*'{ respond user, [status: OK] }
         }
     }
 
@@ -150,7 +149,6 @@ class UserController {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), user.id])
                 redirect action:"index", method:"GET"
             }
-            '*'{ render status: NO_CONTENT }
         }
     }
 
@@ -160,7 +158,6 @@ class UserController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
         }
     }
 
@@ -182,14 +179,14 @@ class UserController {
 			
 			request.withFormat {
 				form multipartForm {
-					flash.message = message(code: 'users.accountActivationSucceeded.label')
+					flash.success = message(code: 'users.accountActivationSucceeded.label')
 					redirect controller: "login", action: "auth"
 				}
 			}
 		} else {
 			request.withFormat {
 				form multipartForm {
-					flash.message = message(code: 'users.accountActivationFailed.label')
+					flash.failure = message(code: 'users.accountActivationFailed.label')
 					redirect controller: "login", action: "auth"
 				}
 			}

@@ -81,7 +81,7 @@
 									<li class="list-group-item">
 										${skill.name}
 										<span class="badge">
-											${this.community.countCreaturesThatKnowSkill(skill.id)}
+											2
 										</span>
 									</li>
 								</g:each>

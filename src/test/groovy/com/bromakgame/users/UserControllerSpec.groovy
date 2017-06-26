@@ -59,7 +59,7 @@ class UserControllerSpec extends Specification {
 
         then:"A redirect is issued to create a new champion"
             response.redirectedUrl == '/login/auth'
-            controller.flash.message != null
+            controller.flash.success != null
             User.count() == 1
     }
 
