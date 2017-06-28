@@ -6,6 +6,7 @@ import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 import com.bromakgame.users.User
 import com.bromakgame.worlds.World
+import com.bromakgame.worlds.Tutorials
 
 @Secured('ROLE_PLAYER')
 @Transactional(readOnly = true)
@@ -65,7 +66,7 @@ class ChampionController {
 		
 		if (user != null) {
 			champion.user = user
-			champion.world = World.get(session.worldId)
+			champion.world = World.get(session.worldId) ?: Tutorials.get(session.worldId)
 			champion.validate()
 		}
 
@@ -84,12 +85,14 @@ class ChampionController {
 			startCommunity(champion)
 		}
 		
+		String worldType = Tutorials.get(session.worldId) ? 'tutorials' : 'world'
+		
         request.withFormat {
             form multipartForm {
                 flash.message = message(
 					code: 'champions.created.message',
 					args: [champion.firstName])
-				redirect controller:"world", action:"show", id: champion.world.id
+				redirect controller: worldType, action: 'show', id: champion.world.id
             }
         }
     }

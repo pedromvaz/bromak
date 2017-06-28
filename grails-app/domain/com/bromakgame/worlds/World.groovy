@@ -3,6 +3,7 @@ package com.bromakgame.worlds
 import com.bromakgame.math.Position
 import com.bromakgame.math.Vector
 import com.bromakgame.users.User
+import com.bromakgame.creatures.Creature
 
 /**
  * A world is a grid of adjacent regions, all correctly placed since regions are hexagon-like.
@@ -23,7 +24,7 @@ class World {
 	Date dateCreated
 
 	// players rel is only filled if maxNumPlayers > 1
-	static hasMany = [ regions : Region, players : User ]
+	static hasMany = [ regions : Region, players : User, creatures : Creature ]
 	static belongsTo = [ owner : User ]
 
 	static constraints = {

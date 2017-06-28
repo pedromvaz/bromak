@@ -12,6 +12,7 @@ class QuestType {
 	static constraints = {
 		name blank: false, unique: true
 		description nullable: true, blank: false
+		objectives nullable: true
 		groupCap min: 1
 	}
 }

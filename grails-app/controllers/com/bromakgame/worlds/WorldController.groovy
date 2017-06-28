@@ -156,28 +156,4 @@ class WorldController {
 		
 		respond single_results, model : model
 	}
-
-	@Secured('ROLE_PLAYER')
-	@Transactional
-	def tutorials() {
-		User player = springSecurityService?.getCurrentUser()
-		String worldName = message(code: 'tutorials.world.name')
-		
-		World tutorials = World.findByNameAndOwner(worldName, player)
-		
-		if (!tutorials) {
-			tutorials = new World(name: worldName, radius: 0, maxNumPlayers: 1)
-			
-			if (!saveOrUpdate(tutorials, true)) {
-				return
-			}
-		}
-		
-		Champion champion = Champion.findByWorld(tutorials)
-		
-		// must set the session variable for the [possible] champion creation
-		session["worldId"] = tutorials.id
-		
-		respond tutorials, model : [hasChampion : champion != null]
-	}
 }

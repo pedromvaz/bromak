@@ -46,20 +46,56 @@
 			
 			<p>Your first quest will be to hunt a deer with some members from your community.</p>
 			
-			<g:link class="btn btn-success btn-block disabled" controller="champion" action="create">
+			<g:link class="btn btn-success btn-block disabled">
 				Prepare for the hunt
+			</g:link>
+		</div>
+		
+		<div class="col-sm-3">
+			<h4>Animal skinning</h4>
+			
+			<img src="${resource(dir:'images',file:'stone-age/knife-bw.svg')}" style="width: 50%;margin: auto;display: block" />
+			
+			<p>Your community quickly felt the need to find something sharp with which to cut through animal skin.</p>
+			
+			<g:link class="btn btn-success btn-block disabled">
+				Craft stone tools
 			</g:link>
 		</div>
 		
 		<div class="col-sm-3">
 			<h4>Winter is coming</h4>
 			
-			<img src="${resource(dir:'images',file:'stone-age/leathers-bw.svg')}" style="width: 50%;margin: auto;display: block" />
+			<img src="${resource(dir:'images',file:'stone-age/pelt-bw.svg')}" style="width: 50%;margin: auto;display: block" />
 			
 			<p>Your community must learn to skin the animals they hunt, for clothing, otherwise they won't last the winter.</p>
 			
-			<g:link class="btn btn-success btn-block disabled" controller="champion" action="create">
+			<g:link class="btn btn-success btn-block disabled">
 				Learn to skin
+			</g:link>
+		</div>
+		
+		<div class="col-sm-3">
+			<h4>To arms!</h4>
+			
+			<img src="${resource(dir:'images',file:'stone-age/spear-bw.svg')}" style="width: 50%;margin: auto;display: block" />
+			
+			<p>Having suffered an attack from a sabertooth, the community feels threatened.</p>
+			
+			<g:link class="btn btn-success btn-block disabled">
+				Craft the first spear
+			</g:link>
+		</div>
+		
+		<div class="col-sm-3">
+			<h4>Fire!</h4>
+			
+			<img src="${resource(dir:'images',file:'stone-age/bonfire-bw.svg')}" style="width: 50%;margin: auto;display: block" />
+			
+			<p>The thunderstorm left behind a threat, one that could be used for the community's benefit.</p>
+			
+			<g:link class="btn btn-success btn-block disabled">
+				Gather fire
 			</g:link>
 		</div>
 	</body>
