@@ -5,6 +5,7 @@ import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 import com.bromakgame.users.User
 import com.bromakgame.creatures.Champion
+import com.bromakgame.quests.QuestType
 
 @Secured('ROLE_PLAYER')
 @Transactional(readOnly = true)
@@ -27,6 +28,9 @@ class TutorialsController {
 		if (!world) {
 			world = new Tutorials(name: message(code: 'tutorials.world.name'),
 				radius: 0, maxNumPlayers: 1, owner: player)
+			
+			world.addToQuestTypes(QuestType.findByName('Terrain Scouting'))
+			world.addToQuestTypes(QuestType.findByName('Animal Hunting'))
 
 			if (!save(world)) {
 				respond tutorials.errors, controller: 'world', view: 'choose'

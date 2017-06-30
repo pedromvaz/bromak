@@ -11,6 +11,7 @@ import com.bromakgame.creatures.Race
 import com.bromakgame.learning.Epoch
 import com.bromakgame.learning.Skill
 import com.bromakgame.learning.SkillCategory
+import com.bromakgame.quests.QuestType
 
 import com.bromakgame.creatures.Champion
 
@@ -235,6 +236,34 @@ class BootStrap {
 		}
 		
 		assert Community.count() == 1
+		
+		// -----------
+		// Quest Types
+		// -----------
+		
+		def terrainScouting = new QuestType(name: 'Terrain Scouting',
+			description: 'Scouting new terrain will provide information ' +
+				'on its wild life, plants, minerals, soil, among other things.',
+			groupCap: 3).save()
+		def animalHunting = new QuestType(name: 'Animal Hunting',
+			description: 'Your first quest will be to hunt a deer with some members from your community.',
+			groupCap: 4).save()
+		def animalSkinning = new QuestType(name: 'Animal Skinning',
+			description: 'Your community quickly felt the need to find something sharp ' +
+				'with which to cut through animal skin.',
+			groupCap: 3).save()
+		def winterIsComing = new QuestType(name: 'Winter is coming',
+			description: 'Your community must learn to skin the animals they hunt, for clothing, ' +
+				'otherwise they won\'t last the winter.',
+			groupCap: 6).save()
+		def toArms = new QuestType(name: 'To Arms!',
+			description: 'Having suffered an attack from a sabertooth, the community feels threatened.',
+			groupCap: 6).save()
+		def fire = new QuestType(name: 'Fire!',
+			description: 'The thunderstorm left behind a threat, one that could be used for the community\'s benefit.',
+			groupCap: 3).save()
+		
+		assert QuestType.count() == 6
 	}
 
 	private int numRegionsByRadius(int radius) {

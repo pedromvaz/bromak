@@ -1,7 +1,5 @@
 package com.bromakgame.quests
 
-import com.bromakgame.learning.Skill
-
 class QuestType {
 	String name
 	String description

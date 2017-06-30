@@ -6,6 +6,7 @@ class SkillCategory {
 	String name
 	String description
 	
+	// why does this have objectives?
 	static hasMany = [ skills : Skill, objectives : Objective ]
 	
 	static constraints = {

@@ -1,7 +1,7 @@
 package com.bromakgame.creatures
 
 import groovy.transform.ToString
-import com.bromakgame.learning.Skill
+import com.bromakgame.learning.SkillLevel
 import com.bromakgame.worlds.World
 
 @ToString
@@ -21,7 +21,7 @@ class Creature {
 	Creature father
 	Creature mother
 
-	static hasMany = [ learnedSkills : Skill ]
+	static hasMany = [ learnedSkills : SkillLevel ]
 
 	String getFullName() {
 		String fullName = firstName.trim()
@@ -80,7 +80,6 @@ class Creature {
 		mother nullable: true
     }
 
-	// don't know if this is necessary, or implicit
 	static mapping = {
 		gender column: "gender", sqlType: "char", length: 1
 		learnedSkills lazy: false

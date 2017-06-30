@@ -41,10 +41,9 @@ class QuestTypeController {
 
 		request.withFormat {
 			form multipartForm {
-				flash.message = message(code: 'default.created.message', args: [message(code: 'questType.label', default: 'QuestType'), questType.id])
+				flash.message = message(code: 'default.created.message', args: [message(code: 'questTypes.label'), questType.id])
 				redirect action:"index", method:"GET"
 			}
-			'*' { respond questType, [status: CREATED] }
 		}
 	}
 
@@ -70,10 +69,9 @@ class QuestTypeController {
 
 		request.withFormat {
 			form multipartForm {
-				flash.message = message(code: 'default.updated.message', args: [message(code: 'questType.label', default: 'QuestType'), questType.id])
+				flash.message = message(code: 'default.updated.message', args: [message(code: 'questTypes.label'), questType.id])
 				redirect action:"index", method:"GET"
 			}
-			'*'{ respond questType, [status: OK] }
 		}
 	}
 
@@ -90,20 +88,18 @@ class QuestTypeController {
 
 		request.withFormat {
 			form multipartForm {
-				flash.message = message(code: 'default.deleted.message', args: [message(code: 'questType.label', default: 'QuestType'), questType.id])
+				flash.message = message(code: 'default.deleted.message', args: [message(code: 'questTypes.label'), questType.id])
 				redirect action:"index", method:"GET"
 			}
-			'*'{ render status: NO_CONTENT }
 		}
 	}
 
 	protected void notFound() {
 		request.withFormat {
 			form multipartForm {
-				flash.message = message(code: 'default.not.found.message', args: [message(code: 'questType.label', default: 'QuestType'), params.id])
+				flash.message = message(code: 'default.not.found.message', args: [message(code: 'questTypes.label'), params.id])
 				redirect action: "index", method: "GET"
 			}
-			'*'{ render status: NOT_FOUND }
 		}
 	}
 }
