@@ -42,7 +42,7 @@
 
 				<div class="form-group">
 					<label for="startingPopulation" class="sr-only"><g:message code='races.startingPopulation.label'/></label>
-					<input type="text" name="startingPopulation" id="startingPopulation" class="form-control" placeholder="${message(code: 'races.startingPopulation.label')}" required>
+					<input class="form-control" type="number" name="startingPopulation" id="startingPopulation" value="1" min="1" required />
 				</div>
 
 				<div class="checkbox">

@@ -2,30 +2,79 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'race.label', default: 'Race')}" />
+        <g:set var="entityName" value="${message(code: 'races.label')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#show-race" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="show-race" class="content scaffold-show" role="main">
-            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:display bean="race" />
-            <g:form resource="${this.race}" method="DELETE">
-                <fieldset class="buttons">
-                    <g:link class="edit" action="edit" resource="${this.race}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                    <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                </fieldset>
-            </g:form>
-        </div>
+        <div class="page-header">
+			<h2>
+				${race.name}
+				<small><g:message code="races.label" /></small>
+			</h2>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">General</div>
+					<div class="panel-body">
+						<table class="table">
+							<tbody>
+								<tr>
+									<td><b><g:message code='races.name.label'/></b></td>
+									<td>${race.name}</td>
+								</tr>
+								<tr>
+									<td><b><g:message code='races.description.label'/></b></td>
+									<td>${race.description}</td>
+								</tr>
+								<tr>
+									<td><b><g:message code='races.startingPopulation.label'/></b></td>
+									<td>${race.startingPopulation}</td>
+								</tr>
+								<tr>
+									<td><b><g:message code='races.cognition.label'/></b></td>
+									<td>
+										<g:if test="${race.intelligent}">
+											<span class="label label-success"><g:message code="races.intelligent.label" /></span>
+										</g:if>
+										<g:else>
+											<span class="label label-danger"><g:message code="races.primitive.label" /></span>
+										</g:else>
+									</td>
+								</tr>
+								<tr>
+									<td><b><g:message code='races.status.label'/></b></td>
+									<td>
+										<g:if test="${race.enabled}">
+											<span class="label label-success"><g:message code="races.enabled.label" /></span>
+										</g:if>
+										<g:else>
+											<span class="label label-danger"><g:message code="races.disabled.label" /></span>
+										</g:else>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Skill Tree</div>
+					<div class="panel-body">
+						<table class="table">
+							<tbody>
+								<g:each in="${race.skillTree.skills}" var="skill">
+									<tr>
+										<td>${skill.name}</td>
+									</tr>
+								</g:each>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
     </body>
 </html>

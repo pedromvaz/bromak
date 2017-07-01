@@ -3,6 +3,7 @@ package com.bromakgame.creatures
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
+import com.bromakgame.learning.SkillTree
 
 @Secured('ROLE_ADMIN')
 @Transactional(readOnly = true)
@@ -15,7 +16,6 @@ class RaceController {
         respond Race.list(params), model:[raceCount: Race.count()]
     }
 
-	@Secured('ROLE_UNKNOWN')
     def show(Race race) {
         respond race
     }
@@ -31,6 +31,9 @@ class RaceController {
             notFound()
             return
         }
+		
+		race.skillTree = new SkillTree(race: race)
+		race.validate()
 
         if (race.hasErrors()) {
             transactionStatus.setRollbackOnly()
@@ -46,7 +49,6 @@ class RaceController {
                 //redirect race
 				redirect action:"index", method:"GET"
             }
-            '*' { respond race, [status: CREATED] }
         }
     }
 
@@ -77,7 +79,6 @@ class RaceController {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'race.label', default: 'Race'), race.id])
                 redirect race
             }
-            '*'{ respond race, [status: OK] }
         }
     }
 
@@ -98,7 +99,6 @@ class RaceController {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'race.label', default: 'Race'), race.id])
                 redirect action:"index", method:"GET"
             }
-            '*'{ render status: NO_CONTENT }
         }
     }
 
@@ -108,7 +108,6 @@ class RaceController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'race.label', default: 'Race'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
         }
     }
 }

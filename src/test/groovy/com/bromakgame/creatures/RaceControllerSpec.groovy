@@ -2,17 +2,21 @@ package com.bromakgame.creatures
 
 import grails.test.mixin.*
 import spock.lang.*
+import com.bromakgame.learning.SkillTree
 
 @TestFor(RaceController)
-@Mock(Race)
+@Mock([Race,SkillTree])
 class RaceControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
 
         params["name"] = 'Human'
-		params["description"] = 'An arrogante race'
+		params["description"] = 'The Human race'
 		params["startingPopulation"] = 10
+		params["skillTree.race.name"] = 'Human'
+		params["skillTree.race.description"] = 'The Human race'
+		params["skillTree.race.startingPopulation"] = 10
     }
 
     void "Test the index action returns the correct model"() {

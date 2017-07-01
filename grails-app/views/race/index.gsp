@@ -22,12 +22,18 @@
 					<th><g:message code="races.startingPopulation.label" /></th>
 					<th><g:message code="races.cognition.label" /></th>
 					<th><g:message code="races.status.label" /></th>
+					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<g:each in="${raceList}" var="race">
 					<tr>
-						<td>${race.name}</td>
+						<td>
+							<g:link action="show" id="${race.id}">
+								${race.name}
+							</g:link>
+						</td>
 						<td>${race.description}</td>
 						<td>${race.startingPopulation}</td>
 						<td>
@@ -45,6 +51,16 @@
 							<g:else>
 								<span class="label label-danger"><g:message code="races.disabled.label" /></span>
 							</g:else>
+						</td>
+						<td>
+							<!--<g:link action="edit" id="${race.id}">-->
+								<span class="glyphicon glyphicon-edit"></span> Edit
+							<!--</g:link>-->
+						</td>
+						<td>
+							<!--<g:link action="delete" id="${race.id}">-->
+								<span class="glyphicon glyphicon-trash"></span> Remove
+							<!--</g:link>-->
 						</td>
 					</tr>
 				</g:each>

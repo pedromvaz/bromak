@@ -1,17 +1,10 @@
 package com.bromakgame
 
-import com.bromakgame.users.Role
-import com.bromakgame.users.User
-import com.bromakgame.users.UserRole
-import com.bromakgame.worlds.World
-import com.bromakgame.worlds.Region
-import com.bromakgame.worlds.Area
-import com.bromakgame.creatures.Community
-import com.bromakgame.creatures.Race
-import com.bromakgame.learning.Epoch
-import com.bromakgame.learning.Skill
-import com.bromakgame.learning.SkillCategory
-import com.bromakgame.quests.QuestType
+import com.bromakgame.users.*
+import com.bromakgame.worlds.*
+import com.bromakgame.creatures.*
+import com.bromakgame.learning.*
+import com.bromakgame.quests.*
 
 import com.bromakgame.creatures.Champion
 
@@ -37,31 +30,22 @@ class BootStrap {
         assert Role.count() == 1
         assert UserRole.count() == 1
 		
-		// --------------
-		// Creature Races
-		// --------------
+		// ---------------------------------------------------------------
+		// Creature Races (name, desc, intelligent, enabled, starting pop)
+		// ---------------------------------------------------------------
 		
 		// intelligent ones
-		def humanRace = new Race(name: 'Human', description: 'An arrogant race.',
-			intelligent:true, enabled: true, startingPopulation: 20).save()
-		def dwarfRace = new Race(name: 'Dwarf', description: 'A greedy race.',
-			intelligent:true, enabled: true, startingPopulation: 15).save()
-		def elfRace = new Race(name: 'Elf', description: 'A peaceful race.',
-			intelligent:true, enabled: true, startingPopulation: 10).save()
-		def orcRace = new Race(name: 'Orc', description: 'A proud race.',
-			intelligent:true, enabled: true, startingPopulation: 25).save()
-		def goblinRace = new Race(name: 'Goblin', description: 'A coward race.',
-			intelligent:true, enabled: true, startingPopulation: 30).save()
-		def trollRace = new Race(name: 'Troll', description: 'A brutish race.',
-			intelligent:true, enabled: false, startingPopulation: 5).save()
+		def humanRace	= addRace('Human',	'The Human race.',		true, true, 20)
+		def dwarfRace	= addRace('Dwarf',	'The Dwarven race.',	true, true, 15)
+		def elfRace		= addRace('Elf',	'The Elven race.',		true, true, 10)
+		def orcRace		= addRace('Orc',	'The Orchish race.',	true, true, 25)
+		def goblinRace	= addRace('Goblin',	'The Goblin race.',		true, true, 30)
+		def trollRace	= addRace('Troll',	'The Troll race.',		true, false, 5)
 		
 		// savage ones
-		def wolfRace = new Race(name: 'Wolf', description: 'A race that works in packs.',
-			intelligent: false, enabled: true, startingPopulation: 15).save()
-		def bearRace = new Race(name: 'Bear', description: 'A growling race.',
-			intelligent: false, enabled: true, startingPopulation: 10).save()
-		def eagleRace = new Race(name: 'Eagle', description: 'A flying race.',
-			intelligent: false, enabled: true, startingPopulation: 5).save()
+		def wolfRace	= addRace('Wolf',	'The Wolf race.',		false, true, 15)
+		def bearRace	= addRace('Bear',	'The Bear race.',		false, true, 10)
+		def eagleRace	= addRace('Eagle',	'The Eagle race.',		false, true, 5)
 		
 		assert Race.count() == 9
 		
@@ -115,15 +99,6 @@ class BootStrap {
 			name: 'Cave Painting',
 			description: 'Painting deeds in cave walls.').save()
 		
-		/*
-		for (race in Race.findAllByIntelligent(true)) {
-			for (skill in nomadic.skills) {
-				race.addToLearnableSkills(skill)
-			}
-			race.save()
-		}
-		*/
-		
 		def agriculture = new Skill(
 			name: 'Agriculture',
 			description: 'Agriculture').save()
@@ -161,6 +136,17 @@ class BootStrap {
 		.save()
 		
 		assert Epoch.count() == 2
+		
+		// -----------
+		// Skill Trees
+		// -----------
+		
+		for (race in Race.findAllByIntelligent(true)) {
+			for (skill in nomadic.skills) {
+				race.skillTree.addToSkills(skill)
+			}
+			race.save()
+		}
 		
 		// ----------------
 		// Skill Categories
@@ -264,6 +250,16 @@ class BootStrap {
 			groupCap: 3).save()
 		
 		assert QuestType.count() == 6
+	}
+	
+	private Race addRace(String name, String description, boolean intelligent, boolean enabled, int startingPopulation) {
+		Race race = new Race(name: name, description: description,
+			intelligent: intelligent, enabled: enabled,
+			startingPopulation: startingPopulation)
+		race.skillTree = new SkillTree()
+		race.save()
+		
+		return race
 	}
 
 	private int numRegionsByRadius(int radius) {
