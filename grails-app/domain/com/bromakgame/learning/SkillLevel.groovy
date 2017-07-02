@@ -10,6 +10,6 @@ class SkillLevel {
 	static belongsTo = [ creature : Creature ]
 
 	static constraints = {
-		level min: 0
+		level min: 0.0d
 	}
 }

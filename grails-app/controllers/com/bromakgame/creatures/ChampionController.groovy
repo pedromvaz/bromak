@@ -1,9 +1,11 @@
 package com.bromakgame.creatures
 
 import static org.springframework.http.HttpStatus.*
-import com.bromakgame.creatures.Community
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
+import com.bromakgame.creatures.Community
+import com.bromakgame.learning.SkillLevel
+import com.bromakgame.learning.Skill
 import com.bromakgame.users.User
 import com.bromakgame.worlds.World
 import com.bromakgame.worlds.Tutorials
@@ -93,10 +95,49 @@ class ChampionController {
                 flash.message = message(
 					code: 'champions.created.message',
 					args: [champion.firstName])
-				redirect controller: 'world', action: 'show', id: champion.world.id
+				redirect action: 'chooseSkills', id: champion.id
             }
         }
     }
+	
+	def chooseSkills(Champion champion) {
+		respond champion, model: [ skills : champion.race.skillTree.skills ]
+	}
+	
+	@Transactional
+	def saveSkills(Champion champion) {
+		if (champion == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+		// cycle through each selected Skill on the chooseSkills view
+		// and assign it to the Champion
+		params.each {
+			if (it.value.equals("on")) {
+				SkillLevel skillLevel = new SkillLevel(level: 1.0, skill : Skill.get(it.key))
+				champion.addToLearnedSkills(skillLevel)
+			}
+		}
+
+		if (champion.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            respond champion.errors, view:'create'
+            return
+        }
+
+        champion.save(flush:true)
+
+		request.withFormat {
+            form multipartForm {
+                flash.message = message(
+					code: 'champions.created.message',
+					args: [champion.firstName])
+				redirect controller: 'world', action: 'show', id: champion.world.id
+            }
+        }
+	}
 	
 	boolean playerHasChampionsAlive() {
 		User player = springSecurityService?.getCurrentUser()
@@ -112,9 +153,11 @@ class ChampionController {
 		def community = new Community().save()
 		
 		for (int i = 0; i < startingPop; i += 2) {
-			def maleCreature = new Creature(firstName: Creature.createRandomWord(), race: race, gender: 'm',
+			def maleCreature = new Creature(firstName: Creature.createRandomWord(),
+				race: race, gender: 'm',
 				world: world).save()
-			def femaleCreature = new Creature(firstName: Creature.createRandomWord(), race: race, gender: 'f',
+			def femaleCreature = new Creature(firstName: Creature.createRandomWord(),
+				race: race, gender: 'f',
 				world: world).save()
 			
 			community.addToCreatures(maleCreature)
@@ -153,7 +196,7 @@ class ChampionController {
             form multipartForm {
                 flash.message = message(
 					code: 'default.updated.message',
-					args: [message(code: 'champion.label', default: 'Champion'), champion.id])
+					args: [message(code: 'champions.label'), champion.id])
                 redirect champion
             }
         }
@@ -174,7 +217,7 @@ class ChampionController {
             form multipartForm {
                 flash.message = message(
 					code: 'default.deleted.message',
-					args: [message(code: 'champion.label', default: 'Champion'), champion.id])
+					args: [message(code: 'champions.label'), champion.id])
                 redirect action:"index", method:"GET"
             }
         }
@@ -185,7 +228,7 @@ class ChampionController {
             form multipartForm {
                 flash.message = message(
 					code: 'default.not.found.message',
-					args: [message(code: 'champion.label', default: 'Champion'), params.id])
+					args: [message(code: 'champions.label'), params.id])
                 redirect action: "index", method: "GET"
             }
         }

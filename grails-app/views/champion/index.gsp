@@ -42,7 +42,7 @@
 		</g:if>
 		<g:else>
 			<div class="page-header">
-				<h2><g:message code="champions.index.header" /></h2>
+				<h2><g:message code="champions.header" /></h2>
 			</div>
 			
 			<g:if test="${flash.message}">
