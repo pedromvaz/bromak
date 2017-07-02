@@ -2,10 +2,9 @@ package com.bromakgame.creatures
 
 import grails.test.mixin.*
 import spock.lang.*
-import com.bromakgame.learning.SkillTree
 
 @TestFor(RaceController)
-@Mock([Race,SkillTree])
+@Mock(Race)
 class RaceControllerSpec extends Specification {
 
     def populateValidParams(params) {

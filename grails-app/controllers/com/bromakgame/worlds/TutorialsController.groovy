@@ -29,8 +29,8 @@ class TutorialsController {
 			world = new Tutorials(name: message(code: 'tutorials.world.name'),
 				radius: 0, maxNumPlayers: 1, owner: player)
 			
-			world.addToQuestTypes(QuestType.findByName('Terrain Scouting'))
-			world.addToQuestTypes(QuestType.findByName('Animal Hunting'))
+			//world.addToQuestTypes(QuestType.findByName('Terrain Scouting'))
+			//world.addToQuestTypes(QuestType.findByName('Animal Hunting'))
 
 			if (!save(world)) {
 				respond tutorials.errors, controller: 'world', view: 'choose'

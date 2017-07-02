@@ -13,7 +13,6 @@ class Creature {
 	String firstName
 	String lastName
 
-	World world
 	Race race
 	String gender
 	boolean alive = true
@@ -22,14 +21,28 @@ class Creature {
 	Creature mother
 
 	static hasMany = [ learnedSkills : SkillLevel ]
+	static belongsTo = [ world : World ]
+
+	static constraints = {
+		firstName blank: false
+		lastName nullable: true
+		gender inList: [MALE, FEMALE]
+		father nullable: true
+		mother nullable: true
+	}
+
+	static mapping = {
+		gender column: "gender", sqlType: "char", length: 1
+		learnedSkills lazy: false
+	}
 
 	String getFullName() {
 		String fullName = firstName.trim()
-		
+
 		if (lastName?.trim()) {
 			fullName = fullName + " " + lastName.trim()
 		}
-		
+
 		return fullName
 	}
 
@@ -70,18 +83,5 @@ class Creature {
 		}
 
 		return word
-	}
-
-    static constraints = {
-		firstName blank: false
-		lastName nullable: true
-		gender inList: [MALE, FEMALE]
-		father nullable: true
-		mother nullable: true
-    }
-
-	static mapping = {
-		gender column: "gender", sqlType: "char", length: 1
-		learnedSkills lazy: false
 	}
 }

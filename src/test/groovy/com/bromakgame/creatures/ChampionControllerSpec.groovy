@@ -2,12 +2,9 @@ package com.bromakgame.creatures
 
 import grails.test.mixin.*
 import spock.lang.*
-import com.bromakgame.creatures.Race
-import com.bromakgame.users.User
-import com.bromakgame.worlds.World
 
 @TestFor(ChampionController)
-@Mock([Champion, Race, User, World, Community])
+@Mock(Champion)
 class ChampionControllerSpec extends Specification {
 
     def populateValidParams(params) {
@@ -16,8 +13,12 @@ class ChampionControllerSpec extends Specification {
         params["firstName"] = 'Aragorn'
 		params["gender"] = 'm'
 		params["race.name"] = 'Human'
-		params["user"] = new User(username: 'User', email: 'user@email.com', password: 'pass')
-		params["world"] = new World(name: 'Bromak', radius: 2, maxNumPlayers: 10)
+		params["user.username"] = 'User'
+		params["user.email"] = 'user@email.com'
+		params["user.password"] = 'pass'
+		params["world.name"] = 'Bromak'
+		params["world.radius"] = 2
+		params["world.maxNumPlayers"] = 10
     }
 
     void "Test the index action returns the correct model"() {

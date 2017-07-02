@@ -2,10 +2,9 @@ package com.bromakgame.quests
 
 import grails.test.mixin.*
 import spock.lang.*
-import com.bromakgame.learning.SkillCategory
 
 @TestFor(ObjectiveController)
-@Mock([Objective,QuestType,SkillCategory])
+@Mock(Objective)
 class ObjectiveControllerSpec extends Specification {
 
 	def populateValidParams(params) {

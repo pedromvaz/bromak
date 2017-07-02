@@ -50,6 +50,9 @@ class ChampionController {
             return
         }
 		
+		// TODO: IF below can't stay here, we must allow multiple Champions per player, later on
+		// Must find another way, like this http://docs.grails.org/latest/guide/theWebLayer.html#formtokens
+		
 		// in case the user creates a Champion, then clicks "Back" in the browser
 		// and tries to create a second Champion
 		if (playerHasChampionsAlive()) {
@@ -65,12 +68,19 @@ class ChampionController {
 		User user = springSecurityService?.getCurrentUser()
 		
 		if (user != null) {
-			champion.user = user
-			champion.world = World.get(session.worldId) ?: Tutorials.get(session.worldId)
+			user.addToChampions(champion)
+			user.save()
+			
+			World world = World.get(session.worldId)
+			world.addToCreatures(champion)
+			world.save()
+			
 			champion.validate()
+			
+			startCommunity(champion)
 		}
-
-        if (champion.hasErrors()) {
+		
+		if (champion.hasErrors()) {
             transactionStatus.setRollbackOnly()
             respond champion.errors, view:'create'
             return
@@ -78,21 +88,12 @@ class ChampionController {
 
         champion.save(flush:true)
 		
-		if (user != null) {
-			user.addToChampions(champion)
-			user.save(flush:true)
-			
-			startCommunity(champion)
-		}
-		
-		String worldType = Tutorials.get(session.worldId) ? 'tutorials' : 'world'
-		
         request.withFormat {
             form multipartForm {
                 flash.message = message(
 					code: 'champions.created.message',
 					args: [champion.firstName])
-				redirect controller: worldType, action: 'show', id: champion.world.id
+				redirect controller: 'world', action: 'show', id: champion.world.id
             }
         }
     }

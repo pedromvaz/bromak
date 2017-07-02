@@ -12,9 +12,9 @@ class BootStrap {
 
     def init = {
 		
-		// -----------------------
-		// Roles and Administrator
-		// -----------------------
+		// -------------
+		// Administrator
+		// -------------
 		
         def adminRole = new Role(authority: 'ROLE_ADMIN', description: 'An administrator of the bromak website').save()
         def adminUser = new User(username: 'admin', email: 'admin@bromakgame.com', password: 'admin', enabled: true).save()
@@ -29,6 +29,26 @@ class BootStrap {
         assert User.count() == 1
         assert Role.count() == 1
         assert UserRole.count() == 1
+		
+		// -------
+		// Players
+		// -------
+
+		def playerRole = new Role(authority: 'ROLE_PLAYER', description: 'A player on the bromak website').save()
+		def playerUser = new User(username: 'player', email: 'player@bromakgame.com', password: 'player', enabled: true).save()
+		def pedroUser = new User(username: 'pedro', email: 'pedro@bromakgame.com', password: 'pedro', enabled: true).save()
+
+        UserRole.create playerUser, playerRole
+		UserRole.create pedroUser, playerRole
+
+        UserRole.withSession {
+            it.flush()
+            it.clear()
+        }
+
+        assert User.count() == 3
+        assert Role.count() == 2
+        assert UserRole.count() == 3
 		
 		// ---------------------------------------------------------------
 		// Creature Races (name, desc, intelligent, enabled, starting pop)
@@ -48,26 +68,6 @@ class BootStrap {
 		def eagleRace	= addRace('Eagle',	'The Eagle race.',		false, true, 5)
 		
 		assert Race.count() == 9
-		
-		// ------
-		// Player
-		// ------
-
-		def playerRole = new Role(authority: 'ROLE_PLAYER', description: 'A player on the bromak website').save()
-		def playerUser = new User(username: 'player', email: 'player@bromakgame.com', password: 'player', enabled: true).save()
-		def pedroUser = new User(username: 'pedro', email: 'pedro@bromakgame.com', password: 'pedro', enabled: true).save()
-
-        UserRole.create playerUser, playerRole
-		UserRole.create pedroUser, playerRole
-
-        UserRole.withSession {
-            it.flush()
-            it.clear()
-        }
-
-        assert User.count() == 3
-        assert Role.count() == 2
-        assert UserRole.count() == 3
 		
 		// ------
 		// Skills
@@ -137,9 +137,9 @@ class BootStrap {
 		
 		assert Epoch.count() == 2
 		
-		// -----------
-		// Skill Trees
-		// -----------
+		// ---------------------
+		// Skill Trees for Races
+		// ---------------------
 		
 		for (race in Race.findAllByIntelligent(true)) {
 			for (skill in nomadic.skills) {

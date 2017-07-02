@@ -21,10 +21,9 @@ class WorldController {
 
 	@Secured('ROLE_PLAYER')
 	def show(World world) {
-		
-		// despicable hack to point to tutorials page in case it is a tutorial world
-		if (message(code: 'tutorials.world.name').equals(world?.name)) {
-			redirect action: 'tutorials'
+		if (Tutorials.get(world?.id) != null) {
+			redirect controller: 'tutorials', action: 'show', id: world.id
+			return
 		}
 		
 		def regions = Region.findAllByWorld(world)
