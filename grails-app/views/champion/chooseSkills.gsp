@@ -9,6 +9,13 @@
 		<div class="col-sm-4"></div>
 		
 		<div class="col-sm-4">
+			<div class="page-header">
+				<h3>
+					<img data-src="holder.js/64x64" class="img-thumbnail">
+					${champion.firstName}
+				</h3>
+			</div>
+			
 			<g:if test="${flash.message}">
 				<div class="alert alert-info" role="alert">${flash.message}</div>
 			</g:if>
@@ -24,13 +31,6 @@
 					</ul>
 				</div>
 			</g:hasErrors>
-			
-			<div class="page-header">
-				<h3>
-					<img data-src="holder.js/64x64" class="img-thumbnail">
-					${champion.firstName}
-				</h3>
-			</div>
 			
 			<p><g:message code="champions.chooseSkills.firstLabel" /></p>
 			
