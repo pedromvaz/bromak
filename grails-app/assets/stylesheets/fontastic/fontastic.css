@@ -209,3 +209,9 @@
 .icon-person:before {
   content: "\34";
 }
+.icon-ruby:before {
+  content: "\35";
+}
+.icon-steps:before {
+  content: "\36";
+}
