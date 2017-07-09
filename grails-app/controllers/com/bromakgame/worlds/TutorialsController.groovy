@@ -41,7 +41,7 @@ class TutorialsController {
 		// must set the session variable for the [possible] champion creation
 		session["worldId"] = world.id
 
-		Map model = [hasChampion : Champion.findByWorld(world) != null]
+		Map model = [champions : Champion.findAllByWorld(world)]
 
 		respond world, model : model
 	}

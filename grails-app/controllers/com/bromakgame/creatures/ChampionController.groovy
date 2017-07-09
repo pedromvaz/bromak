@@ -87,6 +87,14 @@ class ChampionController {
             respond champion.errors, view:'create'
             return
         }
+		
+		// champion starts with basic skills knowledge
+		SkillLevel bashingLevel = new SkillLevel(level: 1.0, skill : Skill.findByName('Bashing'))
+		SkillLevel throwingLevel = new SkillLevel(level: 1.0, skill : Skill.findByName('Throwing'))
+		SkillLevel stealthLevel = new SkillLevel(level: 1.0, skill : Skill.findByName('Stealth'))
+		champion.addToLearnedSkills(bashingLevel)
+		champion.addToLearnedSkills(throwingLevel)
+		champion.addToLearnedSkills(stealthLevel)
 
         champion.save(flush:true)
 		
@@ -95,11 +103,13 @@ class ChampionController {
                 flash.message = message(
 					code: 'champions.created.message',
 					args: [champion.firstName])
-				redirect action: 'chooseSkills', id: champion.id
+				//redirect action: 'chooseSkills', id: champion.id
+				redirect controller: 'world', action: 'show', id: champion.world.id
             }
         }
     }
 	
+	@Secured('ROLE_UNKNOWN')
 	def chooseSkills(Champion champion) {
 		respond champion, model: [ skills : champion.race.skillTree.skills ]
 	}

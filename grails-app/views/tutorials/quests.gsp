@@ -50,28 +50,40 @@
 			</li>
 		</ul>
 		
-		<div class="col-sm-3">
-			<h4>Animal hunting</h4>
+		<div class="row">
+			<div class="col-sm-4">
+				<ul class="list-group">
+					<li class="list-group-item" style="padding: 0px">
+						<img src="${resource(dir:'images',file:'quests/hunting-deer.jpg')}" style="width: 100%" />
+					</li>
+					<li class="list-group-item">
+						<h5 class="list-group-item-heading"><small>ANIMAL HUNTING</small></h5>
+						<p class="list-group-item-text">
+							Your first quest will be to hunt a deer with some members from your community.
+						</p>
+					</li>
+					<g:link controller="quest" action="prepare" class="list-group-item list-group-item-success">
+						Prepare for the hunt
+					</g:link>
+				</ul>
+			</div>
 			
-			<img src="${resource(dir:'images',file:'stone-age/deer-bw.svg')}" style="width: 50%;margin: auto;display: block" />
-			
-			<p>Your first quest will be to hunt a deer with some members from your community.</p>
-			
-			<g:link class="btn btn-success btn-block disabled">
-				Prepare for the hunt
-			</g:link>
-		</div>
-		
-		<div class="col-sm-3">
-			<h4>Animal skinning</h4>
-			
-			<img src="${resource(dir:'images',file:'stone-age/knife-bw.svg')}" style="width: 50%;margin: auto;display: block" />
-			
-			<p>Your community quickly felt the need to find something sharp with which to cut through animal skin.</p>
-			
-			<g:link class="btn btn-success btn-block disabled">
-				Craft stone tools
-			</g:link>
+			<div class="col-sm-4">
+				<ul class="list-group">
+					<li class="list-group-item" style="padding: 0px">
+						<img src="${resource(dir:'images',file:'quests/skinning.jpg')}" style="width: 100%" />
+					</li>
+					<li class="list-group-item">
+						<h5 class="list-group-item-heading"><small>ANIMAL SKINNING</small></h5>
+						<p class="list-group-item-text">
+							Your community quickly felt the need to find something sharp with which to cut through animal skin.
+						</p>
+					</li>
+					<g:link controller="quest" action="prepare" class="list-group-item list-group-item-success">
+						Craft stone tools
+					</g:link>
+				</ul>
+			</div>
 		</div>
 		
 		<div class="col-sm-3">

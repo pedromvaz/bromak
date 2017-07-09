@@ -50,29 +50,81 @@
 			</li>
 		</ul>
 		
-		<div class="col-sm-4">
-			<ul class="list-group">
-				<li class="list-group-item" style="padding: 0px">
-					<img src="${resource(dir:'images',file:'stone-age/cave-men.jpg')}" style="width: 100%" />
-				</li>
-				<li class="list-group-item">
-					<h5 class="list-group-item-heading"><small>SUMMON YOUR FIRST CHAMPION</small></h5>
-					<p class="list-group-item-text">
-						This is the Champion you will use throughout the tutorials. You can choose its name, race and gender.
-					</p>
-				</li>
-				<g:if test="${hasChampion}">
-					<li class="list-group-item">
-						<span class="glyphicon glyphicon-ok" style="color:green"></span>
-						Champion Summoned
-					</li>
-				</g:if>
-				<g:else>
-					<g:link controller="champion" action="create" class="list-group-item list-group-item-success">
-						Summon Champion
-					</g:link>
-				</g:else>
-			</ul>
-		</div>
+		<g:if test="${champions.isEmpty()}">
+			<div class="row">
+				<div class="col-sm-4"></div>
+				
+				<div class="col-sm-4">
+					<ul class="list-group">
+						<li class="list-group-item" style="padding: 0px">
+							<img src="${resource(dir:'images',file:'stone-age/cave-men.jpg')}" style="width: 100%" />
+						</li>
+						<li class="list-group-item">
+							<h5 class="list-group-item-heading">
+								<small><g:message code="worlds.show.summonChampion.title" /></small>
+							</h5>
+							<p class="list-group-item-text">
+								<g:message code="worlds.show.summonChampion.description" />
+							</p>
+						</li>
+						<g:link controller="champion" action="create" class="list-group-item list-group-item-success">
+							<g:message code="worlds.show.summonChampion.button" />
+						</g:link>
+					</ul>
+				</div>
+			</div>
+		</g:if>
+		
+		<g:if test="${champions.size > 0}">
+			<div class="row">
+				<div class="col-sm-6">
+					<ul class="list-group">
+						<li class="list-group-item active">
+							<g:message code='champions.header' />
+						</li>
+						<g:each in="${champions}" var="champion">
+							<li class="list-group-item">
+								${champion.firstName}
+							</li>
+						</g:each>
+					</ul>
+				</div>
+				
+				<div class="col-sm-6">
+					<ul class="list-group">
+						<li class="list-group-item active">
+							<g:message code='communities.show.header' />
+						</li>
+						<li class="list-group-item">
+							Community
+						</li>
+					</ul>
+				</div>
+			</div>
+				
+			<div class="row">
+				<div class="col-sm-6">
+					<ul class="list-group">
+						<li class="list-group-item active">
+							Areas
+						</li>
+						<li class="list-group-item">
+							Areas
+						</li>
+					</ul>
+				</div>
+				
+				<div class="col-sm-6">
+					<ul class="list-group">
+						<li class="list-group-item active">
+							<g:message code="quests.header" />
+						</li>
+						<li class="list-group-item">
+							Quests
+						</li>
+					</ul>
+				</div>
+			</div>
+		</g:if>
 	</body>
 </html>
