@@ -120,4 +120,24 @@ class TutorialsController {
 			}
 		}
 	}
+	
+	def champions() {
+		User player = springSecurityService?.getCurrentUser()
+		respond Tutorials.findByOwner(player)
+	}
+	
+	def community() {
+		User player = springSecurityService?.getCurrentUser()
+		respond Tutorials.findByOwner(player)
+	}
+	
+	def areas() {
+		User player = springSecurityService?.getCurrentUser()
+		respond Tutorials.findByOwner(player)
+	}
+	
+	def quests() {
+		User player = springSecurityService?.getCurrentUser()
+		respond Tutorials.findByOwner(player)
+	}
 }

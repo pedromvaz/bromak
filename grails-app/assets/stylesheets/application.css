@@ -14,10 +14,10 @@
 * require_self
 *
 *= require bootstrap/css/bootstrap.min
-*= require bootstrap/css/navbar-fixed-top
 *= require bootstrap/css/carousel
 *= require bootstrap/css/pagination
 *= require bootstrap/css/progress-bars
+*= require bromak
 *
 *= require fontastic/fontastic
 *
