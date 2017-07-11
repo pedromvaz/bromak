@@ -64,8 +64,8 @@
 								<small>Wild Life</small>
 							</div>
 							<div class="col-sm-4">
-								<span class="glyphicon glyphicon-grain"></span>
-								<small>Plants</small>
+								<span class="glyphicon glyphicon-tree-deciduous"></span>
+								<small>Fruits</small>
 							</div>
 							<div class="col-sm-4">
 								<span class="icon-water"></span>
@@ -75,7 +75,7 @@
 					</p>
 				</li>
 				<li class="list-group-item">
-					<h5 class="list-group-item-heading"><small>GATHERING</small></h5>
+					<h5 class="list-group-item-heading"><small>MATERIALS</small></h5>
 					<p class="list-group-item-text">
 						<div class="row">
 							<div class="col-sm-4">
@@ -86,16 +86,20 @@
 								<span class="glyphicon glyphicon-th-large"></span>
 								<small>Stone</small>
 							</div>
+							<div class="col-sm-4">
+								<span class="glyphicon glyphicon-grain"></span>
+								<small>Fibers</small>
+							</div>
 						</div>
 					</p>
 				</li>
 				<li class="list-group-item">
-					<h5 class="list-group-item-heading"><small>MINING</small></h5>
+					<h5 class="list-group-item-heading"><small>MINERALS</small></h5>
 					<p class="list-group-item-text">
 						<div class="row">
 							<div class="col-sm-4">
 								<span class="icon-ruby"></span>
-								<small>Minerals</small>
+								<small>Diamonds</small>
 							</div>
 						</div>
 					</p>
