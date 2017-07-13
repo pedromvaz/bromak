@@ -1,6 +1,7 @@
 package com.bromakgame.creatures
 
 import groovy.transform.ToString
+import com.bromakgame.quests.Quest
 
 @ToString
 class Group {
@@ -9,7 +10,7 @@ class Group {
 		this.class.getSimpleName() + " " + this.id
 	}
 
-	static hasMany = [ creatures : Creature ]
+	static hasMany = [ creatures : Creature, quests: Quest ]
 
 	static constraints = {
 		creatures nullable: true

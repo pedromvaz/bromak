@@ -5,6 +5,7 @@ import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 import com.bromakgame.creatures.Community
 import com.bromakgame.learning.SkillLevel
+import com.bromakgame.quests.*
 import com.bromakgame.learning.Skill
 import com.bromakgame.users.User
 import com.bromakgame.worlds.World
@@ -77,9 +78,17 @@ class ChampionController {
 			world.addToCreatures(champion)
 			world.save()
 			
-			champion.validate()
-			
 			startCommunity(champion)
+			
+			// champion starts with basic skills knowledge
+			SkillLevel bashingLevel = new SkillLevel(level: 1.0, skill : Skill.findByName('Bashing'))
+			SkillLevel throwingLevel = new SkillLevel(level: 1.0, skill : Skill.findByName('Throwing'))
+			SkillLevel stealthLevel = new SkillLevel(level: 1.0, skill : Skill.findByName('Stealth'))
+			champion.addToLearnedSkills(bashingLevel)
+			champion.addToLearnedSkills(throwingLevel)
+			champion.addToLearnedSkills(stealthLevel)
+			
+			champion.validate()
 		}
 		
 		if (champion.hasErrors()) {
@@ -88,14 +97,6 @@ class ChampionController {
             return
         }
 		
-		// champion starts with basic skills knowledge
-		SkillLevel bashingLevel = new SkillLevel(level: 1.0, skill : Skill.findByName('Bashing'))
-		SkillLevel throwingLevel = new SkillLevel(level: 1.0, skill : Skill.findByName('Throwing'))
-		SkillLevel stealthLevel = new SkillLevel(level: 1.0, skill : Skill.findByName('Stealth'))
-		champion.addToLearnedSkills(bashingLevel)
-		champion.addToLearnedSkills(throwingLevel)
-		champion.addToLearnedSkills(stealthLevel)
-
         champion.save(flush:true)
 		
         request.withFormat {
@@ -155,29 +156,35 @@ class ChampionController {
 		return Champion.findAllWhere(user: player, alive: true).size() > 0
 	}
 	
+	@Transactional
 	void startCommunity(Champion champion) {
 		def race = champion.race
 		def world = champion.world
 		int startingPop = race.startingPopulation
 		
-		def community = new Community().save()
+		Community community = CommunityController.createCommunity()
+		community.addToCreatures(champion)
 		
 		for (int i = 0; i < startingPop; i += 2) {
-			def maleCreature = new Creature(firstName: Creature.createRandomWord(),
-				race: race, gender: 'm',
-				world: world).save()
-			def femaleCreature = new Creature(firstName: Creature.createRandomWord(),
-				race: race, gender: 'f',
-				world: world).save()
-			
-			community.addToCreatures(maleCreature)
-			community.addToCreatures(femaleCreature)
+			community.addToCreatures(
+				new Creature(firstName: Creature.createRandomWord(),
+					race: race, gender: 'm',
+					world: world).save())
+			community.addToCreatures(
+				new Creature(firstName: Creature.createRandomWord(),
+					race: race, gender: 'f',
+					world: world).save())
 		}
 		
-		community.addToCreatures(champion)
-		community.save()
+		Quest animalHunting = new Quest(
+			type: QuestType.findByName('Animal Hunting'),
+			frequency: Quest.FREQUENCY_REPEATABLE)
 		
-		champion.save(flush:true)
+		community.addToQuests(animalHunting)
+		
+		CommunityController.saveCommunity(community)
+		
+		println(Quest.count())
 	}
 
 	@Secured('ROLE_UNKNOWN')

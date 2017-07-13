@@ -5,6 +5,7 @@ import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 import com.bromakgame.users.User
 import com.bromakgame.creatures.Champion
+import com.bromakgame.creatures.Group
 import com.bromakgame.quests.QuestType
 
 @Secured('ROLE_PLAYER')
@@ -138,6 +139,18 @@ class TutorialsController {
 	
 	def quests() {
 		User player = springSecurityService?.getCurrentUser()
-		respond Tutorials.findByOwner(player)
+		Tutorials world = Tutorials.findByOwner(player)
+		
+		def quests = []
+		
+		for (champion in player.champions) {
+			if (champion.world != world) continue
+			
+			for (quest in champion.group.quests) {
+				quests << quest
+			}
+		}
+		
+		respond world, model: [ quests : quests ]
 	}
 }

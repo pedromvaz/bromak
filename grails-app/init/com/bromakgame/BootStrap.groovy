@@ -152,7 +152,7 @@ class BootStrap {
 		// Skill Categories
 		// ----------------
 		
-		def combat = new SkillCategory(
+		def combatCategory = new SkillCategory(
 			name: 'Combat',
 			description: 'Various forms of combat')
 		.addToSkills(bashing)
@@ -183,7 +183,7 @@ class BootStrap {
 		
 		world.generate()
 		
-		world.save(flush:true)
+		world.save()
 		
 		assert World.count() == 1
 		assert Region.count() == numRegionsByRadius(worldRadius)
@@ -223,17 +223,41 @@ class BootStrap {
 		
 		assert Community.count() == 1
 		
-		// -----------
-		// Quest Types
-		// -----------
+		// ------------------------
+		// Objectives & Quest Types
+		// ------------------------
 		
-		def terrainScouting = new QuestType(name: 'Terrain Scouting',
+		/*
+		def terrainScouting = new QuestType(
+			name: 'Terrain Scouting',
 			description: 'Scouting new terrain will provide information ' +
 				'on its wild life, plants, minerals, soil, among other things.',
+			image: '',
+			action: 'Scout the area',
 			groupCap: 3).save()
-		def animalHunting = new QuestType(name: 'Animal Hunting',
-			description: 'Your first quest will be to hunt a deer with some members from your community.',
-			groupCap: 4).save()
+		*/
+	   
+		// animal hunting
+		def animalHunting = new QuestType(
+			name: 'Animal Hunting',
+			description: 'Find and hunt wild animals in the area, to feed your community.',
+			image: 'hunting-deer',
+			action: 'Prepare for the hunt',
+			groupCap: 4)
+		
+		def findWildAnimals = new Objective(description: 'Find wild animals')
+		trackingCategory.addToObjectives(findWildAnimals).save()
+		animalHunting.addToObjectives(findWildAnimals)
+		
+		def approachTargetSilently = new Objective(description: 'Approach target silently')
+		stealthCategory.addToObjectives(approachTargetSilently).save()
+		animalHunting.addToObjectives(approachTargetSilently)
+		
+		def huntAnimal = new Objective(description: 'Hunt animal')
+		combatCategory.addToObjectives(huntAnimal).save()
+		animalHunting.addToObjectives(huntAnimal).save()
+		
+		/*
 		def animalSkinning = new QuestType(name: 'Animal Skinning',
 			description: 'Your community quickly felt the need to find something sharp ' +
 				'with which to cut through animal skin.',
@@ -248,8 +272,10 @@ class BootStrap {
 		def fire = new QuestType(name: 'Fire!',
 			description: 'The thunderstorm left behind a threat, one that could be used for the community\'s benefit.',
 			groupCap: 3).save()
+		*/
 		
-		assert QuestType.count() == 6
+		assert QuestType.count() == 1
+		assert Objective.count() == 3
 	}
 	
 	private Race addRace(String name, String description, boolean intelligent, boolean enabled, int startingPopulation) {

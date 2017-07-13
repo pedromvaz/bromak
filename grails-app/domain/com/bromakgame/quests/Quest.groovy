@@ -37,6 +37,22 @@ class Quest {
 		
 		result
 	}
+	
+	String getTitle() {
+		return type.name.toUpperCase()
+	}
+	
+	String getDescription() {
+		return type.description
+	}
+	
+	String getImage() {
+		return type.image
+	}
+	
+	String getAction() {
+		return type.action
+	}
 
 	public static final String FREQUENCY_UNIQUE = "u"
 	public static final String FREQUENCY_RARE = "r"
@@ -47,6 +63,9 @@ class Quest {
 
 	static constraints = {
 		frequency inList: [FREQUENCY_UNIQUE, FREQUENCY_RARE, FREQUENCY_REPEATABLE, FREQUENCY_DAILY]
+		owningGroup nullable: true
+		owningCreature nullable: true
+		area nullable: true
 	}
 
 	static mapping = {

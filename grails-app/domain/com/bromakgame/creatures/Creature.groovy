@@ -22,6 +22,7 @@ class Creature {
 
 	static hasMany = [ learnedSkills : SkillLevel ]
 	static belongsTo = [ world : World ]
+	Group group
 
 	static constraints = {
 		firstName blank: false
@@ -29,6 +30,7 @@ class Creature {
 		gender inList: [MALE, FEMALE]
 		father nullable: true
 		mother nullable: true
+		group nullable: true
 	}
 
 	static mapping = {

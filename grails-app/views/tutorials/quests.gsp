@@ -51,6 +51,25 @@
 		</ul>
 		
 		<div class="row">
+			<g:each in="${quests}" var="quest">
+				<div class="col-sm-4">
+					<ul class="list-group">
+						<li class="list-group-item" style="padding: 0px">
+							<img src="${resource(dir:'images',file:'quests/' + quest.image + '.jpg')}" style="width: 100%" />
+						</li>
+						<li class="list-group-item">
+							<h5 class="list-group-item-heading"><small>${quest.title}</small></h5>
+							<p class="list-group-item-text">
+								${quest.description}
+							</p>
+						</li>
+						<g:link controller="quest" action="prepare" class="list-group-item list-group-item-success">
+							${quest.action}
+						</g:link>
+					</ul>
+				</div>
+			</g:each>
+			
 			<div class="col-sm-4">
 				<ul class="list-group">
 					<li class="list-group-item" style="padding: 0px">
@@ -84,42 +103,6 @@
 					</g:link>
 				</ul>
 			</div>
-		</div>
-		
-		<div class="col-sm-3">
-			<h4>Winter is coming</h4>
-			
-			<img src="${resource(dir:'images',file:'stone-age/pelt-bw.svg')}" style="width: 50%;margin: auto;display: block" />
-			
-			<p>Your community must learn to skin the animals they hunt, for clothing, otherwise they won't last the winter.</p>
-			
-			<g:link class="btn btn-success btn-block disabled">
-				Learn to skin
-			</g:link>
-		</div>
-		
-		<div class="col-sm-3">
-			<h4>To arms!</h4>
-			
-			<img src="${resource(dir:'images',file:'stone-age/spear-bw.svg')}" style="width: 50%;margin: auto;display: block" />
-			
-			<p>Having suffered an attack from a sabertooth, the community feels threatened.</p>
-			
-			<g:link class="btn btn-success btn-block disabled">
-				Craft the first spear
-			</g:link>
-		</div>
-		
-		<div class="col-sm-3">
-			<h4>Fire!</h4>
-			
-			<img src="${resource(dir:'images',file:'stone-age/bonfire-bw.svg')}" style="width: 50%;margin: auto;display: block" />
-			
-			<p>The thunderstorm left behind a threat, one that could be used for the community's benefit.</p>
-			
-			<g:link class="btn btn-success btn-block disabled">
-				Gather fire
-			</g:link>
 		</div>
 	</body>
 </html>

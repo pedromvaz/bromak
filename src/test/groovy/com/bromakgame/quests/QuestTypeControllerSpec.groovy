@@ -12,6 +12,8 @@ class QuestTypeControllerSpec extends Specification {
 
 		params["name"] = 'Animal Hunting'
 		params["description"] = 'The hunting of wild animals for food'
+		params["image"] = 'image'
+		params["action"] = 'action'
 		params["groupCap"] = 4
 	}
 
