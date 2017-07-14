@@ -122,7 +122,7 @@ class RaceControllerSpec extends Specification {
 
         then:"A redirect is issued to the show action"
             race != null
-            response.redirectedUrl == "/race/show/$race.id"
+            response.redirectedUrl == "/race/index"
             flash.message != null
     }
 
