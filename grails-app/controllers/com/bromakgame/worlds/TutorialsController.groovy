@@ -29,7 +29,7 @@ class TutorialsController {
 		if (!world) {
 			world = new Tutorials(name: message(code: 'tutorials.world.name'),
 				radius: 0, maxNumPlayers: 1, owner: player)
-			
+
 			//world.addToQuestTypes(QuestType.findByName('Terrain Scouting'))
 			//world.addToQuestTypes(QuestType.findByName('Animal Hunting'))
 
@@ -39,7 +39,7 @@ class TutorialsController {
 			}
 		}
 
-		// must set the session variable for the [possible] champion creation
+		// set the session variable when entering the world
 		session["worldId"] = world.id
 
 		Map model = [champions : Champion.findAllByWorld(world)]
@@ -59,7 +59,7 @@ class TutorialsController {
 		}
 
 		tutorials.save flush:true
-		
+
 		return true
 	}
 
@@ -121,36 +121,36 @@ class TutorialsController {
 			}
 		}
 	}
-	
+
 	def champions() {
 		User player = springSecurityService?.getCurrentUser()
 		respond Tutorials.findByOwner(player)
 	}
-	
+
 	def community() {
 		User player = springSecurityService?.getCurrentUser()
 		respond Tutorials.findByOwner(player)
 	}
-	
+
 	def areas() {
 		User player = springSecurityService?.getCurrentUser()
 		respond Tutorials.findByOwner(player)
 	}
-	
+
 	def quests() {
 		User player = springSecurityService?.getCurrentUser()
 		Tutorials world = Tutorials.findByOwner(player)
-		
+
 		def quests = []
-		
+
 		for (champion in player.champions) {
 			if (champion.world != world) continue
-			
+
 			for (quest in champion.group.quests) {
 				quests << quest
 			}
 		}
-		
+
 		respond world, model: [ quests : quests ]
 	}
 }

@@ -8,8 +8,6 @@ import com.bromakgame.learning.SkillTree
 @Secured('ROLE_ADMIN')
 class RaceController extends GenericController {
 
-	static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
 	String getDomainClassName() {
 		return "Race"
 	}

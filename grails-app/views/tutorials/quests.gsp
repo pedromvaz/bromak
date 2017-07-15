@@ -58,12 +58,12 @@
 							<img src="${resource(dir:'images',file:'quests/' + quest.image + '.jpg')}" style="width: 100%" />
 						</li>
 						<li class="list-group-item">
-							<h5 class="list-group-item-heading"><small>${quest.title}</small></h5>
+							<h5 class="list-group-item-heading"><small>${quest.title.toUpperCase()}</small></h5>
 							<p class="list-group-item-text">
 								${quest.description}
 							</p>
 						</li>
-						<g:link controller="quest" action="prepare" class="list-group-item list-group-item-success">
+						<g:link controller="quest" action="prepare" id="${quest.id}" class="list-group-item list-group-item-success">
 							${quest.action}
 						</g:link>
 					</ul>

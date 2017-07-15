@@ -39,7 +39,7 @@ class Quest {
 	}
 	
 	String getTitle() {
-		return type.name.toUpperCase()
+		return type.name
 	}
 	
 	String getDescription() {
